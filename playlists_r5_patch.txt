@@ -60,6 +60,16 @@ playlists
 					hopup_smartcore_med_chance				"1"
 					hopup_smartcore_high_chance				"1"
 
+					hopup_thermite_name					"火焰核心"
+					hopup_thermite_desc					"让武器射出铝热剂"
+					hopup_thermite_tier					"5"
+					hopup_thermite_icon					"rui/pilot_loadout/mods/hopup_em_choke"
+					hopup_thermite_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					hopup_thermite_slot					"hopup"
+					hopup_thermite_low_chance				"1"
+					hopup_thermite_med_chance				"1"
+					hopup_thermite_high_chance				"1"
+
 
 //					inversion_name					"后坐力翻转器"
 //					inversion_desc					"翻转后坐力"
@@ -83,7 +93,7 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Custom Weapons
 				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE"
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF"
 				
 				mp_weapon_volt_smg_class "smg"
 				mp_weapon_sentinel_class  "sniper"
@@ -109,6 +119,13 @@ playlists
 				mp_weapon_energy_shotgunE_med_chance 			"1.0"
 				mp_weapon_energy_shotgunE_high_chance 			"1.0"
 				mp_weapon_energy_shotgunE_tier 					"1"	
+
+				mp_weapon_lmgF_class 					"lmg"
+				mp_weapon_lmgF_attachments 			"barrel mag sight grip hopup"
+				mp_weapon_lmgF_low_chance 				"1.0"
+				mp_weapon_lmgF_med_chance 			"1.0"
+				mp_weapon_lmgF_high_chance 			"1.0"
+				mp_weapon_lmgF_tier 					"1"	
 				
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Code Required Vars

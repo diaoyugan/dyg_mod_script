@@ -547,7 +547,7 @@ WeaponData
 
 	Mods
 	{
-hopup_flamecore
+hopup_thermite
 {
 
 
