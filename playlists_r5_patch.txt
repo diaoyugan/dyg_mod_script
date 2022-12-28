@@ -93,7 +93,7 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Custom Weapons
 				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF"
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF mp_weapon_mastiffF"
 				
 				mp_weapon_volt_smg_class "smg"
 				mp_weapon_sentinel_class  "sniper"
@@ -119,6 +119,13 @@ playlists
 				mp_weapon_energy_shotgunE_med_chance 			"1.0"
 				mp_weapon_energy_shotgunE_high_chance 			"1.0"
 				mp_weapon_energy_shotgunE_tier 					"1"	
+
+				mp_weapon_mastiffF_class 					"shotgun"
+				mp_weapon_mastiffF_attachments 			"mag hopup"
+				mp_weapon_mastiffF_low_chance 				"1.0"
+				mp_weapon_mastiffF_med_chance 			"1.0"
+				mp_weapon_mastiffF_high_chance 			"1.0"
+				mp_weapon_mastiffF_tier 					"1"	
 
 				mp_weapon_lmgF_class 					"lmg"
 				mp_weapon_lmgF_attachments 			"barrel mag sight grip hopup"
