@@ -296,8 +296,7 @@ WeaponData
 
             "is_semi_auto"									"1"
 
-			"projectile_trail_effect_0_1p"                     "P_tracer_proj_sniper_piercer"
-			"projectile_trail_effect_0_3p"                     "P_tracer_proj_sniper_piercer"
+
 
             "fire_sound_1_player_1p"						"Weapon_bulletCasings.Bounce"
             "fire_sound_1_player_3p"						"Weapon_bulletCasings.Bounce"
