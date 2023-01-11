@@ -2,6 +2,8 @@
 #base "_base_mags_heavy.txt"
 #base "_base_stocks_tactical.txt"
 
+      
+
 WeaponData
 {
 	// General
@@ -11,7 +13,6 @@ WeaponData
 	"longdesc"										"#WPN_PDW_LONGDESC"
 
 	"weapon_type_flags"								"WPT_PRIMARY"
-	"ammo_pool_type"								"highcal"
 
 	"menu_icon"										"rui/weapon_icons/r5/weapon_prowler"
 	"hud_icon"										"rui/weapon_icons/r5/weapon_prowler"
@@ -32,13 +33,17 @@ WeaponData
 	// Models
 	"viewmodel"   									"mdl/weapons/prowler_smg/ptpov_prowler_smg.rmdl"
 	"playermodel" 									"mdl/weapons/prowler_smg/w_prowler_smg.rmdl"
+	"holster_offset"								"8 0 0"
+
+	// Script - Callbacks
+
 
 	"chroma_color"									".2 1 .6"
 
 	"sound_dryfire"									"assault_rifle_dryfire"
 	"sound_pickup"									"wpn_pickup_SMG_1P"
 
-	"projectile_launch_speed"						"18000"
+    "projectile_launch_speed"						"18000"
 
 	//Sounds
 	"fire_sound_1_player_1p" 						"weapon_prowler_burst_secondshot_1p"
@@ -67,57 +72,39 @@ WeaponData
 	"low_ammo_sound_name_1"							"car_LowAmmo_Shot1"
 
 	"damage_type" 									"bullet"
+	"damage_near_value"   							"15"
+    "damage_far_value"								"15"
+    "damage_very_far_value"							"15"
+    "damage_near_value_titanarmor"					"15"
+    "damage_far_value_titanarmor" 					"15"
+    "damage_very_far_value_titanarmor" 				"15"
+    "damage_rodeo" 									"110"
 
+                     
+                                
+                                          
+                                                                                                                   
+                                                 
+                                     
+     
 	"ammo_clip_size"   								"20"
+    "ammo_default_total"							"0"
+    "ammo_stockpile_max"							"36"
+    "ammo_no_remove_from_stockpile"					"1"
+    "uses_ammo_pool"								"1"
+    "ammo_pool_type"								"highcal"
+      
 
-	MP_BASE
-	{
-		"ammo_default_total"							"360"
-		"ammo_stockpile_max"							"360"
-		"ammo_no_remove_from_stockpile"					"1"
-		"ammo_min_to_fire"								"1"
+    "ammo_min_to_fire"								"1"
+    "low_ammo_fraction" 							"0.2"
 
-		"damage_near_value"   							"14"
-		"damage_far_value"								"14"
-		"damage_very_far_value"							"14"
-		"damage_near_value_titanarmor"					"14"
-		"damage_far_value_titanarmor" 					"14"
-		"damage_very_far_value_titanarmor" 				"14"
-		"damage_rodeo" 									"110"
+    // Damage - When Used by NPCs
+    "npc_damage_near_value"   						"9"
+    "npc_damage_far_value"							"7"
+    "npc_damage_near_value_titanarmor"				"0"
+    "npc_damage_far_value_titanarmor" 				"0"
+    "npc_max_range"   								"2000"
 
-		// Damage - When Used by NPCs
-		"npc_damage_near_value"   						"9"
-		"npc_damage_far_value"							"7"
-		"npc_damage_near_value_titanarmor"				"0"
-		"npc_damage_far_value_titanarmor" 				"0"
-
-		"npc_max_range"   								"2000"
-	}
-
-	SP_BASE
-	{
-		"ammo_default_total"							"150"
-		"ammo_stockpile_max"							"240"
-		"ammo_no_remove_from_stockpile"					"0"
-		"ammo_min_to_fire"								"1"
-
-		// Damage - When Used by Players
-		"damage_near_value"   							"25"
-		"damage_far_value"								"16"
-		"damage_near_value_titanarmor"					"50"
-		"damage_far_value_titanarmor" 					"32"
-		"damage_very_far_value_titanarmor" 				"32"
-		"damage_rodeo" 									"90"
-		"damage_very_far_value"							"<KEEP_DEFAULT>"
-
-		// Damage - When Used by NPCs
-		"npc_damage_near_value"   						"12"
-		"npc_damage_far_value"							"8"
-		"npc_damage_near_value_titanarmor"				"<KEEP_DEFAULT>"
-		"npc_damage_far_value_titanarmor" 				"<KEEP_DEFAULT>"
-
-		"npc_max_range"   								"4000"
-	}
 
 	// NPC
 	"npc_min_engage_range"							"0"
@@ -149,7 +136,7 @@ WeaponData
 	// Behavior
 	"fire_rate"   									"21"
 	"burst_fire_count"								"5"
-	"burst_fire_delay"								"0.2"
+	"burst_fire_delay"								"0.24"
 
 	"reload_time" 									"2.0"
 	"reload_time_late1"								"1.67"
@@ -163,23 +150,23 @@ WeaponData
 	// -- if you change a setting here for burstfire, make sure it's still set correctly for the autofire mod
 	"viewkick_pattern"                              "pdw_burst_2"
 
-	"viewkick_spring"                               "pdw_vkp"
-	"viewkick_spring_hot"                           "pdw_burst_vkp_hot"
+    "viewkick_spring"                               "pdw_vkp"
+    "viewkick_spring_hot"                           "pdw_burst_vkp_hot"
 
-	"viewkick_spring_heatpershot"					"1.0"
-	"viewkick_spring_cooldown_holdtime"             "0.16"
-	"viewkick_spring_cooldown_fadetime"             "0.12"
+    "viewkick_spring_heatpershot"					"1.0"
+    "viewkick_spring_cooldown_holdtime"             "0.16"
+    "viewkick_spring_cooldown_fadetime"             "0.12"
 
-	"viewmodel_spring_jolt"                          "pdw_burst_viewmodel_jolt"
-	"viewmodel_jolt_scale"                           "1.0"
-	"viewmodel_jolt_backwardPerShot"                 "-0.45"
-	"viewmodel_jolt_roll"                            "0 2.2 0.0"
-	"viewmodel_jolt_side"                            "0 0.025 0"
+    "viewmodel_spring_jolt"                          "pdw_burst_viewmodel_jolt"
+    "viewmodel_jolt_scale"                           "1.0"
+    "viewmodel_jolt_backwardPerShot"                 "-0.45"
+    "viewmodel_jolt_roll"                            "0 2.2 0.0"
+    "viewmodel_jolt_side"                            "0 0.025 0"
 
 	"viewkick_pitch_base" 							"1.0"
 	"viewkick_pitch_random"   						"1.0"
-	"viewkick_pitch_softScale"						"3.0"
-	"viewkick_pitch_hardScale"						"0.5"
+	"viewkick_pitch_softScale"						"2.3"   //"3.0"
+	"viewkick_pitch_hardScale"						"0.4"   //"0.5"
 
 	"viewkick_yaw_base"   							"1.0"
 	"viewkick_yaw_random" 							"1.0"
@@ -216,37 +203,40 @@ WeaponData
 	"viewkick_scale_yaw_valueLerpStart"   			"0"
 	"viewkick_scale_yaw_valueLerpEnd" 				"10"
 	"viewkick_scale_valueDecayDelay"  				"0.25"  // for burstfire, match to burst delay + fire rate (0.05 + 0.2)
-	"viewkick_scale_valueDecayRate"   				"45"
+    "viewkick_scale_valueDecayRate"   				"45"
 
 	"viewmodel_shake_forward"						"0.0"
 	"viewmodel_shake_up"							"0.0"
 	"viewmodel_shake_right"							"0.0"
 
-	"spread_stand_hip"								"1.0"
-	"spread_stand_hip_run"							"1.5"
-	"spread_stand_hip_sprint"                       "2.5"
-	"spread_crouch_hip"   							"0.8"
-	"spread_air_hip"  								"3.5"
 
-	"spread_kick_on_fire_stand_hip"   				"0.18"
-	"spread_kick_on_fire_crouch_hip"  				"0.18"
-	"spread_kick_on_fire_air_hip" 					"0.18"
 
-	"spread_max_kick_stand_hip"   					"2.0"
-	"spread_max_kick_crouch_hip"  					"1.5"
-	"spread_max_kick_air_hip" 						"3.0"
+    // Sway
+    "sway_min_yaw_zoomed"							"-0.024"
+    "sway_max_yaw_zoomed"							"0.024"
+
+    "sway_min_pitch_zoomed"  						"-0.01"
+    "sway_max_pitch_zoomed"  						"0.008"
+
 
 	//setting to "0" so it's tunable in Bakery
 	"sprintcycle_time"								"0"
 	"deployfirst_time"								"1.4"
 
-	"clip_bodygroup"						"clip"
-	"clip_bodygroup_index_shown"			"0"
-	"clip_bodygroup_index_hidden"			"1"
-	"clip_bodygroup_show_for_milestone_0"	"1"
-	"clip_bodygroup_show_for_milestone_1"	"0"
-	"clip_bodygroup_show_for_milestone_2"	"1"
-	"clip_bodygroup_show_for_milestone_3"	"1"
+    "clip_bodygroup"						"clip"
+    "clip_bodygroup_index_shown"			"0"
+    "clip_bodygroup_index_hidden"			"1"
+    "clip_bodygroup_show_for_milestone_0"	"1"
+    "clip_bodygroup_show_for_milestone_1"	"0"
+    "clip_bodygroup_show_for_milestone_2"	"1"
+    "clip_bodygroup_show_for_milestone_3"	"1"
+	
+	"viewmodel_ads_rui_bottomleft_attachment"	"RUI_BL_CROSSHAIR_PDW"
+	"viewmodel_ads_centerpoint_attachment"      "ADS_CENTER_SIGHT_PDW"
+
+                         
+	"targeting_laser_beam_length_1p"               	"18"
+      
 
 	Mods
 	{
