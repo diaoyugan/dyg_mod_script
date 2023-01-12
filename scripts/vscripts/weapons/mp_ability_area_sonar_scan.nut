@@ -15,9 +15,8 @@ const asset FX_SONAR_TARGET = $"P_ar_target_sonar"
 const int AREA_SCAN_SKIN_INDEX = 9
 
 const float AREA_SONAR_SCAN_HUD_FEEDBACK_DURATION = 3.0
-const float AREA_SONAR_SCAN_DURATION = 2.0
-const float AREA_SONAR_SCAN_CONE_FOV = 90.0
-
+const float AREA_SONAR_SCAN_DURATION = 10.0
+const float AREA_SONAR_SCAN_CONE_FOV = 150.0
 struct
 {
 	int colorCorrection
