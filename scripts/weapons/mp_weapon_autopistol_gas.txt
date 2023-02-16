@@ -19,9 +19,7 @@ WeaponData
 	"weaponSubClass"								"sidearm"
 	"body_type"										"close_quarters"
 	"fire_mode"   									"automatic"
-
-
-
+"OnProjectileCollision"									"OnProjectileCollision_weapon_grenade_gas_gun"
 	// Menu
 	"menu_category"                                 "pistol"
 	"menu_anim_class"                               "small"
@@ -33,6 +31,7 @@ WeaponData
 	// Models
 	"viewmodel"   									"mdl/weapons/p2011_auto/ptpov_p2011_auto.rmdl"
 	"playermodel" 									"mdl/weapons/p2011_auto/w_p2011_auto.rmdl"
+	"projectilemodel"								"mdl/weapons/grenades/w_caustic_grenade_projectile.rmdl"
 	"activitymodifier"								"pistol"
 	"holster_type"									"pistol"
 
@@ -241,6 +240,11 @@ WeaponData
             "low_ammo_fraction" 							"0.3"
 
 	   		"uses_ammo_pool"								"1"
+        }
+
+        gas_grenade
+        {
+
         }
 
         hopup_shield_breaker

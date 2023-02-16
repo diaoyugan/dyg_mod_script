@@ -63,12 +63,33 @@ playlists
 					hopup_thermite_name					"火焰核心"
 					hopup_thermite_desc					"让武器射出铝热剂"
 					hopup_thermite_tier					"5"
-					hopup_thermite_icon					"rui/pilot_loadout/mods/hopup_em_choke"
-					hopup_thermite_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					hopup_thermite_icon					"rui/ordnance_icons/grenade_incendiary"
+					hopup_thermite_model					"mdl/weapons/grenades/w_thermite_grenade_projectile.rmdl"
 					hopup_thermite_slot					"hopup"
 					hopup_thermite_low_chance				"1"
 					hopup_thermite_med_chance				"1"
 					hopup_thermite_high_chance				"1"
+
+					gas_grenade_name					"毒气发射器"
+					gas_grenade_desc					"让武器射出毒气云"
+					gas_grenade_tier					"5"
+					gas_grenade_icon					"rui/hud/ultimate_icons/ultimate_caustic"
+					gas_grenade_model					"mdl/weapons/grenades/w_caustic_grenade_projectile.rmdl"
+					gas_grenade_slot					"hopup"
+					gas_grenade_low_chance				"1"
+					gas_grenade_med_chance				"1"
+					gas_grenade_high_chance				"1"
+					
+					
+					shield_heal_name					"能量转换器"
+					shield_heal_desc					"武器的伤害会降低10%，但是这10%的伤害会为你的护甲充能"
+					shield_heal_tier					"4"
+					shield_heal_icon					"rui/pilot_loadout/mods/hopup_em_choke"
+					shield_heal_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					shield_heal_slot					"hopup"
+					shield_heal_low_chance				"1"
+					shield_heal_med_chance				"1"
+					shield_heal_high_chance				"1"
 
 
 //					inversion_name					"后坐力翻转器"
@@ -88,12 +109,12 @@ playlists
 				register_damage_to_ai 							1
 				register_dummie_kill_as_actual_kill 			1
 				dummies_have_random_shields 					1
-				dummies_agressivedummies 						1	//Toggle for combat/training dummies
+				dummies_agressivedummies 						0	//Toggle for combat/training dummies
 				
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Custom Weapons
 				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF mp_weapon_mastiffF"
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
 				
 				mp_weapon_volt_smg_class "smg"
 				mp_weapon_sentinel_class  "sniper"
@@ -133,6 +154,13 @@ playlists
 				mp_weapon_lmgF_med_chance 			"1.0"
 				mp_weapon_lmgF_high_chance 			"1.0"
 				mp_weapon_lmgF_tier 					"1"	
+
+				mp_weapon_autopistol_gas_class 					"pistol"
+				mp_weapon_autopistol_gas_attachments 			"barrel mag sight hopup"
+				mp_weapon_autopistol_gas_low_chance 				"1.0"
+				mp_weapon_autopistol_gas_med_chance 			"1.0"
+				mp_weapon_autopistol_gas_high_chance 			"1.0"
+				mp_weapon_autopistol_gas_tier 					"1"	
 				
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Code Required Vars
@@ -355,6 +383,9 @@ playlists
 				survival_unequip_attachment                    1
 				survival_transfer_attachment                   1
 				survival_drop_equipment                        1
+				blockable_door_can_be_hurt_by_normal_weapons 1
+				blockable_door_show_damage_numbers 1
+				dev_force_everything_unlocked 1
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Player Reporting

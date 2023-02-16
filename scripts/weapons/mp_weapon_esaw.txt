@@ -46,7 +46,7 @@ WeaponData
 
 	"OnWeaponActivate"								"OnWeaponActivate_weapon_basic_bolt"
 	"OnClientAnimEvent"								"OnClientAnimEvent_weapon_basic_bolt"
-
+	"OnWeaponPrimaryAttack"							"OnWeaponPrimaryAttack_weapon_shield_heal_hopup"
 	"projectilemodel" 								"mdl/dev/empty_model.rmdl"
 	"projectile_trail_effect_0" 					"P_tracer_projectile_smg_blue"
 
@@ -196,7 +196,7 @@ WeaponData
 
 	// Behavior
 	"fire_rate"   									"5"
-	"fire_rate_max"									"2147483647"
+	"fire_rate_max"									"15"
 	"fire_rate_max_time_speedup"					"1.75"
 	"fire_rate_max_time_cooldown"					"0"
 
@@ -456,7 +456,15 @@ WeaponData
 			"burst_or_looping_fire_sound_middle_npc"		""
 			"burst_or_looping_fire_sound_end_npc"			""
         }
-
+shield_heal
+{                         
+       "damage_near_value"   					        "*0.9"
+    "damage_far_value"						        "*0.9"
+    "damage_very_far_value"					        "*0.9"
+    "damage_near_value_titanarmor"			        "*0.9"
+    "damage_far_value_titanarmor" 			        "*0.9"
+    "damage_very_far_value_titanarmor" 		        "*0.9"
+   }
                    
         energy_mag_l1
 		{

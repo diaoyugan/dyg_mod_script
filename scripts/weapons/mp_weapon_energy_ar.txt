@@ -39,6 +39,7 @@ WeaponData
 
     "OnWeaponActivate"                              "OnWeaponActivate_Energy_AR"
     "OnWeaponDeactivate"                            "OnWeaponDeactivate_Energy_AR"
+	"OnWeaponPrimaryAttack"							"OnWeaponPrimaryAttack_weapon_shield_heal_hopup"
 
 	"projectile_launch_speed"						"30500"
 
@@ -299,7 +300,15 @@ WeaponData
         	"charge_cooldown_time"			"0.0"
 			"charge_cooldown_delay"   		"0.0"
         }
-
+shield_heal
+{                         
+       "damage_near_value"   					        "*0.9"
+    "damage_far_value"						        "*0.9"
+    "damage_very_far_value"					        "*0.9"
+    "damage_near_value_titanarmor"			        "*0.9"
+    "damage_far_value_titanarmor" 			        "*0.9"
+    "damage_very_far_value_titanarmor" 		        "*0.9"
+   }
         hopup_selectfire
         {
         	// This mod is only used to indicate that the hop-up is active

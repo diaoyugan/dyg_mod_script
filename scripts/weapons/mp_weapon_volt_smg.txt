@@ -41,6 +41,8 @@ WeaponData
 	"stat_accuracy"   								"90"
 	"stat_rof"		        						"38"
 
+	"OnWeaponPrimaryAttack"							"OnWeaponPrimaryAttack_weapon_shield_heal_hopup"
+
 	// Models
 	"viewmodel"   									"mdl/weapons/hemlok_smg/ptpov_hemlok_smg.rmdl"
 	"playermodel" 									"mdl/weapons/hemlok_smg/w_hemlok_smg.rmdl"
@@ -429,10 +431,15 @@ WeaponData
    
                           
    
-
-                           
-   
-                          
+shield_heal
+{                         
+       "damage_near_value"   					        "*0.9"
+    "damage_far_value"						        "*0.9"
+    "damage_very_far_value"					        "*0.9"
+    "damage_near_value_titanarmor"			        "*0.9"
+    "damage_far_value_titanarmor" 			        "*0.9"
+    "damage_very_far_value_titanarmor" 		        "*0.9"
+   }
    
       
 
