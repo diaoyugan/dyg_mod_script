@@ -240,7 +240,9 @@ WeaponData
 		gold
 		{
 		}
-
+armor_piercing
+{
+}
 		survival_finite_ammo
 		{
 			"ammo_default_total"							"0"

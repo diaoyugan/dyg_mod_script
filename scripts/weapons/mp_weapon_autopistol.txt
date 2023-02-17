@@ -243,6 +243,10 @@ WeaponData
 	   		"uses_ammo_pool"								"1"
         }
 
+armor_piercing
+{
+}
+
         hopup_shield_breaker
         {
             "damage_shield_scale"      			"1.6"

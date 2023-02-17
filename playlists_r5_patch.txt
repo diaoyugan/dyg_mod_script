@@ -19,17 +19,6 @@ playlists
 
 				custom_hopup_override_weapon_attachments       "1"
 
-
-					optic_ranged_aog_variable_pro_name					"#optic_ranged_aog_variable_pro_name"
-					optic_ranged_aog_variable_pro_desc					"#optic_ranged_aog_variable_pro_desc"
-					optic_ranged_aog_variable_pro_tier					"4"
-					optic_ranged_aog_variable_pro_icon					"rui/weapon_icons/attachments/2x_4x_variable_aog"
-					optic_ranged_aog_variable_pro_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_optic_rng_aog_var_r1.rmdl"
-					optic_ranged_aog_variable_pro_slot					"sight"
-					optic_ranged_aog_variable_pro_low_chance				"1"
-					optic_ranged_aog_variable_pro_med_chance				"1"
-					optic_ranged_aog_variable_pro_high_chance				"1"
-
 					kunailauncher_name					"苦无附魔"
 					kunailauncher_desc					"拜托，这特效超酷的好吗（虽然并没有实用性）"
 					kunailauncher_tier					"5"
@@ -82,7 +71,7 @@ playlists
 					
 					
 					shield_heal_name					"能量转换器"
-					shield_heal_desc					"武器的伤害会降低10%，但是这10%的伤害会为你的护甲充能"
+					shield_heal_desc					"发射时基于武器的50%伤害为你的护甲充能"
 					shield_heal_tier					"4"
 					shield_heal_icon					"rui/pilot_loadout/mods/hopup_em_choke"
 					shield_heal_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
@@ -90,6 +79,16 @@ playlists
 					shield_heal_low_chance				"1"
 					shield_heal_med_chance				"1"
 					shield_heal_high_chance				"1"
+
+					armor_piercing_name					"穿甲子弹"
+					armor_piercing_desc					"武器会穿透敌人护盾造成额外伤害"
+					armor_piercing_tier					"4"
+					armor_piercing_icon					"rui/pilot_loadout/mods/hopup_unshielded_dmg"
+					armor_piercing_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					armor_piercing_slot					"hopup"
+					armor_piercing_low_chance				"1"
+					armor_piercing_med_chance				"1"
+					armor_piercing_high_chance				"1"
 
 
 //					inversion_name					"后坐力翻转器"
@@ -1393,7 +1392,7 @@ playlists
 				
 				//General Gamemode Settings
 				match_ending_enabled                           0
-				max_teams                                      1
+				max_teams                                      3
 				max_players                                    3
 				min_players                                    1
 				

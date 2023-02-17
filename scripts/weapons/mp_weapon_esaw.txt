@@ -458,12 +458,7 @@ WeaponData
         }
 shield_heal
 {                         
-       "damage_near_value"   					        "*0.9"
-    "damage_far_value"						        "*0.9"
-    "damage_very_far_value"					        "*0.9"
-    "damage_near_value_titanarmor"			        "*0.9"
-    "damage_far_value_titanarmor" 			        "*0.9"
-    "damage_very_far_value_titanarmor" 		        "*0.9"
+
    }
                    
         energy_mag_l1

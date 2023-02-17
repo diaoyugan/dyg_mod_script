@@ -218,7 +218,9 @@ WeaponData
 
 	   		"uses_ammo_pool"						"1"
         }
-
+armor_piercing
+{
+}
         kunailauncher
         {
 	"projectilemodel"								"mdl/props/kunai/kunai.rmdl"

@@ -13,7 +13,7 @@ var function OnWeaponPrimaryAttack_weapon_shield_heal_hopup( entity weapon, Weap
     {
         // printt( "hasmod")
         entity weaponOwner = weapon.GetWeaponOwner()
-         shieldsHeal = (weapon.GetWeaponSettingInt( eWeaponVar.damage_near_value )/10)
+         shieldsHeal = (weapon.GetWeaponSettingInt( eWeaponVar.damage_near_value )/5)
          currentShields  = weaponOwner.GetShieldHealth()
          shieldHealthMax = weaponOwner.GetShieldHealthMax()
     if ( currentShields < shieldHealthMax )
@@ -45,7 +45,7 @@ var function OnWeaponPrimaryAttack_weapon_shield_heal_hopup( entity weapon, Weap
 void function HealthOwner(entity weapon, entity weaponOwner, int currentShields, int shieldsHeal )
 {
     currentShields  = weaponOwner.GetShieldHealth()
-    shieldsHeal = (weapon.GetWeaponSettingInt( eWeaponVar.damage_near_value )/10)
+    shieldsHeal = (weapon.GetWeaponSettingInt( eWeaponVar.damage_near_value )/5)
     weaponOwner.SetShieldHealth( currentShields + shieldsHeal )
     // printt( "HealOwner")
 }

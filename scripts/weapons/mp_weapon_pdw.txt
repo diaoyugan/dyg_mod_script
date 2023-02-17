@@ -254,7 +254,9 @@ WeaponData
 
 			"uses_ammo_pool"								"1"
 		}
-
+armor_piercing
+{
+}
 		hopup_selectfire
 		{
 			// This mod is only used to indicate that the hop-up is active
