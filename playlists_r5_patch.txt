@@ -113,7 +113,7 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Custom Weapons
 				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity mp_weapon_energy_shotgunE mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity  mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
 				
 				mp_weapon_volt_smg_class "smg"
 				mp_weapon_sentinel_class  "sniper"
@@ -132,6 +132,15 @@ playlists
 				mp_weapon_grenade_gravity_med_chance "1.0"
 				mp_weapon_grenade_gravity_high_chance "1.0"
 				mp_weapon_grenade_gravity_tier "1"
+
+				
+
+				mp_titanweapon_flightcore_rockets_class "pistol"
+				mp_titanweapon_flightcore_rockets_attachments " "
+				mp_titanweapon_flightcore_rockets_low_chance "1.0"
+				mp_titanweapon_flightcore_rockets_med_chance "1.0"
+				mp_titanweapon_flightcore_rockets_high_chance "1.0"
+				mp_titanweapon_flightcore_rockets_tier "5"
 
 				mp_weapon_energy_shotgunE_class 					"shotgun"
 				mp_weapon_energy_shotgunE_attachments 			"mag sight grip hopup"
