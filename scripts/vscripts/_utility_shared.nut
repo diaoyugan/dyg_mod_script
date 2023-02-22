@@ -153,7 +153,7 @@ void function InitWeaponScripts()
 	MpWeaponDeployableCover_Init()
 	MeleeShadowsquadHands_Init()
 	MpArmorPiercingHopup_Init()
-	
+	MpMeleeHeal_Init()
 	#if DEVELOPER
 		MpWeaponShadowsquadHandsPrimary_Init()
 		MDLSpawner_Init()

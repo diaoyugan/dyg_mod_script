@@ -1401,7 +1401,7 @@ playlists
 				
 				//General Gamemode Settings
 				match_ending_enabled                           0
-				max_teams                                      3
+				max_teams                                      1
 				max_players                                    3
 				min_players                                    1
 				

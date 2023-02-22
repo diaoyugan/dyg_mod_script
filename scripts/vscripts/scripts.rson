@@ -270,6 +270,7 @@ Scripts:
 	weapons/mp_weapon_vinson.nut
 	weapons/mp_weapon_mastiff.nut
 	weapons/mp_weapon_melee_primary.nut
+	weapons/melee_heal.nut
 	
 	weapons/mp_weapon_wraith_kunai_primary.nut
 	weapons/melee_wraith_kunai.nut
