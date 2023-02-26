@@ -8,6 +8,158 @@ playlists
 		{
 			vars
 			{
+
+				///////////////////////////////////////////////////////////////////////////////////
+				////Attachments
+				///////////////////////////////////////////////////////////////////////////////////
+//				custom_hopup_override_weapon_attachments - set it to 1. 
+//				This will add attachment slots for weapons that are compatible with the attachment but don't have the appropriate slot for it to fit in. 
+//				To turn that feature off, set it to 0.
+
+
+				custom_hopup_override_weapon_attachments       "1"
+
+					hopup_explode_bullet_name					"爆炸子弹"
+					hopup_explode_bullet_desc					"使武器发射的子弹爆炸"
+					hopup_explode_bullet_tier					"5"
+					hopup_explode_bullet_icon					"rui/ordnance_icons/grenade_frag"
+					hopup_explode_bullet_model					"mdl/weapons/grenades/w_loot_m20_f_grenade_projectile.rmdl"
+					hopup_explode_bullet_slot					"hopup"
+					hopup_explode_bullet_low_chance				"1"
+					hopup_explode_bullet_med_chance				"1"
+					hopup_explode_bullet_high_chance				"1"
+
+					hopup_smartcore_name					"智慧核心"
+					hopup_smartcore_desc					"激活自动瞄准"
+					hopup_smartcore_tier					"5"
+					hopup_smartcore_icon					"rui/pilot_loadout/mods/hopup_em_choke"
+					hopup_smartcore_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					hopup_smartcore_slot					"hopup"
+					hopup_smartcore_low_chance				"1"
+					hopup_smartcore_med_chance				"1"
+					hopup_smartcore_high_chance				"1"
+
+					hopup_thermite_name					"火焰核心"
+					hopup_thermite_desc					"让武器射出铝热剂"
+					hopup_thermite_tier					"5"
+					hopup_thermite_icon					"rui/ordnance_icons/grenade_incendiary"
+					hopup_thermite_model					"mdl/weapons/grenades/w_thermite_grenade_projectile.rmdl"
+					hopup_thermite_slot					"hopup"
+					hopup_thermite_low_chance				"1"
+					hopup_thermite_med_chance				"1"
+					hopup_thermite_high_chance				"1"
+
+					gas_grenade_name					"毒气发射器"
+					gas_grenade_desc					"让武器射出毒气云"
+					gas_grenade_tier					"5"
+					gas_grenade_icon					"rui/hud/ultimate_icons/ultimate_caustic"
+					gas_grenade_model					"mdl/weapons/grenades/w_caustic_grenade_projectile.rmdl"
+					gas_grenade_slot					"hopup"
+					gas_grenade_low_chance				"1"
+					gas_grenade_med_chance				"1"
+					gas_grenade_high_chance				"1"
+					
+					
+					shield_heal_name					"能量转换器"
+					shield_heal_desc					"发射时基于武器的50%伤害为你的护甲充能"
+					shield_heal_tier					"4"
+					shield_heal_icon					"rui/pilot_loadout/mods/hopup_em_choke"
+					shield_heal_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					shield_heal_slot					"hopup"
+					shield_heal_low_chance				"1"
+					shield_heal_med_chance				"1"
+					shield_heal_high_chance				"1"
+
+					armor_piercing_name					"穿甲子弹"
+					armor_piercing_desc					"武器会穿透敌人护盾造成额外伤害"
+					armor_piercing_tier					"4"
+					armor_piercing_icon					"rui/pilot_loadout/mods/hopup_unshielded_dmg"
+					armor_piercing_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+					armor_piercing_slot					"hopup"
+					armor_piercing_low_chance				"1"
+					armor_piercing_med_chance				"1"
+					armor_piercing_high_chance				"1"
+
+
+//					inversion_name					"后坐力翻转器"
+//					inversion_desc					"翻转后坐力"
+//					inversion_tier					"3"
+//					inversion_icon					"rui/pilot_loadout/mods/hopup_em_choke"
+//					inversion_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
+//					inversion_slot					"hopup"
+//					inversion_low_chance				"1"
+//					inversion_med_chance				"1"
+//					inversion_high_chance				"1"
+				///////////////////////////////////////////////////////////////////////////////////
+				//// Custom General Settings (Flowstate custom)
+				///////////////////////////////////////////////////////////////////////////////////
+				
+				r5reloaded_AnimatedCharacterSelect				0
+				register_damage_to_ai 							1
+				register_dummie_kill_as_actual_kill 			1
+				dummies_have_random_shields 					1
+				dummies_agressivedummies 						0	//Toggle for combat/training dummies
+				
+				///////////////////////////////////////////////////////////////////////////////////
+				//// Custom Weapons
+				///////////////////////////////////////////////////////////////////////////////////
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity  mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
+				
+				mp_weapon_volt_smg_class "smg"
+				mp_weapon_sentinel_class  "sniper"
+				mp_weapon_sentinel_attachments "mag sight grip"
+
+				mp_weapon_smart_wingman_class "pistol"
+				mp_weapon_smart_wingman_attachments "barrel mag sight grip hopup"
+				mp_weapon_smart_wingman_low_chance "1.0"
+				mp_weapon_smart_wingman_med_chance "1.0"
+				mp_weapon_smart_wingman_high_chance "1.0"
+				mp_weapon_smart_wingman_tier "1"
+			
+				mp_weapon_grenade_gravity_class "pistol"
+				mp_weapon_grenade_gravity_attachments " "
+				mp_weapon_grenade_gravity_low_chance "1.0"
+				mp_weapon_grenade_gravity_med_chance "1.0"
+				mp_weapon_grenade_gravity_high_chance "1.0"
+				mp_weapon_grenade_gravity_tier "1"
+
+				
+
+				mp_titanweapon_flightcore_rockets_class "pistol"
+				mp_titanweapon_flightcore_rockets_attachments " "
+				mp_titanweapon_flightcore_rockets_low_chance "1.0"
+				mp_titanweapon_flightcore_rockets_med_chance "1.0"
+				mp_titanweapon_flightcore_rockets_high_chance "1.0"
+				mp_titanweapon_flightcore_rockets_tier "5"
+
+				mp_weapon_energy_shotgunE_class 					"shotgun"
+				mp_weapon_energy_shotgunE_attachments 			"mag sight grip hopup"
+				mp_weapon_energy_shotgunE_low_chance 				"1.0"
+				mp_weapon_energy_shotgunE_med_chance 			"1.0"
+				mp_weapon_energy_shotgunE_high_chance 			"1.0"
+				mp_weapon_energy_shotgunE_tier 					"1"	
+
+				mp_weapon_mastiffF_class 					"shotgun"
+				mp_weapon_mastiffF_attachments 			"mag hopup"
+				mp_weapon_mastiffF_low_chance 				"1.0"
+				mp_weapon_mastiffF_med_chance 			"1.0"
+				mp_weapon_mastiffF_high_chance 			"1.0"
+				mp_weapon_mastiffF_tier 					"1"	
+
+				mp_weapon_lmgF_class 					"lmg"
+				mp_weapon_lmgF_attachments 			"barrel mag sight grip hopup"
+				mp_weapon_lmgF_low_chance 				"1.0"
+				mp_weapon_lmgF_med_chance 			"1.0"
+				mp_weapon_lmgF_high_chance 			"1.0"
+				mp_weapon_lmgF_tier 					"1"	
+
+				mp_weapon_autopistol_gas_class 					"pistol"
+				mp_weapon_autopistol_gas_attachments 			"barrel mag sight hopup"
+				mp_weapon_autopistol_gas_low_chance 				"1.0"
+				mp_weapon_autopistol_gas_med_chance 			"1.0"
+				mp_weapon_autopistol_gas_high_chance 			"1.0"
+				mp_weapon_autopistol_gas_tier 					"1"	
+				
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Code Required Vars
 				///////////////////////////////////////////////////////////////////////////////////
