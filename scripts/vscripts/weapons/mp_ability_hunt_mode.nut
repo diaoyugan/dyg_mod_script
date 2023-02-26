@@ -10,7 +10,7 @@ global function BurnMeter_HuntMode
 global function GetBloodhoundColorCorrectionID
 #endif //
 
-const float HUNT_MODE_DURATION = 500
+const float HUNT_MODE_DURATION = 30
 const asset HUNT_MODE_ACTIVATION_SCREEN_FX = $"P_hunt_screen"
 const asset HUNT_MODE_BODY_FX = $"P_hunt_body"
 
@@ -114,19 +114,10 @@ void function HuntMode_Start( entity player )
 	//EmitSoundOnEntityOnlyToPlayer( player, player, "beastofthehunt_activate_1P" )
 	EmitSoundOnEntityExceptToPlayer( player, player, "beastofthehunt_activate_3P" )
 
-	array mods = player.GetExtraWeaponMods()
-	mods.append( "ult_active" )
-		
-	if(mods.len() > 8) //Code limit is 8
-		return
-		
-	player.SetExtraWeaponMods( mods )
-
-	MakeInvincible(player)
 	StatusEffect_AddTimed( player, eStatusEffect.threat_vision, 1.0, HUNT_MODE_DURATION, 5.0 )
 	StatusEffect_AddTimed( player, eStatusEffect.hunt_mode, 1.0, HUNT_MODE_DURATION, HUNT_MODE_DURATION )
 	StatusEffect_AddTimed( player, eStatusEffect.hunt_mode_visuals, 1.0, HUNT_MODE_DURATION, 5.0 )
-	StatusEffect_AddTimed( player, eStatusEffect.speed_boost, 10, HUNT_MODE_DURATION, 5.0 ) //0.15
+	StatusEffect_AddTimed( player, eStatusEffect.speed_boost, 0.15, HUNT_MODE_DURATION, 5.0 )
 
 	thread HuntMode_PlayLoopingBodyFx( player )
 
@@ -142,9 +133,6 @@ void function HuntMode_Start( entity player )
 				StatusEffect_StopAllOfType( player, eStatusEffect.hunt_mode )
 				StatusEffect_StopAllOfType( player, eStatusEffect.hunt_mode_visuals )
 				StatusEffect_StopAllOfType( player, eStatusEffect.speed_boost )
-				array mods = player.GetExtraWeaponMods()
-				mods.fastremovebyvalue( "ult_active" )
-				player.SetExtraWeaponMods( mods )
 			}
 		}
 	)

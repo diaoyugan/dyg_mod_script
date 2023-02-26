@@ -25,6 +25,7 @@ global function CreateSurvivalDeathBoxForPlayer
 global function UpdateMatchSummaryPersistentVars
 
 int MAXBLOCKTIME = 2
+float SERVER_SHUTDOWN_TIME_AFTER_FINISH = 70 // 1 or more to wait the specified number of seconds before executing, 0 to execute immediately, -1 or less to not execute
 
 struct
 {
@@ -273,6 +274,13 @@ void function Sequence_WinnerDetermined()
 		MakeInvincible( player )
 		Remote_CallFunction_NonReplay( player, "ServerCallback_PlayMatchEndMusic" )
 		Remote_CallFunction_NonReplay( player, "ServerCallback_MatchEndAnnouncement", player.GetTeam() == GetWinningTeam(), GetWinningTeam() )
+
+		if( Bleedout_IsBleedingOut( player ) )
+		{
+			player.Signal( "BleedOut_OnRevive" )
+			player.Signal( "OnContinousUseStopped" )
+		}
+			
 	}
 
 	thread SurvivalCommentary_HostAnnounce( eSurvivalCommentaryBucket.WINNER, 3.0 )
@@ -315,7 +323,15 @@ void function Sequence_Epilogue()
 		Remote_CallFunction_NonReplay( player, "ServerCallback_ShowWinningSquadSequence" )
 	}
 
-	WaitForever()
+	if( SERVER_SHUTDOWN_TIME_AFTER_FINISH >= 1 )
+		wait SERVER_SHUTDOWN_TIME_AFTER_FINISH
+	else if( SERVER_SHUTDOWN_TIME_AFTER_FINISH <= -1 )
+		WaitForever()
+
+	if( GetCurrentPlaylistVarBool( "survival_server_restart_after_end", false ) )
+		GameRules_ChangeMap( GetMapName(), GameRules_GetGameMode() )
+	else
+		ShutdownHostGame()
 }
 
 void function UpdateMatchSummaryPersistentVars( int team )
@@ -386,20 +402,19 @@ void function OnPlayerDamaged( entity victim, var damageInfo )
 	
 	vector damagePosition = DamageInfo_GetDamagePosition( damageInfo )
 	int damageType = DamageInfo_GetCustomDamageType( damageInfo )
+	entity weapon = DamageInfo_GetWeapon( damageInfo )
 
-	StoreDamageHistoryAndUpdate( victim, Time() + 30, damage, damagePosition, damageType, sourceId, attacker )
-	
-	if ( currentHealth - damage <= 0 && PlayerRevivingEnabled() && !IsInstantDeath( damageInfo ) && Bleedout_AreThereAlivingMates( victim.GetTeam(), victim ) )
+	TakingFireDialogue( attacker, victim, weapon )
+
+	if ( currentHealth - damage <= 0 && PlayerRevivingEnabled() && !IsInstantDeath( damageInfo ) && Bleedout_AreThereAlivingMates( victim.GetTeam(), victim ) && !IsDemigod( victim ) )
 	{	
-		if(!IsValid(attacker) || !IsValid(victim)) return
-	
-		if( GetGameState() >= eGameState.Playing && attacker.IsPlayer() && attacker != victim )
-		{
-			thread EnemyDownedDialogue( attacker )
+		if( !IsValid(attacker) || !IsValid(victim) )
+			return
 
-			ScoreEvent event = GetScoreEvent( "Sur_DownedPilot" )
-			Remote_CallFunction_NonReplay( attacker, "ServerCallback_ScoreEvent", event.eventId, event.pointValue, event.displayType, victim.GetEncodedEHandle(), GetTotalDamageTakenByPlayer( victim, attacker ), 0 )
-		}
+		thread EnemyDownedDialogue( attacker, victim )
+		
+		if( GetGameState() >= eGameState.Playing && attacker.IsPlayer() && attacker != victim )
+			AddPlayerScore( attacker, "Sur_DownedPilot", victim )
 
 		foreach ( cbPlayer in GetPlayerArray() )
 			Remote_CallFunction_Replay( cbPlayer, "ServerCallback_OnEnemyDowned", attacker, victim, damageType, sourceId )	
@@ -413,7 +428,7 @@ void function OnPlayerDamaged( entity victim, var damageInfo )
 		// Notify the player of the damage (even though it's *technically* canceled and we're hijacking the damage in order to not make an alive 100hp player instantly dead with a well placed kraber shot)
 		if (attacker.IsPlayer() && IsValid( attacker ))
         {
-            attacker.NotifyDidDamage( victim, DamageInfo_GetHitBox( damageInfo ), damagePosition, damageType, damage, DamageInfo_GetDamageFlags( damageInfo ), DamageInfo_GetHitGroup( damageInfo ), DamageInfo_GetWeapon( damageInfo ), DamageInfo_GetDistFromAttackOrigin( damageInfo ) )
+            attacker.NotifyDidDamage( victim, DamageInfo_GetHitBox( damageInfo ), damagePosition, damageType, damage, DamageInfo_GetDamageFlags( damageInfo ), DamageInfo_GetHitGroup( damageInfo ), weapon, DamageInfo_GetDistFromAttackOrigin( damageInfo ) )
         }
 		// Cancel the damage
 		// Setting damage to 0 cancels all knockback, setting it to 1 doesn't
@@ -425,19 +440,25 @@ void function OnPlayerDamaged( entity victim, var damageInfo )
 	}
 }
 
-void function EnemyDownedDialogue( entity attacker )
+void function EnemyDownedDialogue( entity attacker, entity victim )
 {
+	if( !attacker.IsPlayer() || attacker == victim )
+		return
+	
 	attacker.p.downedEnemy++
 
 	string dialogue = ""
-	float delay = 1.5
+	float delay = 2
 	float anotherDelay = 10
+	if( Time() <= anotherDelay )
+		attacker.p.lastDownedEnemyTime -= anotherDelay // rare
+	
 	float time = Time() - attacker.p.lastDownedEnemyTime
 	int currentDownedEnemy = attacker.p.downedEnemy
 
 	if( attacker.p.downedEnemy > 1 )
 		dialogue = "bc_iDownedMultiple"
-	else if( time > delay && time < anotherDelay )
+	else if( time <= anotherDelay )
 		dialogue = "bc_iDownedAnotherEnemy"
 	else
 		dialogue = "bc_iDownedAnEnemy"
@@ -450,6 +471,53 @@ void function EnemyDownedDialogue( entity attacker )
 		attacker.p.downedEnemy = 0
 		attacker.p.lastDownedEnemyTime = Time()
 	}
+}
+
+void function TakingFireDialogue( entity attacker, entity victim, entity weapon )
+{
+	if( !attacker.IsPlayer() || !victim.IsPlayer() || attacker == victim )
+		return
+
+	float returnTime = 30
+	float farTime = 5
+	int attackerTeam = attacker.GetTeam()
+
+	bool inTime
+	foreach( player in GetPlayerArrayOfTeam( victim.GetTeam() ) )
+	{
+		if( player.p.attackedTeam.len() < attackerTeam )
+			player.p.attackedTeam.resize( attackerTeam + 2, -returnTime )
+
+		if( Time() - player.p.attackedTeam[ attackerTeam ] <= returnTime )
+			inTime = true
+	}
+
+	if( weapon != null )
+	{
+		if( Distance( attacker.GetOrigin(), victim.GetOrigin() ) >= 4000 && Time() - victim.p.attackedTeam[ attackerTeam ] >= farTime )
+			PlayBattleChatterLineToSpeakerAndTeam( attacker, "bc_damageEnemy" )
+		else if( !inTime )
+			PlayBattleChatterLineToSpeakerAndTeam( attacker, "bc_engagingEnemy" )
+	}
+
+	foreach( player in GetPlayerArrayOfTeam( victim.GetTeam() ) )
+		player.p.attackedTeam[ attackerTeam ] = Time()
+
+	if( inTime )
+		return
+
+	int attackerTotalTeam = 0
+	foreach( time in victim.p.attackedTeam )
+		if( Time() - time < returnTime )
+			attackerTotalTeam++
+	
+	if( attackerTotalTeam > 1 )
+		PlayBattleChatterLineToSpeakerAndTeam( victim, "bc_anotherSquadAttackingUs" )
+	else
+		if( weapon == null )
+			PlayBattleChatterLineToSpeakerAndTeam( victim, "bc_takingDamage" )
+		else
+			PlayBattleChatterLineToSpeakerAndTeam( victim, "bc_takingFire" )
 }
 
 void function HandleDeathRecapData(entity victim, var damageInfo)
@@ -624,12 +692,12 @@ void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
 	if ( !IsValid( victim ) || !IsValid( attacker ) || !victim.IsPlayer() )
 		return
 	
-	if( attacker.IsPlayer() )
+	if( attacker.IsPlayer() && !IsFiringRangeGameMode() )
 	{
 		int attackerEHandle = attacker ? attacker.GetEncodedEHandle() : -1
 		int victimEHandle = victim ? victim.GetEncodedEHandle() : -1	
 			
-		if(victimEHandle != -1  && victim.p.DeathRecap_PreviousShotEnemyPlayer != null && victim.p.DeathRecap_PreviousShotEnemyPlayer.GetEncodedEHandle() && victim.p.DeathRecap_DataToSend.totalDamage > 0)
+		if(victimEHandle != -1 && victim.p.DeathRecap_PreviousShotEnemyPlayer != null && IsValid( victim.p.DeathRecap_PreviousShotEnemyPlayer ) && victim.p.DeathRecap_PreviousShotEnemyPlayer.GetEncodedEHandle() && victim.p.DeathRecap_DataToSend.totalDamage > 0)
 		{
 			Remote_CallFunction_NonReplay( victim, "ServerCallback_SendDeathRecapData", victimEHandle, victim.p.DeathRecap_PreviousShotEnemyPlayer.GetEncodedEHandle(), victim.p.DeathRecap_DataToSend.damageSourceID, victim.p.DeathRecap_DataToSend.damageType, victim.p.DeathRecap_DataToSend.totalDamage, victim.p.DeathRecap_DataToSend.hitCount, victim.p.DeathRecap_DataToSend.headShotBits, victim.p.DeathRecap_DataToSend.healthFrac, victim.p.DeathRecap_DataToSend.shieldFrac, victim.p.DeathRecap_DataToSend.blockTime )
 			ResetDeathRecapBlock(victim)
@@ -650,9 +718,9 @@ void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
 	{
 		thread function() : ( victim )
 		{
-			wait 5.0
+			wait GetDeathCamLength( victim )
 
-			SetRandomStagingPositionForPlayer( victim )
+			//SetRandomStagingPositionForPlayer( victim )
 			DecideRespawnPlayer( victim )
 		}()
 
@@ -686,6 +754,44 @@ void function OnPlayerKilled( entity victim, entity attacker, var damageInfo )
 
 	if ( canPlayerBeRespawned || droppableItems > 0 )
 		CreateSurvivalDeathBoxForPlayer( victim, attacker, damageInfo )
+
+	thread EnemyKilledDialogue( attacker, victim.GetTeam(), victim )
+}
+
+void function EnemyKilledDialogue( entity attacker, int victimTeam, entity victim )
+{
+	if( !attacker.IsPlayer() || attacker == victim )
+		return
+	
+	attacker.p.killedEnemy++
+
+	string dialogue = ""
+	string responseName = ""
+	entity responsePlayer = null
+	float delay = 2
+	int currentKilledEnemy = attacker.p.killedEnemy
+
+	if( GetPlayerArrayOfTeam_Alive( victimTeam ).len() == 0 )
+	{
+		dialogue = "bc_squadTeamWipe"
+		responseName = "bc_congratsKill"
+		responsePlayer = TryFindSpeakingPlayerOnTeamDisallowSelf( attacker.GetTeam(), attacker )
+	}
+	else if( attacker.p.killedEnemy > 1 )
+		dialogue = "bc_megaKill"
+	else
+		dialogue = "bc_iKilledAnEnemy"
+
+	wait delay
+
+	if( attacker.p.killedEnemy == currentKilledEnemy )
+	{
+		PlayBattleChatterLineToSpeakerAndTeam( attacker, dialogue )
+		if( responsePlayer != null )
+			PlayBattleChatterLineToSpeakerAndTeam( responsePlayer, responseName )
+		
+		attacker.p.killedEnemy = 0
+	}
 }
 
 void function OnClientConnected( entity player )

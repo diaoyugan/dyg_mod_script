@@ -133,13 +133,6 @@ void function InitArenasBuyPanel3( var panel )
 	file.Mags.append( Hud_GetChild( file.menu, "Mags3" ) )
 	file.Mags.append( Hud_GetChild( file.menu, "Mags4" ) )
 	
-	//Optics default
-	Hud_SetSelected( file.SMGOptics[0], true )
-	Hud_SetSelected( file.SMGBarrels[0], true )
-	Hud_SetSelected( file.SMGStocks[0], true )
-	Hud_SetSelected( file.SniperStocks[0], true )
-	Hud_SetSelected( file.Mags[0], true )
-	
 	//Optics buttons
 	AddEventHandlerToButton( file.menu, "SMGOptics1", UIE_CLICK, SetSMGOpticsAttachmentSelected )	
 	AddEventHandlerToButton( file.menu, "SMGOptics2", UIE_CLICK, SetSMGOpticsAttachmentSelected )	
@@ -209,7 +202,18 @@ void function InitArenasBuyPanel3( var panel )
 	AddEventHandlerToButton( menu, "KraberButton", UIE_CLICKRIGHT, BuyKraber )
 	file.weaponButtons.append(Hud_GetChild( menu, "KraberButton" ))
 
-	CleanAllButtons()
+	AddUICallback_OnLevelInit( OnLevelInit )
+}
+
+void function OnLevelInit()
+{
+	array<array<var> > buttonArrayInArray = [ file.SMGOptics, file.SniperStocks, file.SMGBarrels, file.SMGStocks, file.Mags ]
+	foreach( buttonArray in buttonArrayInArray ) // Resets all attachments of purchases and sets with nothing attached
+		foreach( button in buttonArray )
+			if( button == buttonArray[0] )
+				Hud_SetSelected( button, true )
+			else
+				Hud_SetSelected( button, false )
 }
 
 array<var> function returnWeaponButtons3()
@@ -488,6 +492,8 @@ void function OpenAttachmentsBox( var button )
 		// Hud_SetPos( file.magstext, file.screenPos.x+(buttonsOnTopCenter*7)-TextButtonsOnTopOffset-(5* (screenSize.width / 1920.0)), file.screenPos.y )
 	// }
 	SMGOptics(button)
+
+	SetWeaponSwitcherVisible( false )
 }
 
 void function CloseButtonAttachmentsBox(var button)
@@ -498,6 +504,7 @@ void function CloseButtonAttachmentsBox(var button)
 		Hud_SetVisible(element, false)
 		
 	EnableAllButtons()
+	SetWeaponSwitcherVisible( true )
 }
 
 void function SetSMGOpticsAttachmentSelected(var button)

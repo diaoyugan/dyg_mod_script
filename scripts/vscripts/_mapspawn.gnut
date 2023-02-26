@@ -251,8 +251,6 @@ void function CodeCallback_MapSpawn() // original script entry point
 	//Weapons
 
 	PrecacheWeapon( $"mp_weapon_melee_survival" )
-	PrecacheWeapon( $"mp_ability_crypto_drone_nuclear" )
-	PrecacheWeapon( $"mp_titanweapon_flightcore_rockets" )
 	PrecacheWeapon( $"mp_weapon_mdlspawner" )
 	PrecacheWeapon( $"mp_weapon_alternator_smg" )
 	PrecacheWeapon( $"mp_weapon_bubble_bunker" )
@@ -308,8 +306,6 @@ void function CodeCallback_MapSpawn() // original script entry point
 	PrecacheWeapon( $"npc_weapon_energy_shotgun" )
 	PrecacheWeapon( $"npc_weapon_hemlok" )
 	PrecacheWeapon( $"npc_weapon_lstar" )
-	PrecacheWeapon( $"mp_weapon_smart_pistol" )
-	// PrecacheWeapon( $"mp_weapon_defender_sustained" )
 
 	switch(GameRules_GetGameMode())
 	{
@@ -319,28 +315,13 @@ void function CodeCallback_MapSpawn() // original script entry point
 			PrecacheWeapon( $"mp_weapon_clickweapon")
 			PrecacheWeapon( $"mp_weapon_clickweaponauto")
 			break
-		case "map_editor":
-			PrecacheWeapon( $"mp_weapon_editor" )
-			if ( GetCurrentPlaylistVarBool( "movement_map_enable", false ) )
-				_CheckPoints_Init()
-		default:
-			LoadModelsFromEditor()
-			if ( GetCurrentPlaylistVarBool( "movement_map_enable", false ) )
-				LoadMovementMap()
-			PrecacheWeapon( $"mp_weapon_clickweapon")
-			PrecacheWeapon( $"mp_weapon_clickweaponauto")
-			//PrecacheWeapon( $"mp_weapon_grenade_gravity" )			
-			break
 	}
-	
-	if(GameRules_GetGameMode() == "map_editor" )
-		PutLoadedPropsIntoSaveArray() //needs to be called after the props were loaded
-	
+
 	PrecacheWeapon( $"mp_ability_cloak" )
 	PrecacheWeapon( $"mp_weapon_dragon_lmg" )
 	PrecacheWeapon( $"mp_weapon_3030" )
 	PrecacheWeapon( $"mp_ability_phase_rewind" )
-	PrecacheWeapon( $"mp_ability_space_elevator_tac" ) //needs more testing
+	PrecacheWeapon( $"mp_ability_space_elevator_tac" )
 	PrecacheWeapon( $"mp_weapon_sentinel" )
 
 	SV_CL_Shared_Init()

@@ -135,7 +135,7 @@ void function ServerBrowser_ConnectBtnClicked(var button)
 
 	//Connect to server
 	printf("Connecting to server: (Server ID: " + m_vSelectedServer.svServerID + " | Server Name: " + m_vSelectedServer.svServerName + " | Map: " + m_vSelectedServer.svMapName + " | Playlist: " + m_vSelectedServer.svPlaylist + ")")
-	//SetEncKeyAndConnect(m_vSelectedServer.svServerID)
+	//ConnectToListedServer(m_vSelectedServer.svServerID)
 	RunClientScript("UICallback_ServerBrowserJoinServer", m_vSelectedServer.svServerID)
 }
 
@@ -195,7 +195,7 @@ void function ServerBrowser_FilterServerList(string filter)
 	for( int i=0; i < m_vFilteredServerList.len() && i < SB_MAX_SERVER_PER_PAGE; i++ )
 	{
 		Hud_SetText( Hud_GetChild( file.panel, "ServerName" + i ), m_vFilteredServerList[i].svServerName)
-		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + i ), m_vFilteredServerList[i].svPlaylist)
+		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + i ), GetUIPlaylistName(m_vFilteredServerList[i].svPlaylist))
 		Hud_SetText( Hud_GetChild( file.panel, "Map" + i ), GetUIMapName(m_vFilteredServerList[i].svMapName))
 		Hud_SetText( Hud_GetChild( file.panel, "PlayerCount" + i ), m_vFilteredServerList[i].svCurrentPlayers + "/" + m_vFilteredServerList[i].svMaxPlayers)
 		Hud_SetVisible(Hud_GetChild( file.panel, "ServerButton" + i ), true)
@@ -248,7 +248,7 @@ void function ServerBrowser_RefreshServerListing(bool refresh = true)
 	for( int i=0; i < m_vServerList.len() && i < SB_MAX_SERVER_PER_PAGE; i++ )
 	{
 		Hud_SetText( Hud_GetChild( file.panel, "ServerName" + i ), m_vServerList[i].svServerName)
-		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + i ), m_vServerList[i].svPlaylist)
+		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + i ), GetUIPlaylistName(m_vServerList[i].svPlaylist))
 		Hud_SetText( Hud_GetChild( file.panel, "Map" + i ), GetUIMapName(m_vServerList[i].svMapName))
 		Hud_SetText( Hud_GetChild( file.panel, "PlayerCount" + i ), m_vServerList[i].svCurrentPlayers + "/" + m_vServerList[i].svMaxPlayers)
 		Hud_SetVisible(Hud_GetChild( file.panel, "ServerButton" + i ), true)
@@ -302,7 +302,7 @@ void function ServerBrowser_NextPage(var button)
 	int id = 0
 	for( int i=m_vPages.pStart; i < m_vPages.pEnd; i++ ) {
 		Hud_SetText( Hud_GetChild( file.panel, "ServerName" + id ), m_vServerList[i].svServerName)
-		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + id ), m_vServerList[i].svPlaylist)
+		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + id ), GetUIPlaylistName(m_vServerList[i].svPlaylist))
 		Hud_SetText( Hud_GetChild( file.panel, "Map" + id ), GetUIMapName(m_vServerList[i].svMapName))
 		Hud_SetText( Hud_GetChild( file.panel, "PlayerCount" + id ), m_vServerList[i].svCurrentPlayers + "/" + m_vServerList[i].svMaxPlayers)
 		Hud_SetVisible(Hud_GetChild( file.panel, "ServerButton" + id ), true)
@@ -344,7 +344,7 @@ void function ServerBrowser_PrevPage(var button)
 	int id = 0
 	for( int i=m_vPages.pStart; i < m_vPages.pEnd; i++ ) {
 		Hud_SetText( Hud_GetChild( file.panel, "ServerName" + id ), m_vServerList[i].svServerName)
-		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + id ), m_vServerList[i].svPlaylist)
+		Hud_SetText( Hud_GetChild( file.panel, "Playlist" + id ), GetUIPlaylistName(m_vServerList[i].svPlaylist))
 		Hud_SetText( Hud_GetChild( file.panel, "Map" + id ), GetUIMapName(m_vServerList[i].svMapName))
 		Hud_SetText( Hud_GetChild( file.panel, "PlayerCount" + id ), m_vServerList[i].svCurrentPlayers + "/" + m_vServerList[i].svMaxPlayers)
 		Hud_SetVisible(Hud_GetChild( file.panel, "ServerButton" + id ), true)
@@ -413,7 +413,7 @@ void function ServerBrowser_SelectServer(int id, string name, string map, string
 
 	Hud_SetText(Hud_GetChild( file.panel, "ServerNameInfoEdit" ), name )
 	Hud_SetText(Hud_GetChild( file.panel, "ServerCurrentMapEdit" ), GetUIMapName(map) )
-	Hud_SetText(Hud_GetChild( file.panel, "PlaylistInfoEdit" ), playlist )
+	Hud_SetText(Hud_GetChild( file.panel, "PlaylistInfoEdit" ), GetUIPlaylistName(playlist) )
 	Hud_SetText(Hud_GetChild( file.panel, "ServerDesc" ), desc )
 	RuiSetImage( Hud_GetRui( Hud_GetChild( file.panel, "ServerMapImg" ) ), "loadscreenImage", GetUIMapAsset(map) )
 }
@@ -476,5 +476,5 @@ void function ServerBrowser_StartConnection(int id)
 
 	Hud_SetVisible(Hud_GetChild( file.menu, "R5RConnectingPanel"), false)
 
-	SetEncKeyAndConnect(id)
+	ConnectToListedServer(id)
 }

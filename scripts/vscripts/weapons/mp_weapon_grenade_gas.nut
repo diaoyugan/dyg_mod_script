@@ -1,6 +1,5 @@
 global function MpWeaponGrenadeGas_Init
 global function OnProjectileCollision_weapon_grenade_gas
-global function OnProjectileCollision_weapon_grenade_gas_gun
 global function OnWeaponReadyToFire_weapon_grenade_gas
 global function OnWeaponTossReleaseAnimEvent_weapon_greande_gas
 global function OnWeaponDeactivate_weapon_grenade_gas
@@ -40,66 +39,6 @@ var function OnWeaponTossReleaseAnimEvent_weapon_greande_gas( entity weapon, Wea
 	return result
 }
 
-void function OnProjectileCollision_weapon_grenade_gas_gun( entity projectile, vector pos, vector normal, entity hitEnt, int hitbox, bool isCritical )
-{
-	array<string> mods = projectile.ProjectileGetMods()
-	foreach ( mod in mods )
-	{
-		if ( mod == "gas_grenade" )
-		{
-
-	entity player = projectile.GetOwner()
-	if ( hitEnt == player )
-		return
-
-	// if ( projectile.GrenadeHasIgnited() )
-	// 	return
-
-	table collisionParams =
-	{
-		pos = pos,
-		normal = normal,
-		hitEnt = hitEnt,
-		hitbox = hitbox
-	}
-
-	bool result = PlantStickyEntityOnWorldThatBouncesOffWalls( projectile, collisionParams, 0.7 )
-
-
-	#if SERVER
-
-	vector origin = projectile.GetOrigin()
-	entity owner = projectile.GetOwner()
-	if ( !IsValid( owner ) )
-		return
-	entity myParent = projectile.GetParent()
-
-	// owner.EndSignal( "OnDestroy" )
-	// projectile.GrenadeExplode( <0,0,1> )
-
-	// wait 0.2
-
-	entity mover = CreateScriptMover( origin )
-	mover.SetOwner( owner )
-	if(owner)
-	{
-		mover.RemoveFromAllRealms()
-		mover.AddToOtherEntitysRealms( owner )
-	}
-
-	if ( IsValid( myParent ) )
-	{
-		mover.SetParent( myParent )
-	}
-
-	TrackingVision_CreatePOI( eTrackingVisionNetworkedPOITypes.PLAYER_ABILITIES_GAS, mover, mover.GetOrigin(), mover.GetTeam(), mover )
-	CreateGasCloudLarge( mover, WEAPON_GAS_GRENADE_DURATION, WEAPON_GAS_GRENADE_OFFSET )
-	thread DelayedDestroy( mover, WEAPON_GAS_GRENADE_DURATION )
-
-	#endif
-}
-}
-}
 
 void function OnProjectileCollision_weapon_grenade_gas( entity projectile, vector pos, vector normal, entity hitEnt, int hitbox, bool isCritical )
 {

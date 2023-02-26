@@ -1,175 +1,13 @@
 playlists
 {
 	version stable
-	versionNum 228
+	versionNum 230
 	Gamemodes
 	{
 		defaults
 		{
 			vars
 			{
-
-				///////////////////////////////////////////////////////////////////////////////////
-				////Attachments
-				///////////////////////////////////////////////////////////////////////////////////
-//				custom_hopup_override_weapon_attachments - set it to 1. 
-//				This will add attachment slots for weapons that are compatible with the attachment but don't have the appropriate slot for it to fit in. 
-//				To turn that feature off, set it to 0.
-
-
-				custom_hopup_override_weapon_attachments       "1"
-
-					kunailauncher_name					"苦无附魔"
-					kunailauncher_desc					"拜托，这特效超酷的好吗（虽然并没有实用性）"
-					kunailauncher_tier					"5"
-					kunailauncher_icon					"rui/pilot_loadout/mods/hopup_em_choke"
-					kunailauncher_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
-					kunailauncher_slot					"hopup"
-					kunailauncher_low_chance				"1"
-					kunailauncher_med_chance				"1"
-					kunailauncher_high_chance				"1"
-
-					hopup_explode_bullet_name					"爆炸子弹"
-					hopup_explode_bullet_desc					"使武器发射的子弹爆炸"
-					hopup_explode_bullet_tier					"5"
-					hopup_explode_bullet_icon					"rui/ordnance_icons/grenade_frag"
-					hopup_explode_bullet_model					"mdl/weapons/grenades/w_loot_m20_f_grenade_projectile.rmdl"
-					hopup_explode_bullet_slot					"hopup"
-					hopup_explode_bullet_low_chance				"1"
-					hopup_explode_bullet_med_chance				"1"
-					hopup_explode_bullet_high_chance				"1"
-
-					hopup_smartcore_name					"智慧核心"
-					hopup_smartcore_desc					"激活自动瞄准"
-					hopup_smartcore_tier					"5"
-					hopup_smartcore_icon					"rui/pilot_loadout/mods/hopup_em_choke"
-					hopup_smartcore_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
-					hopup_smartcore_slot					"hopup"
-					hopup_smartcore_low_chance				"1"
-					hopup_smartcore_med_chance				"1"
-					hopup_smartcore_high_chance				"1"
-
-					hopup_thermite_name					"火焰核心"
-					hopup_thermite_desc					"让武器射出铝热剂"
-					hopup_thermite_tier					"5"
-					hopup_thermite_icon					"rui/ordnance_icons/grenade_incendiary"
-					hopup_thermite_model					"mdl/weapons/grenades/w_thermite_grenade_projectile.rmdl"
-					hopup_thermite_slot					"hopup"
-					hopup_thermite_low_chance				"1"
-					hopup_thermite_med_chance				"1"
-					hopup_thermite_high_chance				"1"
-
-					gas_grenade_name					"毒气发射器"
-					gas_grenade_desc					"让武器射出毒气云"
-					gas_grenade_tier					"5"
-					gas_grenade_icon					"rui/hud/ultimate_icons/ultimate_caustic"
-					gas_grenade_model					"mdl/weapons/grenades/w_caustic_grenade_projectile.rmdl"
-					gas_grenade_slot					"hopup"
-					gas_grenade_low_chance				"1"
-					gas_grenade_med_chance				"1"
-					gas_grenade_high_chance				"1"
-					
-					
-					shield_heal_name					"能量转换器"
-					shield_heal_desc					"发射时基于武器的50%伤害为你的护甲充能"
-					shield_heal_tier					"4"
-					shield_heal_icon					"rui/pilot_loadout/mods/hopup_em_choke"
-					shield_heal_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
-					shield_heal_slot					"hopup"
-					shield_heal_low_chance				"1"
-					shield_heal_med_chance				"1"
-					shield_heal_high_chance				"1"
-
-					armor_piercing_name					"穿甲子弹"
-					armor_piercing_desc					"武器会穿透敌人护盾造成额外伤害"
-					armor_piercing_tier					"4"
-					armor_piercing_icon					"rui/pilot_loadout/mods/hopup_unshielded_dmg"
-					armor_piercing_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
-					armor_piercing_slot					"hopup"
-					armor_piercing_low_chance				"1"
-					armor_piercing_med_chance				"1"
-					armor_piercing_high_chance				"1"
-
-
-//					inversion_name					"后坐力翻转器"
-//					inversion_desc					"翻转后坐力"
-//					inversion_tier					"3"
-//					inversion_icon					"rui/pilot_loadout/mods/hopup_em_choke"
-//					inversion_model					"mdl/weapons_r5/loot/_master/w_loot_wep_mods_chip.rmdl"
-//					inversion_slot					"hopup"
-//					inversion_low_chance				"1"
-//					inversion_med_chance				"1"
-//					inversion_high_chance				"1"
-				///////////////////////////////////////////////////////////////////////////////////
-				//// Custom General Settings (Flowstate custom)
-				///////////////////////////////////////////////////////////////////////////////////
-				
-				r5reloaded_AnimatedCharacterSelect				0
-				register_damage_to_ai 							1
-				register_dummie_kill_as_actual_kill 			1
-				dummies_have_random_shields 					1
-				dummies_agressivedummies 						0	//Toggle for combat/training dummies
-				
-				///////////////////////////////////////////////////////////////////////////////////
-				//// Custom Weapons
-				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity  mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
-				
-				mp_weapon_volt_smg_class "smg"
-				mp_weapon_sentinel_class  "sniper"
-				mp_weapon_sentinel_attachments "mag sight grip"
-
-				mp_weapon_smart_wingman_class "pistol"
-				mp_weapon_smart_wingman_attachments "barrel mag sight grip hopup"
-				mp_weapon_smart_wingman_low_chance "1.0"
-				mp_weapon_smart_wingman_med_chance "1.0"
-				mp_weapon_smart_wingman_high_chance "1.0"
-				mp_weapon_smart_wingman_tier "1"
-			
-				mp_weapon_grenade_gravity_class "pistol"
-				mp_weapon_grenade_gravity_attachments " "
-				mp_weapon_grenade_gravity_low_chance "1.0"
-				mp_weapon_grenade_gravity_med_chance "1.0"
-				mp_weapon_grenade_gravity_high_chance "1.0"
-				mp_weapon_grenade_gravity_tier "1"
-
-				
-
-				mp_titanweapon_flightcore_rockets_class "pistol"
-				mp_titanweapon_flightcore_rockets_attachments " "
-				mp_titanweapon_flightcore_rockets_low_chance "1.0"
-				mp_titanweapon_flightcore_rockets_med_chance "1.0"
-				mp_titanweapon_flightcore_rockets_high_chance "1.0"
-				mp_titanweapon_flightcore_rockets_tier "5"
-
-				mp_weapon_energy_shotgunE_class 					"shotgun"
-				mp_weapon_energy_shotgunE_attachments 			"mag sight grip hopup"
-				mp_weapon_energy_shotgunE_low_chance 				"1.0"
-				mp_weapon_energy_shotgunE_med_chance 			"1.0"
-				mp_weapon_energy_shotgunE_high_chance 			"1.0"
-				mp_weapon_energy_shotgunE_tier 					"1"	
-
-				mp_weapon_mastiffF_class 					"shotgun"
-				mp_weapon_mastiffF_attachments 			"mag hopup"
-				mp_weapon_mastiffF_low_chance 				"1.0"
-				mp_weapon_mastiffF_med_chance 			"1.0"
-				mp_weapon_mastiffF_high_chance 			"1.0"
-				mp_weapon_mastiffF_tier 					"1"	
-
-				mp_weapon_lmgF_class 					"lmg"
-				mp_weapon_lmgF_attachments 			"barrel mag sight grip hopup"
-				mp_weapon_lmgF_low_chance 				"1.0"
-				mp_weapon_lmgF_med_chance 			"1.0"
-				mp_weapon_lmgF_high_chance 			"1.0"
-				mp_weapon_lmgF_tier 					"1"	
-
-				mp_weapon_autopistol_gas_class 					"pistol"
-				mp_weapon_autopistol_gas_attachments 			"barrel mag sight hopup"
-				mp_weapon_autopistol_gas_low_chance 				"1.0"
-				mp_weapon_autopistol_gas_med_chance 			"1.0"
-				mp_weapon_autopistol_gas_high_chance 			"1.0"
-				mp_weapon_autopistol_gas_tier 					"1"	
-				
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Code Required Vars
 				///////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +47,7 @@ playlists
 				waiting_for_players_min_wait                   0
 				waiting_for_players_timeout_seconds            60
 				waiting_for_players_has_black_screen           1
-				survival_enable_gladiator_intros               1
+				survival_enable_gladiator_intros               0
 				character_select_time_max                      6
 				character_select_time_min                      6
 
@@ -217,19 +55,15 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Character Configurations
 				///////////////////////////////////////////////////////////////////////////////////
-//				character_dummie                               lock
-//				character_wattson                              lock
-//				character_crypto                               lock
-//				character_random                               lock
-//				character_bloodhound                               lock
-//				character_pathfinder                               lock
-//				character_lifeline                               lock
-//				character_gibraltar                               lock
-//				character_wraith                               lock
-//				character_bangalore                               lock
-//				character_caustic                               lock
-//				character_mirage                               lock
-//				character_octane                               lock
+				//character_wattson                            lock
+				//character_crypto                             lock
+
+				//============= Hide from Normal Use ============//
+				
+				
+				///////////////////////////////////////////////////////////////////////////////////
+				//// Custom Weapons
+				///////////////////////////////////////////////////////////////////////////////////
 
 
 				///////////////////////////////////////////////////////////////////////////////////
@@ -348,25 +182,27 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				valentines_event                               0
 				halloween_event                                0
+				random_loadscreen							   1
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Aim Assist
 				///////////////////////////////////////////////////////////////////////////////////
-				aimassist_adspull_disabled                     0//1
-				aimassist_magnet_pc                            400//0.4
-				aimassist_magnet                               400//0.4
+				aimassist_adspull_disabled                     1
+				aimassist_magnet_pc                            0.40
+				aimassist_magnet                               0.60
 
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Battlepass
 				///////////////////////////////////////////////////////////////////////////////////
-				//battlepass_character_max_xp                    25000
-				//battlepass_character_max_weekly_xp             25000
+				//battlepass_character_max_xp                  25000
+				//battlepass_character_max_weekly_xp           25000
 
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Misc Configuration
 				///////////////////////////////////////////////////////////////////////////////////
+				timelimit                                      30
 				enable_grx                                     1
 				enable_battlepass                              1
 				enable_wraith_alert_effect                     1
@@ -375,8 +211,6 @@ playlists
 				ranked_in_match_check_party_force_team         0
 				quick_melee_enabled                            1
 				require_training                               0
-				timelimit                                      30
-				survival_shields                               1
 				octane_preview                                 0
 				player_revive_enabled                          1
 				match_ending_enabled                           1
@@ -391,9 +225,6 @@ playlists
 				survival_unequip_attachment                    1
 				survival_transfer_attachment                   1
 				survival_drop_equipment                        1
-				blockable_door_can_be_hurt_by_normal_weapons 1
-				blockable_door_show_damage_numbers 1
-				dev_force_everything_unlocked 1
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Player Reporting
@@ -433,15 +264,15 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Season start/end datetimes (don't delete these)
 				///////////////////////////////////////////////////////////////////////////////////
+				season01_start_unixtime                        2145916800
+				season02_start_unixtime                        2145916800
 				season03_reveal_unixtime                       1626656230
 				season03_start_unixtime                        1626656230
 				season03_finish_unixtime                       1637272618
 				season03_hide_unixtime                         1637272618
-				season01_start_unixtime 1626656230
-				season02_start_unixtime 1626656230
 				ranked_period_02_start_unixtime                1630749435
 				s03e01_start_unixtime                          1630749435
-				season01_start_unixtime 1626656230
+
 
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Dev Playlist Vars
@@ -451,7 +282,7 @@ playlists
 				survival_quick_chat_enabled                    1 // Quips
 				desertlands_script_train_enable                1 // World's Edge Train
 				thirdperson_match                              0 // Third Person Mode
-				enable_nessies                                 0 // Kings Canyon Easter Egg
+				enable_nessies                                 1 // Kings Canyon Easter Egg
 
 				///////////////////////////////////////////////////////////////////////////////////
 				///////////////////////////////////////////////////////////////////////////////////
@@ -465,11 +296,8 @@ playlists
 		{
 			inherit defaults
 		}
+
 		menufall
-		{
-			inherit defaults
-		}
-		custom_aimtrainer
 		{
 			inherit defaults
 		}
@@ -479,72 +307,27 @@ playlists
 			inherit defaults
 		}
 
-		map_editor
-		{
-			inherit defaults
-		}
-
 		custom_tdm
 		{
 			inherit defaults
 		}
-
 	}
+
+// START OF MP GAMEMODES LINE --------------------------------------------------
 
 	Playlists
 	{
-
-		///////////////////////////////////
-		/////////////  LTMs  //////////////
-		///////////////////////////////////
-		
-		// NOT IMPLEMENTED YET
-		// ShadowfallLTM
-		// {
-			// inherit defaults
-			// vars
-			// {
-				// name                                           #SHADOW_SQUAD_MODE
-				// description                                    #SHADOW_SQUAD_MODE_DESC
-				// abbreviation                                   #SHADOW_SQUAD_MODE_ABOUT
-				// image                                          shadow_squad
-				// video                                          shadow_squad
-				// visible                                        1
-				// show_ltm_about_button                          1
-				// max_teams                                      60
-				// max_players                                    60
-				// min_players                                    60
-				// survival_shields                               1
-				// freelance_enabled                              1
-				// is_ranked_game                                 0
-				// //ui_slot                                      ltm
-				// mode_fall_ltm                                  1
-				// evil_leviathans                                1
-				// player_revive_enabled                          0
-				// battlechatter_enabled                          1
-				// showLTMAboutButton                             1
-				// character_select_time_max                      4.0
-				// character_select_time_min                      4.0
-			// }
-			// gamemodes { survival { maps {
-				// mp_rr_canyonlands_mu1_night                    1
-				// mp_rr_desertlands_64k_x_64k_nx                 1
-			// } } }
-		// }
-
-		custom_aimtrainer
+		survival_staging_baseline
 		{
 			inherit survival
 			vars
 			{
-				firingrange_aimtrainerbycolombia 1
-				aimtrainer_enableSkins 1
-				r5reloaded_AnimatedCharacterSelect 1
-				solo_mode 1
-				
-				visible                                        1
-				name                                           "Aim Trainer"
-				description                                    "Aim Trainer"
+				name                                           "survival_staging_baseline"
+				visible                                        0
+				max_teams                                      20
+				max_players                                    20
+				min_players                                    1
+				num_squads_in_staging                          1
 
 				waiting_for_players_spawning_enabled           1
 				jump_from_plane_enabled                        0
@@ -554,8 +337,60 @@ playlists
 				airdrop_enabled                                0
 				num_static_loot_ticks_to_spawn                 0
 				loot_preprocessing_should_be_skipped           1
+
+				// Skip intros:
+				waiting_for_players_spawning_enabled           1
+				waiting_for_players_countdown_seconds          0
+				waiting_for_players_timeout_seconds            1
+				character_select_time_max                      0.0
+				character_select_time_min                      0.0
+				survival_enable_gladiator_intros               0
+				jump_from_plane_enabled                        0
+
+				// No circle:
+				sur_circle_start_paused                        1
+
+				charge_pylons_raise_time_override              15 //Shorter time in training
+
 				survival_staging_area_enabled                  1
+				battlechatter_enabled                          1
 				make_room_for_new_players                      1
+			}
+			gamemodes { survival { maps {
+				mp_rr_canyonlands_staging                      1
+			} } }
+		}
+
+		survival_training
+		{
+			inherit survival_staging_baseline
+			vars
+			{
+				visible                                        0
+				ui_slot                                        training
+				video                                          _temp
+				name                                           "Training"
+				description                                    #PL_TRAINING_DESC
+				image                                          training
+
+				//
+				survival_training                              1
+				survival_firingrange                           0
+				pin_match_type                                 training
+			}
+		}
+
+		survival_firingrange
+		{
+			inherit survival_staging_baseline
+			vars
+			{
+				visible                                        1
+				ui_slot                                        firing_range
+				image                                          firing_range
+				name                                           "Firing Range"
+				description                                    #PL_FIRINGRANGE_DESC
+				video                                          _temp
 
 				// match teams will not fill with more than one party, up to max_teams of size max_team_size (or less) -- not exceeding max_players
 				visible                                        1
@@ -573,7 +408,6 @@ playlists
 				sur_circle_start_paused                        1
 
 				// Can change loadouts:
-				dev_loadout_changeable_at_any_time             1
 				sur_dev_unrestricted_character_changes         1
 				character_reselect_enabled                     1
 				charselect_enabled                             1
@@ -591,619 +425,284 @@ playlists
 				survival_firingrange                           1
 				staging_ultimates_enabled                      1
 				survival_staging_area_enabled                  0
+				//survival_infinite_ammo                       1
+				
+				pin_match_type                                 firing_range
 			}
-			gamemodes { custom_aimtrainer { maps {
-				mp_rr_canyonlands_64k_x_64k                    1
-				mp_rr_canyonlands_mu1                          1
-				mp_rr_desertlands_64k_x_64k                    1
-				mp_rr_desertlands_64k_x_64k_nx                 1
-				mp_rr_canyonlands_mu1_night                    1
-			} } }
-		}
-		
-		custom_tdm
-		{
-			inherit defaults
-			vars
-			{
-				image                              worlds_edge
-				video                              worlds_edge
-				panel_image                        panel_worlds_edge
-				visible                            1
-				battlechatter_enabled              1
-				name                               custom_tdm
-				description                        "TDM"
-				abbreviation                       "TDM"
-				lobbytitle                         "TDM"
-				pin_match_type                     survival
-				enable_nessies                     0
-				
-   				//Flowstate By CaféDeColombiaFPS.
-				
-				max_teams                          16
-				max_players                        16
-				min_players                        0
-				
-				default_shield_hp                  75
-				survival_shields                   1
-				skydive_ziplines_enabled           1
-				ground_loot_enable 				   1
-				lootbin_loot_enable                1
-				
-				survival_jumpkit_enabled           0
-				survival_wallrun_enabled           0
-				
-				survival_infinite_ammo             1
-				survival_custom_deploy             1
-				character_select_time_min          0
-				character_select_time_max          0
-				charselect_picking_delay_after_all 0
-				survival_enable_squad_intro        0
-				survival_enable_gladiator_intros   0
-				jump_from_plane_enabled            0
-				replay_enabled                     1  
-				replay_delay                       5
-				enable_small_pheonix			   0
-				match_ending_enabled               0
-				sur_circle_start_paused            1
-
-				replay_new_ui 1
-					
-				//For FFA classic mode
-				//specific weapons and abilities settings
-				respawn_kit_enabled 				1
-				respawn_kit_primary_weapon 			"mp_weapon_r97 optic_cq_hcog_classic bullets_mag_l2 barrel_stabilizer_l4_flash_hider stock_tactical_l3"
-				respawn_kit_secondary_weapon 		"mp_weapon_wingman optic_cq_hcog_classic highcal_mag_l3"
-				respawn_kit_tactical 				"mp_ability_grapple"
-				respawn_kit_ultimate 				"mp_ability_phase_rewind"
-				
-				//random weapons and abilities settings
-				flowstateRandomGuns 				0 	//round, big weapons list
-				flowstateRandomGunsMetagame			0 	//Metagame small weapon list primary:(r99,r301,flatline) secondary:(wingman,pk,eva,mastiff) every round
-				flowstateRandomTactical 			0 	//grapple,phase walk,stim,bubble, bang smokes, hound q, tf2 cloak
-				flowstateRandomUltimate				0 	//caustic ult,jumppad,wraith ult,3dash,hound ult, gibby ult
-
-				//whitelisted_weapon_0 "mp_weapon_mastiff"
-				//whitelisted_weapon_1 ""				
-				
-				//whitelisted_ability_0 "mp_weapon_grenade_bangalore"
-				//whitelisted_ability_1 ""
-				
-				//GENERAL SETTINGS
-				flowstateBattleLogEnable 				0
-				flowstateChatLogEnable 					0
-				
-				flowstateEndlessFFAorTDM				0 //location won't change, no champion will be defined
-				Admins 									"r5r_ColombiaFPS admin2"
-				respawn_delay 							5
-				flowstateRoundtime 						800
-				flowstateBubble 						"111, 66, 245" //ring color
-				flowstateResetKills 					1
-				flowstateTimer 							1
-				flowstateLockPOI 						0  // flowstateRandomizePOIS must be 0 if you want to lock poi.
-				flowstateLockeedPOI 					0
-				flowstateCapitolCityReplacesTTVLocation 0 //Makes ttv building bigger
-				flowstateGrenadesDisabled				1
-				flowstateAdminTgive 					1 //tgive is for the admin ONLY
-				flowstateGrenadesDisabled       		0
-				flowstateAutoChangeLevelEnable			1
-				flowstateRoundsBeforeChangeLevel		2
-				flowstateGiveAllOpticsToPlayer			0
-				flowstate_headshots_only_gamemode 		0 //i recommend a wingman only in respawn kit above
-				flowstateReloadTacticalOnRespawn  		0
-				flowstateReloadUltimateOnRespawn 		1
-				
-				//custom maps by community
-				//World's Edge Map
-				flowstate_Enable_BRIGHWATER_By_Zero				0
-				flowstate_Enable_CAVE_By_BlessedSeal			0
-				flowstate_Enable_SKILLTRAINER_By_Colombia		1
-				
-				//Kings Canyon OG map
-				flowstate_Enable_CUSTOMMAP_By_Biscutz 	0
-				flowstate_Enable_WHITEFOREST_By_Zero 	0				
-				
-				flowstateKickHighPingPlayer				0
-				flowstateMaxPingAllowed					230
-				solo_mode 								1 //this will fix the ingame player count text, so it wont display "??" in players alive (now players connected) count.
-				flowstateDoorsEnabled					0 //Doors enabled or disabled in all buildings.
-				flowstateDoorsRegen						0 //if door is damaged but not destroyed, it will regen health. Suggestion: false.
-
-				//visuals
-				flowstateForceCharacter 				1	//It enables the following settings
-				flowstateChosenCharacter 				8	// 0 Bang// 1 Bloodhound// 2 Caustic// 3 Gibby// 4 Lifeline// 5 Mirage// 6 Octane// 7 Pathy// 8 Wraith// 9 Watty// 10 Crypto
-				flowstateForceAdminCharacter			0
-				flowstateChosenAdminCharacter			0	// 0 Bang// 1 Bloodhound// 2 Caustic// 3 Gibby// 4 Lifeline// 5 Mirage// 6 Octane// 7 Pathy// 8 Wraith// 9 Watty// 10 Crypto
-				flowstateDummyOverride 					0	// explains itself, it's bugged with some abilities (grapple ie)
-				
-				//game continuity 
-				flowstateAutoreloadPrimary 				1
-				flowstateAutoreloadSecondary 			1
-				flowstateKillshotEnabled 				1	//enables the killshot sound when killing
-				
-				//extrashields
-				flowstateExtrashieldsEnabled 			0
-				flowstateExtrashieldsSpawntime 			240
-				flowstateExtrashieldValue 				150 //extrashield actual value
-
-			}
-			gamemodes { custom_tdm { maps {
-				mp_rr_canyonlands_64k_x_64k                    	1
-				mp_rr_canyonlands_mu1                         	1
-				mp_rr_desertlands_64k_x_64k                    	1
-				mp_rr_desertlands_64k_x_64k_nx                 	1
-				mp_rr_desertlands_64k_x_64k_tt                 	1
-				mp_rr_arena_skygarden                          	1
-				mp_rr_party_crasher                      		1
-				mp_rr_canyonlands_mu1_night                    	1
-				mp_rr_canyonlands_staging                      	1
-				mp_rr_ashs_redemption                          	1
-				mp_rr_aqueduct									1
-				mp_rr_arena_composite							1
-				mp_rr_aqueduct_night							1
-			} } }
-		}
-		
-		custom_tdm_fiesta
-		{
-			inherit defaults
-			vars
-			{
-				image                              worlds_edge
-				video                              worlds_edge
-				panel_image                        panel_worlds_edge
-				visible                            1
-				battlechatter_enabled              1
-				name                               custom_tdm
-				description                        "TDM"
-				abbreviation                       "TDM"
-				lobbytitle                         "TDM"
-				pin_match_type                     survival
-				enable_nessies                     0
-				
-   				//Flowstate By CaféDeColombiaFPS.
-				
-				max_teams                          16
-				max_players                        16
-				min_players                        0
-				
-				default_shield_hp                  75
-				survival_shields                   1
-				skydive_ziplines_enabled           1
-				ground_loot_enable 				   1
-				lootbin_loot_enable                1
-				
-				survival_jumpkit_enabled           0
-				survival_wallrun_enabled           0
-				
-				survival_infinite_ammo             1
-				survival_custom_deploy             1
-				character_select_time_min          0
-				character_select_time_max          0
-				charselect_picking_delay_after_all 0
-				survival_enable_squad_intro        0
-				survival_enable_gladiator_intros   0
-				jump_from_plane_enabled            0
-				replay_enabled                     1  
-				replay_delay                       5
-				enable_small_pheonix			   0
-				match_ending_enabled               0
-				sur_circle_start_paused            1
-
-				//For FFA classic mode
-				//specific weapons and abilities settings
-				respawn_kit_enabled 				1
-				respawn_kit_primary_weapon 			"mp_weapon_r97 optic_cq_hcog_classic bullets_mag_l2 barrel_stabilizer_l4_flash_hider stock_tactical_l3"
-				respawn_kit_secondary_weapon 		"mp_weapon_wingman optic_cq_hcog_classic highcal_mag_l3"
-				respawn_kit_tactical 				"mp_ability_phase_walk"
-				respawn_kit_ultimate 				"mp_weapon_jump_pad"
-				
-				//random weapons and abilities settings, change every round
-				flowstateRandomGuns 				0 	//round, big weapons list
-				flowstateRandomGunsMetagame			0 	//Metagame small weapon list primary:(r99,r301,flatline) secondary:(wingman,pk,eva,mastiff) every round
-				flowstateRandomTactical 			0 	//grapple,phase walk,stim,bubble, bang smokes, hound q, tf2 cloak
-				flowstateRandomUltimate				0 	//caustic ult,jumppad,wraith ult,3dash,hound ult, gibby ult
-				
-				//GENERAL SETTINGS
-				flowstateEndlessFFAorTDM	0 //location won't change, no champion will be defined
-				flowstateHoster 					"r5r_ColombiaFPS"
-				flowstateAdmin1 					"r5r_ColombiaFPS"
-				flowstateAdmin2 					"r5r_ColombiaFPS"
-				flowstateAdmin3 					"r5r_ColombiaFPS"
-				flowstateAdmin4 					"r5r_ColombiaFPS"
-				flowstateRoundtime 					800
-				flowstateBubble 					"111, 66, 245" //ring color
-				flowstateResetKills 				1
-				flowstateTimer 						1
-				flowstateLockPOI 					0  // flowstateRandomizePOIS must be 0 if you want to lock poi.
-				flowstateLockeedPOI 				0
-				flowstateCapitolCityReplacesTTVLocation 1 //Makes ttv building bigger
-				flowstateGrenadesDisabled			1
-				flowstateAdminTgive 				0 //tgive is for the admin ONLY
-				flowstateGrenadesDisabled       		0
-				flowstateAutoChangeLevelEnable			1
-				flowstateRoundsBeforeChangeLevel		2
-				flowstateGiveAllOpticsToPlayer			0
-				flowstate_headshots_only_gamemode 0 //i recommend a wingman only in respawn kit above
-				flowstateReloadTacticalOnRespawn  	1
-				flowstateReloadUltimateOnRespawn 	1
-				
-				//custom maps by community
-				//World's Edge Map
-				flowstate_Enable_BRIGHWATER_By_Zero				0
-				flowstate_Enable_CAVE_By_BlessedSeal			0
-				flowstate_Enable_SKILLTRAINER_By_Colombia		1
-				
-				//Kings Canyon OG map
-				flowstate_Enable_CUSTOMMAP_By_Biscutz 0
-				flowstate_Enable_WHITEFOREST_By_Zero 0				
-				
-				flowstateKickHighPingPlayer			0
-				flowstateMaxPingAllowed				230
-				solo_mode 							1 //this will fix the ingame player count text, so it wont display "??" in players alive (now players connected) count.
-				flowstateDoorsEnabled				0 //Doors enabled or disabled in all buildings.
-				flowstateDoorsRegen					0 //if door is damaged but not destroyed, it will regen health. Suggestion: false.
-
-
-				flowstateFIESTA 					1 	//FIESTA gamemode, deathboxes/armor swaps available here
-					flowstateFIESTAShieldsUpgrade	0  //with this you will override the default_shield_hp value and you will get better shields with kill streak. You start with blue shield.
-					flowstateFIESTADeathboxes		1
-				//visuals
-				flowstateForceCharacter 			1	//It enables the following settings
-				flowstateChosenCharacter 			8	// 0 Bang// 1 Bloodhound// 2 Caustic// 3 Gibby// 4 Lifeline// 5 Mirage// 6 Octane// 7 Pathy// 8 Wraith// 9 Watty// 10 Crypto
-				flowstateDummyOverride 				0	// explains itself, it's bugged with some abilities (grapple ie)
-				
-				//game continuity 
-				flowstateAutoreloadPrimary 			1
-				flowstateAutoreloadSecondary 			1
-				flowstateKillshotEnabled 			1	//enables the killshot sound when killing
-				
-				//extrashields
-				flowstateExtrashieldsEnabled 			0
-				flowstateExtrashieldsSpawntime 			240
-				flowstateExtrashieldValue 			150 //extrashield actual value
-
-			}
-			gamemodes { custom_tdm { maps {
-				mp_rr_canyonlands_64k_x_64k                     1
-				mp_rr_canyonlands_mu1                           1
-				mp_rr_desertlands_64k_x_64k                     1
-				mp_rr_desertlands_64k_x_64k_nx                  1
-				mp_rr_desertlands_64k_x_64k_tt                  1
-				mp_rr_arena_skygarden                           1
-				mp_rr_party_crasher                       		1
-				mp_rr_canyonlands_mu1_night                     1
-				mp_rr_canyonlands_staging                       1
-				mp_rr_ashs_redemption                           1
-				mp_rr_aqueduct									1
-				mp_rr_arena_composite							1
-				mp_rr_aqueduct_night							1
-			} } }
-		}
-		
-		custom_tdm_gungame
-		{
-			inherit defaults
-			vars
-			{
-				image                              worlds_edge
-				video                              worlds_edge
-				panel_image                        panel_worlds_edge
-				visible                            1
-				battlechatter_enabled              1
-				name                               custom_tdm
-				description                        "TDM"
-				abbreviation                       "TDM"
-				lobbytitle                         "TDM"
-				pin_match_type                     survival
-				enable_nessies                     0
-				
-   				//Flowstate By CaféDeColombiaFPS.
-				
-				max_teams                          16
-				max_players                        16
-				min_players                        0
-				
-				default_shield_hp                  75
-				survival_shields                   1
-				skydive_ziplines_enabled           1
-				ground_loot_enable 				   1
-				lootbin_loot_enable                1
-				
-				survival_jumpkit_enabled           0
-				survival_wallrun_enabled           0
-				
-				survival_infinite_ammo             1
-				survival_custom_deploy             1
-				character_select_time_min          0
-				character_select_time_max          0
-				charselect_picking_delay_after_all 0
-				survival_enable_squad_intro        0
-				survival_enable_gladiator_intros   0
-				jump_from_plane_enabled            0
-				replay_enabled                     1  
-				replay_delay                       5
-				enable_small_pheonix			   0
-				match_ending_enabled               0
-				sur_circle_start_paused            1
-
-				//For FFA classic mode
-				//specific weapons and abilities settings
-				respawn_kit_enabled 				1
-
-				//GENERAL SETTINGS
-				flowstateEndlessFFAorTDM	0 //location won't change, no champion will be defined
-				flowstateHoster 					"r5r_ColombiaFPS"
-				flowstateAdmin1 					"r5r_ColombiaFPS"
-				flowstateAdmin2 					"r5r_ColombiaFPS"
-				flowstateAdmin3 					"r5r_ColombiaFPS"
-				flowstateAdmin4 					"r5r_ColombiaFPS"
-				flowstateRoundtime 					800
-				flowstateBubble 					"111, 66, 245" //ring color
-				flowstateResetKills 				1
-				flowstateTimer 						1
-				flowstateLockPOI 					0  // flowstateRandomizePOIS must be 0 if you want to lock poi.
-				flowstateLockeedPOI 				0
-				flowstateCapitolCityReplacesTTVLocation 1 //Makes ttv building bigger
-				flowstateGrenadesDisabled			1
-				flowstateAdminTgive 				0 //tgive is for the admin ONLY
-				flowstateGrenadesDisabled       		0
-				flowstateAutoChangeLevelEnable			1
-				flowstateRoundsBeforeChangeLevel		2
-				flowstateGiveAllOpticsToPlayer			0
-				flowstate_headshots_only_gamemode 0 //i recommend a wingman only in respawn kit above
-				flowstateReloadTacticalOnRespawn  	1
-				flowstateReloadUltimateOnRespawn 	1
-				
-				//custom maps by community
-				//World's Edge Map
-				flowstate_Enable_BRIGHWATER_By_Zero				0
-				flowstate_Enable_CAVE_By_BlessedSeal			0
-				flowstate_Enable_SKILLTRAINER_By_Colombia		1
-				
-				//Kings Canyon OG map
-				flowstate_Enable_CUSTOMMAP_By_Biscutz 0
-				flowstate_Enable_WHITEFOREST_By_Zero 0				
-				
-				flowstateKickHighPingPlayer			0
-				flowstateMaxPingAllowed				230
-				solo_mode 							1 //this will fix the ingame player count text, so it wont display "??" in players alive (now players connected) count.
-				flowstateDoorsEnabled				0 //Doors enabled or disabled in all buildings.
-				flowstateDoorsRegen					0 //if door is damaged but not destroyed, it will regen health. Suggestion: false.
-
-
-				flowstateGUNGAME 					1 	//GUNGAME gamemode
-					flowstateGUNGAMESecondary		"mp_weapon_shotgun_pistol"  //secondary shitty weapon
-					flowstateGUNGAMESecondary_0		"optic_cq_hcog_classic" //secondary shitty weapon attachment 1
-					flowstateGUNGAMESecondary_1		"" //secondary shitty weapon attachment 2
-					flowstateGUNGAMESecondary_2		"" //secondary shitty weapon attachment 3
-					flowstateGUNGAMERandomAbilities	0	//1 will give you a random tactical and ultimate when killing, 0 will take the values from below
-					flowstateGUNGAME_tactical	"mp_ability_grapple"
-					flowstateGUNGAME_ultimate	"mp_weapon_jump_pad"
-
-				//visuals
-				flowstateForceCharacter 			1	//It enables the following settings
-				flowstateChosenCharacter 			8	// 0 Bang// 1 Bloodhound// 2 Caustic// 3 Gibby// 4 Lifeline// 5 Mirage// 6 Octane// 7 Pathy// 8 Wraith// 9 Watty// 10 Crypto
-				flowstateDummyOverride 				0	// explains itself, it's bugged with some abilities (grapple ie)
-				
-				//game continuity 
-				flowstateAutoreloadPrimary 			1
-				flowstateAutoreloadSecondary 		1
-				flowstateKillshotEnabled 			1	//enables the killshot sound when killing
-				
-				//extrashields
-				flowstateExtrashieldsEnabled 		0
-				flowstateExtrashieldsSpawntime 		240
-				flowstateExtrashieldValue 			150 //extrashield actual value
-
-			}
-			gamemodes { custom_tdm { maps {
-				mp_rr_canyonlands_64k_x_64k                    	1
-				mp_rr_canyonlands_mu1                          	1
-				mp_rr_desertlands_64k_x_64k                    	1
-				mp_rr_desertlands_64k_x_64k_nx                 	1
-				mp_rr_desertlands_64k_x_64k_tt                 	1
-				mp_rr_arena_skygarden                          	1
-				mp_rr_party_crasher                      	1
-				mp_rr_canyonlands_mu1_night                    	1
-				mp_rr_canyonlands_staging                      	1
-				mp_rr_ashs_redemption                          	1
-				mp_rr_aqueduct									1
-				mp_rr_arena_composite							1
-				mp_rr_aqueduct_night							1
-			} } }
-		}
-
-		map_editor
-		{
-			inherit survival
-			vars
-			{
-				movement_map_enable							   1
-				visible                                        1
-
-				// Skip intros:
-				waiting_for_players_spawning_enabled           1
-				waiting_for_players_countdown_seconds          0
-				waiting_for_players_timeout_seconds            1
-				character_select_time_max                      0.0
-				character_select_time_min                      0.0
-				survival_enable_gladiator_intros               0
-				jump_from_plane_enabled                        0
-
-				// No circle:
-				sur_circle_start_paused                        1
-
-				// Can change loadouts:
-				dev_loadout_changeable_at_any_time             1
-				sur_dev_unrestricted_character_changes         1
-
-				// Bots:
-				sur_bots_spawn_with_random_weapons             1
-				match_ending_enabled                           0
-				max_teams                                      1
-				max_players                                    120
-				min_players                                    1
-				enable_nessies                                 0
-			}
-			gamemodes { map_editor { maps {
-				mp_rr_desertlands_64k_x_64k                    1
-			} } }
-		}
-		
-		custom_surf
-		{
-			inherit defaults
-			vars
-			{
-				image                              worlds_edge
-				video                              worlds_edge
-				panel_image                        panel_worlds_edge
-				visible                            1
-				battlechatter_enabled              1
-				name                               custom_tdm
-				description                        "TDM"
-				abbreviation                       "TDM"
-				lobbytitle                         "TDM"
-				pin_match_type                     survival
-				enable_nessies                     0
-				
-   				//SURF
-				
-				max_teams                          16
-				max_players                        16
-				min_players                        0
-				
-				default_shield_hp                  75
-				survival_shields                   1
-				skydive_ziplines_enabled           1
-				ground_loot_enable 				   1
-				lootbin_loot_enable                1
-				
-				survival_jumpkit_enabled           0
-				survival_wallrun_enabled           0
-				
-				survival_infinite_ammo             1
-				survival_custom_deploy             1
-				character_select_time_min          0
-				character_select_time_max          0
-				charselect_picking_delay_after_all 0
-				survival_enable_squad_intro        0
-				survival_enable_gladiator_intros   0
-				jump_from_plane_enabled            0
-				replay_enabled                     1  
-				replay_delay                       5
-				enable_small_pheonix			   0
-				match_ending_enabled               0
-				sur_circle_start_paused            1
-				flowstateSURF 						1	//Exclusive Apex Surf by AyeZee. Only works on WE
-					flowstateSURFRoundtime			300  //it has two maps. Time for them.
-					flowstateSURFLockPOI			0
-					flowstateSURFLockeedPOI			0
-			}
-			gamemodes { custom_tdm { maps {
-				mp_rr_desertlands_64k_x_64k                    1
-			} } }
-		}
-
-		custom_prophunt
-		{
-			inherit defaults
-			vars
-			{
-				image                              worlds_edge
-				video                              worlds_edge
-				panel_image                        panel_worlds_edge
-				visible                            1
-				battlechatter_enabled              1
-				name                               custom_tdm
-				description                        "TDM"
-				abbreviation                       "TDM"
-				lobbytitle                         "TDM"
-				pin_match_type                     survival
-				enable_nessies                     0
-				
-   				//Flowstate By CaféDeColombiaFPS.
-				
-				max_teams                          16
-				max_players                        16
-				min_players                        0
-				
-				default_shield_hp                  75
-				survival_shields                   1
-				skydive_ziplines_enabled           1
-				ground_loot_enable 				   1
-				lootbin_loot_enable                1
-				
-				survival_jumpkit_enabled           0
-				survival_wallrun_enabled           0
-				
-				survival_infinite_ammo             1
-				survival_custom_deploy             1
-				character_select_time_min          0
-				character_select_time_max          0
-				charselect_picking_delay_after_all 0
-				survival_enable_squad_intro        0
-				survival_enable_gladiator_intros   0
-				jump_from_plane_enabled            0
-				replay_enabled                     1  
-				replay_delay                       5
-				enable_small_pheonix			   0
-				match_ending_enabled               0
-				sur_circle_start_paused            1
-
-				//For FFA classic mode
-				//specific weapons and abilities settings
-				respawn_kit_enabled 				1
-				respawn_kit_primary_weapon 			"mp_weapon_r97 optic_cq_hcog_classic bullets_mag_l2 barrel_stabilizer_l4_flash_hider stock_tactical_l3"
-				respawn_kit_secondary_weapon 		"mp_weapon_wingman optic_cq_hcog_classic highcal_mag_l3"
-				respawn_kit_tactical 				"mp_ability_phase_walk"
-				respawn_kit_ultimate 				"mp_weapon_jump_pad"
-
-				//GENERAL SETTINGS PROPHUNT
-				flowstateEndlessFFAorTDM	0 //location won't change, no champion will be defined
-				flowstateHoster 					"r5r_ColombiaFPS"
-				flowstateAdmin1 					"r5r_ColombiaFPS"
-				flowstateAdmin2 					"r5r_ColombiaFPS"
-				flowstateAdmin3 					"r5r_ColombiaFPS"
-				flowstateAdmin4 					"r5r_ColombiaFPS"
-				flowstateRoundtime 					800
-				flowstateBubble 					"111, 66, 245" //ring color
-				flowstateResetKills 				1
-				flowstateTimer 						1
-				flowstateLockPOI 					0  // flowstateRandomizePOIS must be 0 if you want to lock poi.
-				flowstateLockeedPOI 				0
-				flowstateGrenadesDisabled			1
-				flowstateAdminTgive 				0 //tgive is for the admin ONLY
-				flowstateGrenadesDisabled       	0
-
-				flowstateKickHighPingPlayer			0
-				flowstateMaxPingAllowed				230
-				solo_mode 							1 //this will fix the ingame player count text, so it wont display "??" in players alive (now players connected) count.
-
-				flowstatePROPHUNT					1	//Exclusive Apex Prophunt by ColombiaFPS. Please enable kvoverride at the end of the file.
-					flowstatePROPHUNTweapon1		"mp_weapon_rspn101" //primary prophunt wepaon
-					flowstatePROPHUNTweapon2		"mp_weapon_shotgun_pistol" //secondary prophunt weapon
-					flowstatePROPHUNTLimitTime		240
-
-				//visuals
-				flowstateForceCharacter 			1	//It enables the following settings
-				flowstateChosenCharacter 			8	// 0 Bang// 1 Bloodhound// 2 Caustic// 3 Gibby// 4 Lifeline// 5 Mirage// 6 Octane// 7 Pathy// 8 Wraith// 9 Watty// 10 Crypto
-				flowstateDummyOverride 				0	// explains itself, it's bugged with some abilities (grapple ie)
-				
-				//game continuity 
-				flowstateAutoreloadPrimary 			1
-				flowstateAutoreloadSecondary 		1
-				flowstateKillshotEnabled 			1	//enables the killshot sound when killing
-			}
-			gamemodes { custom_tdm { maps {
-				mp_rr_desertlands_64k_x_64k                    1
-			} } }
 		}
 
 		///////////////////////////////////
 		///////////   SURVIVAL  ///////////
 		///////////////////////////////////
+
+		survival
+		{
+			inherit defaults
+			vars
+			{
+				visible                                        1
+				battlechatter_enabled                          1
+				name                                           "Survival"
+				description                                    #PL_SURVIVAL_SQUADS_DESC
+				abbreviation                                   #PL_PLAY_APEX
+
+				pin_match_type                                 survival
+				enable_nessies                                 1
+				max_teams                                      20
+				max_players                                    60
+				min_players                                    60
+				survival_shields                               1
+				is_ranked_game                                 0
+				player_revive_enabled                          1
+				enable_apex_screens                            1
+				skydive_ziplines_enabled                       1
+			}
+			gamemodes { survival { maps {
+				mp_rr_desertlands_64k_x_64k                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_desertlands_64k_x_64k_tt                 1
+				mp_rr_canyonlands_64k_x_64k                    1
+				mp_rr_canyonlands_mu1                          1
+				mp_rr_canyonlands_mu1_night                    1
+			} } }
+		}
+
+		///////////////////////////////////
+		////////////// RANKED /////////////
+		///////////////////////////////////
+
+		defaults
+		{
+			vars
+			{
+				visible                                        0
+			}
+		}
+
+		ranked
+		{
+			inherit defaults
+			vars
+			{
+				panel_image                                    panel_worlds_edge
+				visible                                        0
+				battlechatter_enabled                          1
+				name                                           "Ranked"
+				description                                    #PL_survival_ranked_desc
+				abbreviation                                   #PL_Ranked_Leagues
+				map_name                                       #MP_RR_DESERTLANDS_64K_X_64K
+				visible_schedule_block_0                       "2021-06-15 10:00:00 -07:00 | 2021-12-03 10:00:00 -07:00"
+				image                                          ranked_2
+				video                                          ranked_2
+				max_teams                                      20
+				max_players                                    60
+				min_players                                    60
+				survival_shields                               1
+				freelance_enabled                              1
+				is_ranked_game                                 1
+				ui_slot                                        regular_2
+				pin_match_type                                 survival
+				player_revive_enabled                          1
+				enable_apex_screens                            1
+				skydive_ziplines_enabled                       1
+			}
+			gamemodes { survival { maps {
+				mp_rr_desertlands_64k_x_64k                    1
+			} } }
+		}
+
+		///////////////////////////////////
+		/////////////  LTMs  //////////////
+		///////////////////////////////////
+
+		FallLTM
+		{
+			inherit defaults
+			vars
+			{
+				name                                           "ShadowFall"
+				description                                    #SHADOW_SQUAD_MODE_DESC
+				abbreviation                                   #SHADOW_SQUAD_MODE_ABOUT
+				image                                          shadow_squad
+				video                                          shadow_squad
+				visible                                        1
+				show_ltm_about_button                          1
+				max_teams                                      60
+				max_players                                    60
+				min_players                                    60
+				survival_shields                               1
+				freelance_enabled                              1
+				is_ranked_game                                 0
+				//ui_slot                                        ltm
+				mode_fall_ltm                                  1
+				evil_leviathans                                1
+				player_revive_enabled                          0
+				battlechatter_enabled                          1
+				showLTMAboutButton                             1
+				lootbin_spiders_chance                         50
+				lootbin_infected_chance                        50
+				character_select_time_max                      4.0
+				character_select_time_min                      4.0
+			}
+			gamemodes { survival { maps {
+				mp_rr_canyonlands_mu1_night                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+			} } }
+		}
+
+		duos
+		{
+			inherit defaults
+			vars
+			{
+				name                                           "Survival Duos"
+				description                                    #PL_DES_DUO_SHORT
+				abbreviation                                   #PL_DES_DUO_LONG
+				image                                          duos
+				video                                          duos
+				sur_bots_spawn_with_random_weapons             1
+				enable_nessies                                 1
+				max_teams                                      30
+				max_players                                    60
+				min_players                                    60
+				survival_shields                               1
+				freelance_enabled                              1
+				visible                                        1
+				is_ranked_game                                 0
+				player_revive_enabled                          1
+				enable_apex_screens                            1
+				showLTMAboutButton                             1
+				//ui_slot                                        ltm
+
+				character_select_time_max                      6.0
+				character_select_time_min                      6.0
+
+				pin_match_type duo
+			}
+			gamemodes { survival { maps {
+				mp_rr_canyonlands_64k_x_64k                    1
+				mp_rr_canyonlands_mu1                          1
+				mp_rr_desertlands_64k_x_64k                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_desertlands_64k_x_64k_tt                 1
+				mp_rr_canyonlands_mu1_night                    1
+			} } }
+		}
+
+		iron_crown
+		{
+			inherit survival
+			vars
+			{
+				name                                           "Iron Crown"
+				description                                    #PL_CAN_SOLO_SHORT
+				abbreviation                                   #PL_CAN_SOLO_LONG
+				image                                          solo_iron_crown
+				video                                          solo_iron_crown
+				enable_nessies                                 1
+				max_teams                                      60
+				max_players                                    60
+				min_players                                    55
+				visible                                        0
+				solo_mode                                      1
+				solo_mode_intro_presentation                   1
+				solo_mode_ingame_presentation                  1
+				solo_mode_postgame_presentation                1
+				showLTMAboutButton                             1
+				ui_slot                                        ltm
+				waiting_for_players_timeout_seconds            120
+
+				waiting_for_players_has_black_screen           0
+				
+				character_select_time_max                      4.0
+				character_select_time_min                      4.0
+			}
+			gamemodes { survival { maps {
+				mp_rr_canyonlands_mu1                          1
+			} } }
+		}
+
+		elite
+		{
+			inherit survival
+			vars
+			{
+				name                                           "Elite"
+				description                                    #PL_survival_elite_desc
+				abbreviation                                   #PL_survival_elite_desc
+				image                                          apex_elite
+				video                                          apex_elite
+				enable_nessies                                 1
+				elite_enabled                                  1
+				visible                                        0
+				showLTMAboutButton                             1
+				//ui_slot                                        ltm
+			}
+			gamemodes { survival { maps {
+				mp_rr_canyonlands_64k_x_64k                    1
+			} } }
+		}
+
+		armed_and_dangerous
+		{
+			inherit survival
+			vars
+			{
+				name                                           "Shotguns And Snipers"
+				description                                    #SHOTGUNS_AND_SNIPERS_DESC
+				abbreviation                                   #SHOTGUNS_AND_SNIPERS_DESC
+				image                                          shotguns_and_snipers
+				video                                          shotguns_and_snipers
+				enable_nessies                                 1
+				shotguns_and_snipers_mode                      1
+				visible                                        0
+				showLTMAboutButton                             1
+
+				//ui_slot                                      ltm
+			}
+			gamemodes { survival { maps {
+				mp_rr_desertlands_64k_x_64k                    1
+			} } }
+		}
+
+		wead
+		{
+			inherit survival
+			vars
+			{
+				visible                                        0
+				name                                           "Worlds Edge After Dark"
+				description                                    #WORLDS_EDGE_NIGHT_DESC
+				abbreviation                                   #WORLDS_EDGE_NIGHT_DESC
+				image                                          worlds_edge_after_dark
+				video                                          worlds_edge_after_dark
+				//ui_slot                                      ltm
+			}
+			gamemodes { survival { maps {
+				mp_rr_desertlands_64k_x_64k_nx                 1
+			} } }
+		}
+
+		voyage
+		{
+			inherit survival
+			vars
+			{
+				visible                                        0
+				name                                           #PL_PLAY_APEX
+				description                                    #PL_SURVIVAL_SQUADS_DESC
+				abbreviation                                   #PL_PLAY_APEX
+				//ui_slot                                      ltm
+			}
+			gamemodes { survival { maps {
+				mp_rr_desertlands_64k_x_64k_tt                 1
+			} } }
+		}
+
+		///////////////////////////////////
+		////////////  CUSTOM  /////////////
+		///////////////////////////////////
+
 		custom_ctf
 		{
 			inherit defaults
@@ -1249,6 +748,9 @@ playlists
 				survival_enable_squad_intro                    0
 				survival_enable_gladiator_intros               0
 
+				survival_jumpkit_enabled                       1
+				survival_wallrun_enabled                       1
+
 				jump_from_plane_enabled                        0
 				match_ending_enabled                           0
 				sur_circle_start_paused                        1
@@ -1257,8 +759,8 @@ playlists
 				//// General CTF Settings:
 				global_chat_enabled                            1    //Enables Global chat
 				teammate_huds_enabled                          0    //Enables teammate huds
-				survival_jumpkit_enabled                       0    //Enables double jump
-				survival_wallrun_enabled                       0    //Enables wallrun
+				survival_jumpkit_enabled                       1    //Enables double jump
+				survival_wallrun_enabled                       1    //Enables wallrun
 				default_shield_hp                              75   //Sets Sheilds
 				give_ult_after_capture                         1    //Fills up ult after capture
 				use_legend_abilitys                            0    //Uses Legends defualt abilitys instead of classes
@@ -1316,66 +818,139 @@ playlists
 				mp_rr_arena_composite                          1
 			} } }
 		}
-		
-		survival
+
+		custom_tdm
 		{
 			inherit defaults
 			vars
 			{
-				visible                                        0
+				//ui_slot                                        regular_2
+				image                                          worlds_edge
+				video                                          worlds_edge
+				panel_image                                    panel_worlds_edge
+				visible                                        1
 				battlechatter_enabled                          1
-				name                                           #PL_PLAY_APEX
-				description                                    #PL_SURVIVAL_SQUADS_DESC
-				abbreviation                                   #PL_PLAY_APEX
+				name                                           "Team Deathmatch"
+				description                                    "You, against them, in a variety of gamemodes"
+				abbreviation                                   "Team Deathmatch"
+				lobbytitle                                     "Team Deathmatch"
 
 				pin_match_type                                 survival
 				enable_nessies                                 0
-				max_teams                                      20
-				max_players                                    60
+				max_teams                                      18
+				max_players                                    18
 				min_players                                    1
+				wait_for_players_forever                       0
 				survival_shields                               1
-				is_ranked_game                                 0
-				player_revive_enabled                          1
-				enable_apex_screens                            1
-				skydive_ziplines_enabled                       1
-				enable_bolo_heirloom				0
-				rgb_skydive 					1
+				skydive_ziplines_enabled                       0
+
+				dev_loadout_changeable_at_any_time             1
+				sur_dev_unrestricted_character_changes         1
+				character_reselect_enabled                     1
+				charselect_enabled                             1
+				solo_mode                                      1
+				solo_mode_intro_presentation                   1
+				solo_mode_ingame_presentation                  1
+				solo_mode_postgame_presentation                1
+				respawn_kit_enabled                            1
+				respawn_kit_primary_weapon                     "mp_weapon_volt_smg energy_mag_l3 barrel_stabilizer_l4_flash_hider optic_cq_hcog_bruiser"
+				respawn_kit_secondary_weapon                   "mp_weapon_volt_smg energy_mag_l3 barrel_stabilizer_l4_flash_hider"
+				respawn_kit_tactical                           "mp_ability_3dash"
+				respawn_kit_ultimate                           "mp_ability_phase_walk"
+
+				survival_jumpkit_enabled                       1
+				survival_wallrun_enabled                       1
+				survival_infinite_ammo                         1
+				survival_custom_deploy                         1
+				
+				ground_loot_enable                             0
+				lootbin_loot_enable                            0
+
+				character_select_time_max                      4.0
+				character_select_time_min                      4.0
+
+				charselect_picking_delay_after_all             0
+
+				survival_enable_squad_intro                    0
+				survival_enable_gladiator_intros               0
+				minified_unitframes_enabled                    1
+				jump_from_plane_enabled                        0
+				enabled_killstreak_obituary                    0
+
+				replay_enabled                                 1
+				replay_delay                                   2
+				replay_new_ui                                  0
+
+				match_ending_enabled                           0
+				sur_circle_start_paused                        1
 			}
-			gamemodes { survival { maps {
-				mp_rr_desertlands_64k_x_64k                    1
-				mp_rr_desertlands_64k_x_64k_nx                 1
+			gamemodes { custom_tdm { maps {
 				mp_rr_canyonlands_64k_x_64k                    1
 				mp_rr_canyonlands_mu1                          1
+				mp_rr_desertlands_64k_x_64k                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_desertlands_64k_x_64k_tt                 1
 				mp_rr_canyonlands_mu1_night                    1
 				mp_rr_canyonlands_staging                      1
+				mp_rr_aqueduct                                 1
+				mp_rr_aqueduct_night                           1
+				mp_rr_ashs_redemption                          1
+				mp_rr_arena_composite                          1
 			} } }
 		}
 
-	
-		firingrange
+		tdm_gg
+		{
+			inherit custom_tdm
+			vars
+			{
+				name                                           "Gun Game"
+				visible                                        1
+
+				tdm_gungame                                    1
+				respawn_delay                                  1
+				replay_enabled                                 0
+				intro_cutscene_num_spawns                      2
+				GG_Drop_Guns                                   1
+				respawn_kit_enabled                            1
+				respawn_kit_primary_weapon                     ""
+				respawn_kit_secondary_weapon                   ""
+				respawn_kit_tactical                           "mp_ability_3dash"
+				respawn_kit_ultimate                           "mp_ability_phase_walk"
+				tgive_enabled                                  0
+			}
+		}
+
+		tdm_gg_double
+		{
+			inherit tdm_gg
+			vars
+			{
+				name                                           "Gun Game Doubles"
+				visible                                        1
+
+				tdm_gungame                                    1
+				respawn_delay                                  1
+				replay_enabled                                 0
+				intro_cutscene_num_spawns                      2
+				GG_Drop_Guns                                   1
+				double_weapon                                  1
+				respawn_kit_enabled                            1
+				respawn_kit_tactical                           "mp_ability_3dash"
+				respawn_kit_ultimate                           "mp_ability_phase_walk"
+			}
+		}
+
+		///////////////////////////////////
+		//////////////  DEV  //////////////
+		///////////////////////////////////
+
+		survival_dev
 		{
 			inherit survival
 			vars
 			{
-				visible                                        1
-				ui_slot                                        firing_range
-				image                                          firing_range
-				name                                           #PL_FIRINGRANGE
-				description                                    #PL_FIRINGRANGE_DESC
-				video                                          _temp
-
-				waiting_for_players_spawning_enabled           1
-				jump_from_plane_enabled                        0
-				wait_for_players_forever                       1
-				scorebar_hide_squads_remaining                 1
-				scorebar_hide_waiting_for_players              1
-				airdrop_enabled                                0
-				num_static_loot_ticks_to_spawn                 0
-				loot_preprocessing_should_be_skipped           1
-				survival_staging_area_enabled                  1
-				make_room_for_new_players                      1
-
-				// match teams will not fill with more than one party, up to max_teams of size max_team_size (or less) -- not exceeding max_players
+				name                                           "Survival Dev"
 				visible                                        1
 
 				// Skip intros:
@@ -1393,78 +968,60 @@ playlists
 				// Can change loadouts:
 				dev_loadout_changeable_at_any_time             1
 				sur_dev_unrestricted_character_changes         1
-				character_reselect_enabled                     1
-				charselect_enabled                             1
 
 				// Bots:
 				sur_bots_spawn_with_random_weapons             1
-				
-				//General Gamemode Settings
 				match_ending_enabled                           0
 				max_teams                                      1
-				max_players                                    3
+				max_players                                    120
 				min_players                                    1
-				
-				// Firing Range:
-				survival_firingrange                           1
-				staging_ultimates_enabled                      1
-				survival_staging_area_enabled                  0
-				//survival_infinite_ammo                       1
-				
-				pin_match_type                                 firing_range
+				enable_nessies                                 1
 			}
 			gamemodes { survival { maps {
-				mp_rr_canyonlands_staging                   1
+				mp_rr_canyonlands_64k_x_64k                    1
+				mp_rr_canyonlands_mu1                          1
+				mp_rr_desertlands_64k_x_64k                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_desertlands_64k_x_64k_tt                 1
+				mp_rr_arena_skygarden                          1
+				mp_rr_canyonlands_mu1_night                    1
+				mp_rr_canyonlands_staging                      1
+				mp_rr_aqueduct                                 1
+				mp_rr_aqueduct_night                           1
+				mp_rr_ashs_redemption                          1
+				mp_rr_arena_composite                          1
 			} } }
 		}
 
-		survival_dev
+		shadowfall_dev
 		{
-			inherit survival
+			inherit survival_dev
 			vars
 			{
-				visible                                        1
-
-				// Skip intros:
-				waiting_for_players_spawning_enabled           1
-				waiting_for_players_countdown_seconds          0
-				waiting_for_players_timeout_seconds            1
-				character_select_time_max                      6
-				character_select_time_min                      6
-				survival_enable_gladiator_intros               0
-				jump_from_plane_enabled                        1
-				solo_mode 1
-
-				// No circle:
-				sur_circle_start_paused                        1
-
-				// Can change loadouts:
-				dev_loadout_changeable_at_any_time             1
-				sur_dev_unrestricted_character_changes         1
-
+				name                                           "ShadowFall Dev"
 				// Bots:
-				sur_bots_spawn_with_random_weapons             1
+				character_select_time_max                      0.0
+				character_select_time_min                      0.0
+				survival_enable_gladiator_intros               0
 				match_ending_enabled                           0
-				max_teams                                      1
-				max_players                                    1
+				player_revive_enabled                          0
+				max_teams                                      60
+				max_players                                    60
 				min_players                                    1
 				enable_nessies                                 0
-
+				evil_leviathans                                1
+				evil_flyers                                    1
+				battlechatter_enabled                          0
+				showLTMAboutButton                             0
+				lootbin_spiders_chance                         50
+				lootbin_infected_chance                        50
+				mode_fall_ltm                                  1
+				force_custom_musicpack                         1
+				solo_mode                                      1
 			}
 			gamemodes { survival { maps {
-				mp_rr_canyonlands_staging                      	1
-				mp_rr_canyonlands_64k_x_64k                    	1
-				mp_rr_canyonlands_mu1                          	1
-				mp_rr_canyonlands_mu1_night                    	1
-				mp_rr_desertlands_64k_x_64k                    	1
-				mp_rr_desertlands_64k_x_64k_nx                 	1
-				mp_rr_desertlands_64k_x_64k_tt                 	1
-				mp_rr_arena_skygarden                          	1
-				mp_rr_party_crasher                     		1
-				mp_rr_aqueduct                                 	1
-				mp_rr_aqueduct_night                           	1
-				mp_rr_ashs_redemption                          	1
-				mp_rr_arena_composite                          	1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_canyonlands_mu1_night                    1
 			} } }
 		}
 
@@ -1505,38 +1062,49 @@ playlists
 				survival_wallrun_enabled                       1
 			}
 			gamemodes { survival { maps {
-				mp_rr_canyonlands_64k_x_64k                    	1
-				mp_rr_canyonlands_mu1                          	1
-				mp_rr_desertlands_64k_x_64k                    	1
-				mp_rr_desertlands_64k_x_64k_nx                 	1
-				mp_rr_desertlands_64k_x_64k_tt                 	1
-				mp_rr_arena_skygarden                          	1
-				mp_rr_party_crasher                     		1
-				mp_rr_canyonlands_mu1_night                    	1
-				mp_rr_canyonlands_staging                      	1
-				mp_rr_aqueduct                                 	1
-				mp_rr_aqueduct_night                           	1
-				mp_rr_ashs_redemption                          	1
-				mp_rr_arena_composite                          	1
+				mp_rr_canyonlands_64k_x_64k                    1
+				mp_rr_canyonlands_mu1                          1
+				mp_rr_desertlands_64k_x_64k                    1
+				mp_rr_desertlands_64k_x_64k_nx                 1
+				mp_rr_canyonlands_mu1_night                    1
+				mp_rr_canyonlands_staging                      1
+				mp_rr_aqueduct                                 1
+				mp_rr_aqueduct_night                           1
+				mp_rr_ashs_redemption                          1
+				mp_rr_arena_composite                          1
 			} } }
 		}
 	}
 	"LocalizedStrings"
 	{
-	  "lang"
+		"lang"
 		{
 			"Language" "english"
 			"Tokens"
 			{
+				"MP_RR_CANYONLANDS_MU2"      		  "Kings Canyon S6"
 				"MP_RR_DESERTLANDS_64K_X_64K_NX"      "World's Edge After Dark"
-				"MP_RR_DESERTLANDS_64K_X_64K"         "World's Edge"
 				"MP_RR_DESERTLANDS_64K_X_64K_TT"      "World's Edge Mirage Voyage"
+				"MP_RR_DESERTLANDS_MU1"      		  "World's Edge S4 Launch"
 				"MP_RR_ASHS_REDEMPTION"               "Ash's Redemption"
 				"MP_RR_AQUEDUCT"                      "Overflow"
 				"MP_RR_AQUEDUCT_NIGHT"                "Overflow After Dark"
 				"MP_RR_ARENA_COMPOSITE"               "Drop-Off"
 				"MP_RR_ARENA_SKYGARDEN"               "Encore"
-				"mp_rr_party_crasher" 		  		  "Party Crasher"
+				"MP_RR_OLYMPUS"               		  "Olympus S7 Launch"
+				
+				"MAPZONE_SKULL_RIG"					  "Skull Salvage"
+				"MAPZONE_SKULL_RIG_SHORT"   		  "Salvage"
+				"MAPZONE_OBSERVATORY"				  "Crypto's Map Room"
+				"MAPZONE_OBSERVATORY_SHORT"			  "Map Room"
+				"MAPZONE_EXCAVATION"				  "ARES Capacitor"
+				"MAPZONE_EXCAVATION_SHORT"			  "Capacitor"
+				"MAPZONE_RIG"						  "Offshore Rig"
+				"MAPZONE_RIG_SHORT"					  "The Rig"
+				"MAPZONE_RIG_NORTH"					  "Offshore Rig North"
+				"MAPZONE_RIG_LOWER"					  "Offshore Rig South"
+				"MAPZONE_RIG_S_LOADING"				  "Offshore Rig Loading"
+				"MAPZONE_RIG_STAGING"				  "Staging Grounds"
 
 				"WORLDS_EDGE_NIGHT"                   "SHADOWFALL WORLD'S EDGE"
 				"WORLDS_EDGE_NIGHT_DESC"              "Dead Legends respawn as Shadows.\nSurvive and escape with final 10 Legends."
@@ -1545,53 +1113,79 @@ playlists
 				"KCAD"                                "Kings Canyon After Dark"
 				"Playtest"                            "Playtest"
 				"Playtest_Only"                       "Playtest"
+				"BETA_BUILD_WATERMARK"                "R5Reloaded [v2.2]"
+
+				"PROMO_LARGE_TITLE"                   "Welcome To R5Reloaded!"
+				"PROMO_LARGE_DESCRIPTION"             "Make sure to join the discord! discord.gg/r5reloaded"
+				"PROMO_LEFT_TITLE"                    "Yes"
+				"PROMO_LEFT_DESCRIPTION"              "Your ad could be here"
+				"PROMO_RIGHT_TITLE"                   "Yes2"
+				"PROMO_RIGHT_DESCRIPTION"             "Yes3"
+				"PROMO_SDK_ERROR"                     "You should not see this."
+
 				"PLAYER_KILLSTREAK"                   "`1%s1`0 is on a `1%s2`0 player killstreak"
 				"PLAYER_ENDED_KILLSTREAK"             "`1%s1`0 ended `1%s2`0's killstreak"
 				"PLAYER_ENDED_OWN_KILLSTREAK"         "`1%s1`0 ended their own killstreak"
 
-                "VALVE_REJECT_BANNED"                 "You have been banned from this server."
-                "DISCONNECT_BANNED"                   "The client's game account has been banned."
+				"DISCONNECT_BANNED"                   "The client's game account has been banned."
+				"VALVE_REJECT_BANNED"                 "You have been banned from this server."
+				"VALVE_REJECT_INVALID_NAME"           "The client's game account has an invalid name."
 
-                "DISCONNECT_SEND_RELIABLEOVERFLOW"    "Connection to server overflowed (code:river)."
-                "DISCONNECT_SEND_OVERFLOW"            "Connection to server overflowed (code:dam)."
-                "DISCONNECT_NETCHAN_OVERFLOW"         "Connection to server overflowed (code:vulkan)."
-                "DISCONNECT_STRINGCMD_OVERFLOW"       "Connection to server overflowed (code:mountain)."
-				"BETA_BUILD_WATERMARK" 				  "R5Reloaded [v2.2.1] \n Flowstate Scripts [v3.5] \n bili钓鱼竿呀"
+				"DISCONNECT_SEND_RELIABLEOVERFLOW"    "Connection to server overflowed (code:river)."
+				"DISCONNECT_SEND_OVERFLOW"            "Connection to server overflowed (code:dam)."
+				"DISCONNECT_NETCHAN_OVERFLOW"         "Connection to server overflowed (code:vulkan)."
+				"DISCONNECT_STRINGCMD_OVERFLOW"       "Connection to server overflowed (code:mountain)."
+				
+                "WPN_ARC_TOOL"                        "Arc Tool"
+                "WPN_ARC_TOOL_DESC"                   "Beacon Substation Tool"
+                "WPN_ARC_TOOL_RUI_READY"              "RDY"
+                "WPN_ARC_TOOL_RUI_DANGER"             "DNGR"
+                "WPN_ARC_TOOL_RUI_CHARGING"           "CHARGING"
+				
+				"MELEE_SKIN_KRALS_MJOLNIR_NAME"		  "Kral's Mjolnir"
+				"TAG_MARKSMAN"                        "Marksman"
+				
+				"INVENTORY_NEED_ATTACHMENT_SIGHT_MARKSMAN"	"`1%s1`0  -  looking for an `2Optic for a Marksman Weapon`0."
+				"INVENTORY_NEED_ATTACHMENT_GRIP_MARKSMAN"	"`1%s1`0  -  looking for a `2Stock for a Marksman Weapon`0."
+				"INVENTORY_NEED_ATTACHMENT_BARREL_MARKSMAN"	"`1%s1`0  -  looking for a `2Barrel Attachment for a Marksman Weapon`0."
+				
+				"WPN_3030"							   "30-30 Repeater"
+				"WPN_3030_SHORT"					   "30-30"
+				"WPN_3030_DESC"						   "Semi-auto heavy repeater."
+				"WPN_3030_LONGDESC"				       "Semi-auto heavy repeater. ADS to get a charged damage bonus."
+				
+				"WPN_DRAGON_LMG"					   			"Rampage LMG"
+				"WPN_DRAGON_LMG_SHORT"					    	"Rampage"
+				"WPN_DRAGON_LMG_DESC"					    	"Fire Powered LMG. Charge with Thermites."
+				"WPN_DRAGON_LMG_LONGDESC"				    	"Fire Powered LMG. Charge with Thermites to increase rate of fire."
+				"WPN_DRAGON_LMG_THERMITE_HINT"              	"Can be used to charge up the Rampage"
+				"WPN_SENTINEL_CELLS_HINT"                   	"Can be used to charge up the Sentinel"
+		
+				"WPN_DRAGON_LMG_ENERGIZING_LABEL"             	"Heating Up"
+				"WPN_DRAGON_LMG_ENERGIZE_LABEL"               	"Revved Up"
+				"WPN_DRAGON_LMG_ENERGIZE_HINT"                	"`1%scriptCommand3% `0to charge"
+				"WPN_DRAGON_LMG_ENERGIZE_CONSUMABLE_REQUIRED" 	"%s1 Required"
+				
+				"WPN_BOW"                                   "Bocek Compound Bow"
+				"WPN_BOW_SHORT"                             "Bocek"
+				"WPN_BOW_DESC"                              "Hold fire to increase power."
+				"WPN_BOW_LONGDESC"                          "Hold fire to increase power and range of shot."
+				
+				"WPN_CAR"									"C.A.R. SMG"
+				"WPN_CAR_SHORT"								"CAR"
+				"WPN_CAR_DESC"								"Adaptable SMG. Uses light and heavy ammo."
+				"WPN_CAR_LONGDESC"							"Adaptable SMG that swaps between light and heavy ammo.\nTakes light or heavy mags."
+				"WPN_CAR_HEAVY_MODE"                        "Heavy Ammo"
+				"WPN_CAR_LIGHT_MODE"                        "Light Ammo"
+				
+				"ABL_ULT_SNIPER"                            "Sniper's Mark"
+				"ABL_ULT_SNIPER_SHORT"                      "Sniper's Mark"
+				"ABL_ULT_SNIPER_DESC"                       "Use your custom sniper rifle to mark enemy targets which applies a damage bonus for you and your team."
+				"ABL_ULT_SNIPER_LONGDESC"                   "Use your custom sniper rifle to mark enemy targets which applies a damage bonus for you and your team."
 			}
 		}
 	}
 	"KVFileOverrides"
 	{
-		//Override for client weapon settings from server
-		//Enable the code below if you want to play PROPHUNT.
-		//You can also use this as an example.
-		
-		// "scripts/weapons/mp_ability_phase_walk.txt"
-		// {
-
-					 // WeaponData
-					 // {
-									// "printname"   									"PROP ABILITY"
-									// "shortprintname"   								"PROP ABILITY"
-									// "description" 									"PROP ABILITY"
-									// "longdesc"										"PROP ABILITY"
-									// "offhand_default_inventory_slot"				"4"
-									// "weapon_type_flags"								"WPT_ULTIMATE"
-									// "hud_icon"										"rui/pilot_loadout/tactical/pilot_tactical_cloak"
-									
-									// "OnWeaponPrimaryAttack"							""
-									// "OnWeaponChargeBegin"							""
-									// "OnWeaponChargeEnd"								""
-									// "OnWeaponActivate"								"OnWeaponDeactivate_ability_phase_walk"
-									// "OnWeaponRegenEnd"                              ""
-	
-									// "charge_time"									"0"
-									// "charge_cooldown_time"							"0.0"
-									// "charge_cooldown_delay"   						"0.0"
-									// "regen_ammo_refill_rate"						"1000"
-									// "deploy_time" 									"0"
-	
-					// }
-		// }
 	}
 }

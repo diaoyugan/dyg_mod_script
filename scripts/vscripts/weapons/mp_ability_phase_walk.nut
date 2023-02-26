@@ -20,15 +20,38 @@ void function OnWeaponActivate_ability_phase_walk( entity weapon )
 	#if SERVER
 		entity player = weapon.GetWeaponOwner()
 		EmitSoundOnEntityExceptToPlayer( player, player, "pilot_phaseshift_armraise_3p" )
-
+		float deploy_time = weapon.GetWeaponSettingFloat( eWeaponVar.deploy_time )
+		
 		if ( player.GetActiveWeapon( eActiveInventorySlot.mainHand ) != player.GetOffhandWeapon( OFFHAND_INVENTORY ) )
 			PlayBattleChatterLineToSpeakerAndTeam( player, "bc_tactical" )
+		
+			if ( !weapon.HasMod( "ult_active" ) )
+			{
+		StatusEffect_AddTimed( player, eStatusEffect.move_slow, 0.2, deploy_time, deploy_time )
+	}
+		
+		
 	#endif
 }
 
 void function OnWeaponDeactivate_ability_phase_walk( entity weapon )
 {
 	#if SERVER
+	entity player = weapon.GetWeaponOwner()
+	if(returnPropBool() || player.GetTeam() == TEAM_IMC){
+		printt("Flowstate DEBUG - Angles locked for prop team player.", player, player.GetAngles())
+		thread PROPHUNT_GiveAndManageRandomProp(player, true)
+
+	} else {
+		int newscore = player.p.PROPHUNT_Max3changes + 1 	//using int as a boolean
+		player.p.PROPHUNT_Max3changes = newscore
+		if (player.p.PROPHUNT_Max3changes <= 3){
+			thread PROPHUNT_GiveAndManageRandomProp(player)
+			} else {
+			printt("Flowstate DEBUG - Max amount of changes reached: ", player)
+			Message(player, "prophunt", "Max amount of changes reached.", 1)
+			}
+	}
 	#endif
 }
 
@@ -42,14 +65,16 @@ bool function OnWeaponChargeBegin_ability_phase_walk( entity weapon )
 {
 	entity player = weapon.GetWeaponOwner()
 	float chargeTime = weapon.GetWeaponSettingFloat( eWeaponVar.charge_time )
-	weapon.w.statusEffects.append( StatusEffect_AddTimed( player, eStatusEffect.speed_boost, 2147483647, chargeTime, 0 ) )
+	float amount = GetCurrentPlaylistVarFloat( "wraith_phase_walk_speed_boost_amount", 0.3 )
+	float easeOut = GetCurrentPlaylistVarFloat( "wraith_phase_walk_speed_boost_easeOutFrac", 0.3 )
+			
 	#if SERVER
-		UnlockWeaponsAndMelee( player )
-		if ( weapon.HasMod( "ult_active" ) )
-			weapon.w.statusEffects.append( StatusEffect_AddTimed( player, eStatusEffect.speed_boost, 2147483647, chargeTime, 0 ) )
+		LockWeaponsAndMelee( player )
+
+			weapon.w.statusEffects.append( StatusEffect_AddTimed( player, eStatusEffect.speed_boost, amount, chargeTime, chargeTime*easeOut ) )
 
 		thread PhaseWalkUnphaseTell( player, chargeTime )
-		// PlayerUsedOffhand( player, weapon )
+		PlayerUsedOffhand( player, weapon )
 	StatsHook_Tactical_TimeSpentInPhase( player, chargeTime )
 	#endif
 	PhaseShift( player, 0, chargeTime, eShiftStyle.Balance )
