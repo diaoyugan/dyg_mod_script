@@ -46,7 +46,7 @@ WeaponData
 
 	"OnWeaponActivate"								"OnWeaponActivate_weapon_basic_bolt"
 	"OnClientAnimEvent"								"OnClientAnimEvent_weapon_basic_bolt"
-
+	"OnWeaponPrimaryAttack"							"OnWeaponPrimaryAttack_weapon_shield_heal_hopup"
 	"projectilemodel" 								"mdl/dev/empty_model.rmdl"
 	"projectile_trail_effect_0" 					"P_tracer_projectile_smg_blue"
 
@@ -456,7 +456,10 @@ WeaponData
 			"burst_or_looping_fire_sound_middle_npc"		""
 			"burst_or_looping_fire_sound_end_npc"			""
         }
+shield_heal
+{                         
 
+   }
                    
         energy_mag_l1
 		{

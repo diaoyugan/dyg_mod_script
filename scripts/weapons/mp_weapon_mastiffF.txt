@@ -71,7 +71,7 @@ WeaponData
                                               
                                                                                                 
      
-	"blast_pattern"									"mastiffF"
+	"blast_pattern"									"mastiff_2"
 	"blast_pattern_default_scale"        			"2.0"
 	"blast_pattern_ads_scale"                       "1.0"  // for players, scales pattern when ADS
       

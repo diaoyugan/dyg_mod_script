@@ -1,5 +1,5 @@
 #base "_base_handgun.txt"
-#base "_base_mags_light.txt"
+#base "_base_ability_ultimate.txt"
 WeaponData
 {
 	// General
@@ -13,10 +13,29 @@ WeaponData
 	"menu_icon"										"rui/weapon_icons/r5/weapon_p2020"
 	"hud_icon"										"rui/weapon_icons/r5/weapon_p2020"
 
+	"weapon_type_flags"								"WPT_ULTIMATE"
+
 	"weaponClass" 									"human"
 	"weaponSubClass"								"autolock"
 	"body_type"										"light"
-	"fire_mode"   									"automatic"
+
+	"fire_mode"   									"offhandHybrid"
+	"offhand_default_inventory_slot"				"1"
+	"offhand_keep_primary_in_hand"					"0"
+	"offhand_holster_primary"						"1"
+    "hide_holstered_sidearm_when_active"			"1"
+	"offhand_active_slot"                           "mainHand"
+	"allow_gibraltar_shield"                        "1"
+	"offhand_interupts_weapon_anims"				"1"
+	"offhand_uses_hud_ammo_status"                  "1"
+	"alt_fire_anim_count"							"1"
+
+    "offhand_hybrid_switch_on_attack"               "0"
+    "cycle_to_next_when_out_of_ammo"                "0"
+    "offhand_hybrid_reset_shot_count_on_attack"     "0"
+    "offhand_hybrid_block_switch_if_empty"          "1"
+    "offhand_clear_zoom_on_activate"                "1"
+
 	"is_semi_auto"									"1"
 	"pickup_hold_prompt"  							"Hold [USE] [WEAPONNAME]"
 	"pickup_press_prompt" 							"[USE] [WEAPONNAME]"
@@ -62,7 +81,9 @@ WeaponData
 
 	"fire_sound_1_player_1p"						"Weapon_SmartPistol_Fire_1P"
 	"fire_sound_1_player_3p"						"Weapon_SmartPistol_Fire_3P"
-	"sound_dryfire"									"pistol_dryfire"
+
+	"sound_weapon_ready"							"survival_ui_ultimate_ready"
+	"sound_dryfire"									"Survival_UI_Ability_NotReady"
 	"sound_pickup"									"wpn_pickup_Pistol_1P"
 	"sound_zoom_in"									"Weapon_SmartPistol_ADS_In"
 	"sound_zoom_out"								"Weapon_SmartPistol_ADS_Out"
@@ -81,7 +102,7 @@ WeaponData
 
 
 	// Ammo
-	"ammo_min_to_fire"								"1"
+
 
    "titanarmor_critical_hit_required"              "1"
 	"critical_hit"									"1"
@@ -90,13 +111,19 @@ WeaponData
 
 	MP_BASE
 	{
-		"ammo_default_total"							"132"
-		"ammo_stockpile_max"							"132"
-		"ammo_no_remove_from_stockpile"				"0"
-		//"ammo_default_total"							"120" //GoldenGun
-		//"ammo_stockpile_max"							"120" //GoldenGun
-		//"ammo_no_remove_from_stockpile"					"0"   //GoldenGun
-		"aimassist_adspull_weaponclass"					"broad"
+	"cooldown_type"                                 "ammo_instant"
+	"ammo_display"									"count"
+	"ammo_clip_size"   								"40"
+	"ammo_default_total"							"0"
+	"ammo_min_to_fire"								"10"
+	"ammo_per_shot"									"10"
+	"ammo_stockpile_max"							"40"
+	"ammo_drains_to_empty_on_fire"					"0"
+	"ammo_no_remove_from_clip"						"0"
+    "ammo_no_remove_from_stockpile"					"1"
+    "regen_ammo_refill_rate"						"0.4"
+    "regen_ammo_refill_start_delay"					"0.0"
+
 
 		// Damage - When Used by Players
 		"damage_near_value"   							"11"
@@ -109,7 +136,7 @@ WeaponData
 		"red_crosshair_range" 							"1250"
 
 		"smart_ammo_search_distance"  					"1250"
-		"smart_ammo_max_targeted_burst"					"3"
+		"smart_ammo_max_targeted_burst"					"9"
 		"smart_ammo_targeting_time_min"					"0.25"//"0.37"
 		"smart_ammo_targeting_time_max"					"0.45"//"0.65"
 		"smart_ammo_targeting_time_min_npc"				"0.1"
@@ -349,7 +376,7 @@ WeaponData
 
 	// WeaponED Unhandled Key/Values and custom script Key/Values
 	"sprintcycle_time"								"0.55"
-	"smart_ammo_search_angle" 						"35"
+	"smart_ammo_search_angle" 						"100"
 	"smart_ammo_search_npcs"						"1"
 	"smart_ammo_search_players"						"1"
 	"smart_ammo_search_projectiles"					"1"
@@ -425,7 +452,7 @@ WeaponData
 		}
 		enhanced_targeting
 		{
-			"smart_ammo_search_angle" 				"36"
+			"smart_ammo_search_angle" 				"100"
 			"smart_ammo_targeting_time_min"			"0.34"
 			"smart_ammo_targeting_time_max"			"0.59"
 			"smart_ammo_targeting_time_min_npc"		"0.1"
@@ -515,7 +542,7 @@ WeaponData
 
 		ads_smaller_lock_on
 		{
-			"smart_ammo_search_angle" 						"35"
+			"smart_ammo_search_angle" 						"100"
 		}
 
 		og_pilot

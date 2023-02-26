@@ -33,9 +33,9 @@ WeaponData
 	"stat_rof"		        						"38"
 	
 	// Models
-	"viewmodel"   									"mdl/weapons/r97/ptpov_r97.rmdl"
-	"playermodel" 									"mdl/weapons/r97/w_r97.rmdl"
-	"holstermodel"									"mdl/weapons/r97/w_r97.rmdl"
+	"viewmodel"   									"mdl/Weapons/car101/ptpov_car101.rmdl"
+	"playermodel" 									"mdl/Weapons/car101/w_car101.rmdl"
+	"holstermodel"									"mdl/Weapons/car101/w_car101.rmdl"
 	"holster_offset"								"2 0 0"
 	"holster_type"									"rifle"
 	
@@ -81,7 +81,7 @@ WeaponData
     "fire_sound_1_player_3p"						"Weapon_Car_SecondShot_NPC"
     "fire_sound_1_npc"								"Weapon_Car_SecondShot_NPC"
 
-	"fire_sound_2_player_1p" 						""
+	"fire_sound_2_player_1p" 						"Weapon_Car_SecondShot_NPC"
 	"fire_sound_2_player_3p" 						"Weapon_Car_SecondShot_NPC"
 
     "burst_or_looping_fire_sound_start_1p"			"Weapon_Car_FirstShot_1P"
@@ -101,7 +101,7 @@ WeaponData
 	// Damage - When Used by Players
 	"damage_type" 									"bullet"
 	"red_crosshair_range" 							"0"
-    "ammo_clip_size"                                "19"
+    "ammo_clip_size"                                "20"
 	"ammo_min_to_fire"								"1"
     "ammo_default_total"							"300"
     "ammo_stockpile_max"							"300"
@@ -180,6 +180,40 @@ WeaponData
 
 	// Crosshair Spread
 
+
+                          
+                                 
+                                    
+                                                       
+                                    
+                                 
+         
+		"spread_stand_hip"								"1.8"
+		"spread_stand_hip_run"							"2.0"
+		"spread_stand_hip_sprint"                       "2.2"
+		"spread_crouch_hip"   							"1.0"
+		"spread_air_hip"  								"3.2"
+          
+
+	// movement based crosshair bloom
+	"spread_moving_increase_rate" 					"3.0"
+	"spread_moving_decay_rate" 						"11.5"
+
+	// firing based crosshair bloom
+	"spread_decay_delay"  							"0.15"
+	"spread_decay_rate"   							"12"
+	"spread_kick_on_fire_stand_hip"   				"0.15"
+	"spread_kick_on_fire_crouch_hip"  				"0.15"
+	"spread_kick_on_fire_air_hip" 					"0.17"
+	"spread_kick_on_fire_stand_ads"   				"0.0"
+	"spread_kick_on_fire_crouch_ads"  				"0.0"
+	"spread_kick_on_fire_air_ads" 					"0.0"
+	"spread_max_kick_stand_hip"   					"2.0"
+    "spread_max_kick_crouch_hip"  					"1.5"
+    "spread_max_kick_air_hip" 						"3.0"
+	"spread_max_kick_stand_ads"   					"0.0"
+	"spread_max_kick_crouch_ads"  					"0.0"
+	"spread_max_kick_air_ads" 						"0.0"
 	"ammo_suck_behavior"							"primary_weapons"
 
 	// View Kick
@@ -309,15 +343,15 @@ WeaponData
 
 		bullets_mag_l1
 		{
-			"ammo_clip_size"   							"21"
+			"ammo_clip_size"   							"22"
 		}
 		bullets_mag_l2
 		{
-			"ammo_clip_size"   							"23"
+			"ammo_clip_size"   							"24"
 		}
 		bullets_mag_l3
 		{
-			"ammo_clip_size"   							"26"
+			"ammo_clip_size"   							"27"
 		}
 		barrel_stabilizer_l1 //flowstate things
 		{

@@ -8,8 +8,8 @@ WeaponData
 	"description" 									"#WPN_CREEPING_BOMBARDMENT_DESC"
 	"longdesc" 										"#WPN_CREEPING_BOMBARDMENT_LONGDESC"
 
-	"menu_icon"										"rui/titan_loadout/passive/monarch_core_missile_racks"
-	"hud_icon"										"rui/hud/ultimate_icons/ultimate_bangalore"
+	"menu_icon"										"rui/pilot_loadout/ordnance/electric_smoke_menu"
+	"hud_icon"										"rui/hud/ultimate_icons/ultimate_caustic"
 
 	"readymessage"              					"#HUD_BURNMETER_READY_DEFENSIVE_BOMBARDMENT"
 	"readyhint"                 					"#HUD_BURNMETER_READY_DEFENSIVE_BOMBARDMENT_HINT"

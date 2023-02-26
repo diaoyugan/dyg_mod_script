@@ -33,13 +33,16 @@ WeaponData
     "projectile_launch_speed"						"21000"
 
 	// Models
-	"viewmodel"   									"mdl/weapons/r97/ptpov_r97.rmdl"
-	"playermodel" 									"mdl/weapons/r97/w_r97.rmdl"
+	"viewmodel"   									"mdl/weapons/r97/ptpov_r97_legendary_05.rmdl"
+	"playermodel" 									"mdl/weapons/r97/w_r97_legendary_05.rmdl"
 	"holster_offset"								"2 0 0"
 
 	//"tracer_effect"   							"weapon_tracers_shotgun"
 
 	"chroma_color"									"1 .9 .5"
+
+	"OnWeaponActivate"                              "OnWeaponActivate_kunai_R99"
+    "OnWeaponDeactivate"                            "OnWeaponDeactivate_kunai_R99"
 
 	//Sounds
 	"fire_sound_1_player_1p"						"Weapon_bulletCasings.Bounce"
@@ -79,12 +82,12 @@ WeaponData
 		"ammo_min_to_fire"								"1"
 
 		// Damage - When Used by Players
-    "damage_near_value"   							"12"
-    "damage_far_value"								"12"
-    "damage_very_far_value"							"12"
-    "damage_near_value_titanarmor"					"12"
-    "damage_far_value_titanarmor" 					"12"
-    "damage_very_far_value_titanarmor" 				"12"
+	   "damage_near_value"   							"11"
+    "damage_far_value"								"11"
+    "damage_very_far_value"							"11"
+    "damage_near_value_titanarmor"					"11"
+    "damage_far_value_titanarmor" 					"11"
+    "damage_very_far_value_titanarmor" 				"11"
       
     "damage_rodeo" 									"110"
 
@@ -215,6 +218,16 @@ WeaponData
 
 	   		"uses_ammo_pool"						"1"
         }
+armor_piercing
+{
+}
+        kunailauncher
+        {
+	"projectilemodel"								"mdl/props/kunai/kunai.rmdl"
+	"impact_effect_table" 							"melee_kunai"
+
+	"projectile_do_predict_impact_effects"			"0"//0"
+        }
 
         optic_cq_hcog_classic
         {
@@ -259,11 +272,11 @@ WeaponData
 		}
 		bullets_mag_l2
 		{
-			"ammo_clip_size"   							"25"
+			"ammo_clip_size"   							"24"
 		}
 		bullets_mag_l3
 		{
-			"ammo_clip_size"   							"28"
+			"ammo_clip_size"   							"27"
 		}
 
 		legendary1

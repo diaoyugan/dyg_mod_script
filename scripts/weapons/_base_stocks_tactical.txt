@@ -31,11 +31,6 @@ WeaponData
             "reloadempty_time_late3"			"*0.967"
             "reloadempty_time_late4"			"*0.967"
             "reloadempty_time_late5"			"*0.967"
-
-            "reloadsegment_time_loop"			"*0.967"
-            "reloadsegment_time_end"			"*0.967"
-            "reloadsegmentempty_time_end"		"*0.967"
-
 		}
 
 		"stock_tactical_l2"
@@ -67,10 +62,6 @@ WeaponData
             "reloadempty_time_late3"			"*0.933"
             "reloadempty_time_late4"			"*0.933"
             "reloadempty_time_late5"			"*0.933"
-
-            "reloadsegment_time_loop"			"*0.933"
-            "reloadsegment_time_end"			"*0.933"
-            "reloadsegmentempty_time_end"		"*0.933"
 		}
 
 		"stock_tactical_l3"
@@ -102,10 +93,6 @@ WeaponData
             "reloadempty_time_late3"			"*0.9"
             "reloadempty_time_late4"			"*0.9"
             "reloadempty_time_late5"			"*0.9"
-
-            "reloadsegment_time_loop"			"*0.9"
-            "reloadsegment_time_end"			"*0.9"
-            "reloadsegmentempty_time_end"		"*0.9"
 		}
 	}
 }

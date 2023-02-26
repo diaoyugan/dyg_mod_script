@@ -1,7 +1,7 @@
 #base "_base_smg.txt"
 #base "_base_mags_light.txt"
 #base "_base_laser_sights.txt"
-
+#base "_base_optics_ranged.txt"
 WeaponData
 {
 	// General
@@ -240,7 +240,9 @@ WeaponData
 		gold
 		{
 		}
-
+armor_piercing
+{
+}
 		survival_finite_ammo
 		{
 			"ammo_default_total"							"0"
