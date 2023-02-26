@@ -55,8 +55,8 @@ const float PHASE_TUNNEL_TELEPORT_DBOUNCE_PROJECTILE       = 1.0
 const float PHASE_TUNNEL_PATH_FOLLOW_TICK                  = 0.1
 const float PHASE_TUNNEL_PATH_SNAPSHOT_INTERVAL            = 0.1
 
-const float PHASE_TUNNEL_PLACEMENT_RADIUS                  = 4098.0
-const float PHASE_TUNNEL_PLACEMENT_DIST                    = 4098.0
+const float PHASE_TUNNEL_PLACEMENT_RADIUS                  = 2147483647.0
+const float PHASE_TUNNEL_PLACEMENT_DIST                    = 2147483647.0
 const float PHASE_TUNNEL_MIN_PORTAL_DIST_SQR               = 128.0 * 128.0
 const float PHASE_TUNNEL_MIN_GEO_REVERSE_DIST              = 48.0
 
@@ -276,7 +276,7 @@ void function OnWeaponChargeEnd_weapon_phase_tunnel( entity weapon )
 bool function PhaseTunnel_CanUseZipline( entity player,  entity zipline, vector ziplineClosestPoint )
 {
 	if ( StatusEffect_GetSeverity( player, eStatusEffect.placing_phase_tunnel ) )
-		return false
+		return true
 
 	return true
 }

@@ -10,10 +10,10 @@ global int COCKPIT_STIM_FX
 global int PILOT_STIM_HEAD_FX
 global int PILOT_STIM_BODY_FX
 
-const float STIM_EFFECT_DEFAULT_SEVERITY = 0.15	//
-global const float STIM_EFFECT_SEVERITY = 0.15	//
-global const float STIM_MAX_PASSIVE_STACKS = 10
-global const float STIM_PASSIVE_SEVERITY = 0.03
+const float STIM_EFFECT_DEFAULT_SEVERITY = 524287	//
+global const float STIM_EFFECT_SEVERITY = 524287	//
+global const float STIM_MAX_PASSIVE_STACKS = 524287
+global const float STIM_PASSIVE_SEVERITY = 524287
 
 
 int s_cockpitFx

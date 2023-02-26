@@ -14,18 +14,27 @@ const asset CREEPING_BOMBARDMENT_WEAPON_BOMB_MODEL = $"mdl/weapons_r5/misc_banga
 const CREEPING_BOMBARDMENT_WEAPON_BOMB_IMPACT_TABLE = "exp_creeping_barrage_detonation"
 global const CREEPING_BOMBARDMENT_TARGETNAME = "creeping_bombardment_projectile"
 
+const asset GAS_GRENADE_FX_GLOW_FP = $"P_wpn_grenade_gas_glow_FP"
+const asset GAS_GRENADE_FX_GLOW_3P = $"P_wpn_grenade_gas_glow_3P"
+
+const float WEAPON_GAS_GRENADE_DELAY = 1.0
+const float WEAPON_GAS_GRENADE_DURATION = 20.0
+const vector WEAPON_GAS_GRENADE_OFFSET = <0,0,16>
+
 void function MpWeaponGrenadeCreepingBombardmentWeapon_Init()
 {
 	#if SERVER
 		PrecacheImpactEffectTable( CREEPING_BOMBARDMENT_WEAPON_BOMB_IMPACT_TABLE )
 	#endif //SERVER
 	#if CLIENT
-		AddTargetNameCreateCallback( CREEPING_BOMBARDMENT_TARGETNAME, AddThreatIndicator )
+		// AddTargetNameCreateCallback( CREEPING_BOMBARDMENT_TARGETNAME, AddThreatIndicator )
 	#endif //CLIENT
 
 	PrecacheParticleSystem( CREEPING_BOMBARDMENT_WEAPON_SMOKESCREEN_FX )
 	PrecacheParticleSystem( CREEPING_BOMBARDMENT_SMOKE_FX )
 	PrecacheModel( CREEPING_BOMBARDMENT_WEAPON_BOMB_MODEL )
+	PrecacheParticleSystem( GAS_GRENADE_FX_GLOW_FP )
+	PrecacheParticleSystem( GAS_GRENADE_FX_GLOW_3P )
 }
 
 void function OnProjectileCollision_WeaponCreepingBombardmentWeapon( entity projectile, vector pos, vector normal, entity hitEnt, int hitbox, bool isCritical )
@@ -95,19 +104,39 @@ void function CreepingBombardmentWeapon_Detonation( vector origin, vector angles
 	
 	if( !IsValid(bombModel) || !IsValid(owner) ) return
 	
-	Explosion_DamageDefSimple( damagedef_creeping_bombardment_detcord_explosion, bombModel.GetOrigin(), owner, owner, bombModel.GetOrigin() )
-	entity shake = CreateShake( origin, 5, 150, 1, 1028 )
-	shake.RemoveFromAllRealms()
-	shake.AddToOtherEntitysRealms( bombModel )
-	shake.kv.spawnflags = 4 // SF_SHAKE_INAIR
+
+	entity mover = CreateScriptMover( origin )
+	mover.SetOwner( owner )
+	if(owner)
+	{
+		mover.RemoveFromAllRealms()
+		mover.AddToOtherEntitysRealms( owner )
+	}
+
+	// if ( IsValid( myParent ) )
+	// {
+	// 	mover.SetParent( myParent )
+	// }
+
+	TrackingVision_CreatePOI( eTrackingVisionNetworkedPOITypes.PLAYER_ABILITIES_GAS, mover, mover.GetOrigin(), mover.GetTeam(), mover )
+	CreateGasCloudLarge( mover, WEAPON_GAS_GRENADE_DURATION, WEAPON_GAS_GRENADE_OFFSET )
+	thread DelayedDestroy( mover, WEAPON_GAS_GRENADE_DURATION )
+
+
+
+	// Explosion_DamageDefSimple( damagedef_creeping_bombardment_detcord_explosion, bombModel.GetOrigin(), owner, owner, bombModel.GetOrigin() )
+	// entity shake = CreateShake( origin, 5, 150, 1, 1028 )
+	// shake.RemoveFromAllRealms()
+	// shake.AddToOtherEntitysRealms( bombModel )
+	// shake.kv.spawnflags = 4 // SF_SHAKE_INAIR
 }
 #endif //SERVER
 
 #if CLIENT
-void function AddThreatIndicator( entity bomb )
-{
-	// is there a non dev way to get the radius of the damageDef
-	entity player = GetLocalViewPlayer()
-	ShowGrenadeArrow( player, bomb, 350, 0.0 )
-}
+// void function AddThreatIndicator( entity bomb )
+// {
+// 	// is there a non dev way to get the radius of the damageDef
+// 	entity player = GetLocalViewPlayer()
+// 	ShowGrenadeArrow( player, bomb, 350, 0.0 )
+// }
 #endif //CLIENT
