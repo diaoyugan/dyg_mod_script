@@ -85,6 +85,10 @@ global function UIToClient_MenuGiveWeaponWithAttachments
 global function OpenFRChallengesSettingsWpnSelector
 global function CloseFRChallengesSettingsWpnSelector
 global function ExitChallengeClient
+global function WeaponSelectorClose
+
+global function SetWeaponSlot
+string DesiredSlot = "p"
 
 struct{
 	int totalShots
@@ -103,6 +107,9 @@ global struct CameraLocationPair
 
 void function Cl_ChallengesByColombia_Init()
 {
+	//Increase client command limit to 60
+	SetConVarInt("cl_quota_stringCmdsPerSecond", 60)
+	
 	//I don't want these things in user screen even if they launch in debug
 	SetConVarBool( "cl_showpos", false )
 	SetConVarBool( "cl_showfps", false )
@@ -121,6 +128,31 @@ void function Cl_ChallengesByColombia_Init()
 	PrecacheParticleSystem($"P_wpn_lasercannon_aim_short_blue") 
 
 	AddCallback_EntitiesDidLoad( AimTrainer_OnEntitiesDidLoad )
+}
+
+void function SetWeaponSlot(int slot)
+{
+	entity player = GetLocalClientPlayer()
+	switch(slot)
+	{
+		case 1:
+			DesiredSlot = "p"
+			break
+		case 2:
+			DesiredSlot = "s"
+			break
+		default:
+			DesiredSlot = "p"
+			break
+	}
+	
+	player.ClientCommand("CC_AimTrainer_SelectWeaponSlot " + DesiredSlot)
+}
+
+void function WeaponSelectorClose()
+{
+	entity player = GetLocalClientPlayer()
+	player.ClientCommand("CC_AimTrainer_WeaponSelectorClose")
 }
 
 void function AimTrainer_OnEntitiesDidLoad()
@@ -143,6 +175,7 @@ void function ServerCallback_SetDefaultMenuSettings()
 
 void function ServerCallback_SetLaserSightsOnSMGWeapon(entity weapon)
 {
+	if(!IsValid(weapon)) return
 	weapon.StopWeaponEffect( $"P_wpn_lasercannon_aim_short_blue", $"" )
 	weapon.PlayWeaponEffect( $"P_wpn_lasercannon_aim_short_blue", $"", "muzzle_flash" )
 	thread DisableLaserInADS()
@@ -150,6 +183,7 @@ void function ServerCallback_SetLaserSightsOnSMGWeapon(entity weapon)
 
 void function ServerCallback_StopLaserSightsOnSMGWeapon(entity weapon)
 {
+	if(!IsValid(weapon)) return
 	weapon.StopWeaponEffect( $"P_wpn_lasercannon_aim_short_blue", $"" )
 }
 	
@@ -829,15 +863,18 @@ void function ChangeAimTrainer_STRAFING_SPEEDClient(string desiredSpeed)
 	
 	switch(int(desiredSpeed)){
 	case 0:
-		speed = 0.85
+		speed = 0
 		break
 	case 1:
-		speed = 1
+		speed = 0.85
 		break
 	case 2:
-		speed = 1.35
+		speed = 1
 		break
 	case 3:
+		speed = 1.35
+		break
+	case 4:
 		speed = 1.8
 		break
 	}
@@ -929,13 +966,13 @@ void function ChangeAimTrainer_USER_WANNA_BE_A_DUMMYClient(string isabool)
 	player.ClientCommand("CC_AimTrainer_USER_WANNA_BE_A_DUMMY " + isabool)
 }
 
-void function UIToClient_MenuGiveWeapon( string weapon)
+void function UIToClient_MenuGiveWeapon(string weapon)
 {
 	entity player = GetLocalClientPlayer()
-    player.ClientCommand("CC_MenuGiveAimTrainerWeapon " + weapon)
+    player.ClientCommand("CC_MenuGiveAimTrainerWeapon " + weapon + " " + DesiredSlot)
 }
 
-void function UIToClient_MenuGiveWeaponWithAttachments( string weapon, int desiredoptic, int desiredbarrel, int desiredstock, int desiredshotgunbolt, string weapontype, int desiredMag, string ammotype)
+void function UIToClient_MenuGiveWeaponWithAttachments(string weapon, int desiredoptic, int desiredbarrel, int desiredstock, int desiredshotgunbolt, string weapontype, int desiredMag, string ammotype)
 {
 	entity player = GetLocalClientPlayer()
 	string optic = "none"
@@ -1124,7 +1161,7 @@ void function UIToClient_MenuGiveWeaponWithAttachments( string weapon, int desir
 				break
 		}
 	
-    player.ClientCommand("CC_MenuGiveAimTrainerWeapon " + weapon + " " + optic + " " + barrel + " " + stock + " " + shotgunbolt + " " + weapontype + " " + mag)
+    player.ClientCommand("CC_MenuGiveAimTrainerWeapon " + weapon + " " + DesiredSlot + " " + optic + " " + barrel + " " + stock + " " + shotgunbolt + " " + weapontype + " " + mag)
 }
 
 void function OpenFRChallengesSettingsWpnSelector()

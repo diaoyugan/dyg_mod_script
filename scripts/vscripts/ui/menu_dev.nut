@@ -286,7 +286,7 @@ void function SetupDefaultDevCommandsMP()
 		SetupDevMenu( "TDM: Change Secondary weapon", SetDevMenu_TDMSecondaryWeapons )
 	
 	if(GetCurrentPlaylistName() == "custom_tdm")
-		SetupDevCommand( "TDM: Saved Current Weapons", "saveguns" )
+		SetupDevCommand( "TDM: Save Current Weapons", "saveguns" )
 
 	if(GetCurrentPlaylistName() == "custom_tdm")
 		SetupDevCommand( "TDM: Reset Saved Weapons", "resetguns" )
@@ -336,7 +336,7 @@ void function SetupDefaultDevCommandsMP()
 
 		//SetupDevCommand( "Toggle Model Viewer", "script thread ToggleModelViewer()" )
 		SetupDevCommand( "Start Skydive", "script thread SkydiveTest()" )
-		SetupDevCommand( "Spawn Deathbox", "script thread SURVIVAL_CreateDeathBox(GetPlayerArray()[0], false)" )
+		SetupDevCommand( "Spawn Deathbox", "script thread SURVIVAL_CreateDeathBox(gp()[0], false)" )
 		//SetupDevCommand( "Toggle Weapon Preview", "ToggleWeaponSkinPreview" )
 		//SetupDevMenu( "Threat Tracker", SetDevMenu_ThreatTracker )
 		//SetupDevMenu( "High-Vis NPC Test", SetDevMenu_HighVisNPCTest )
@@ -394,8 +394,8 @@ void function SetupDefaultDevCommandsMP()
 		//SetupDevCommand( "Jump Randomly Forever", "script_client thread JumpRandomlyForever()" )
 
 		//SetupDevCommand( "Toggle Zeroing Mode", "script ToggleZeroingMode()" )
-		SetupDevCommand( "Enable God Mode", "script MakeInvincible( GetPlayerArray()[0] )" )
-		SetupDevCommand( "Disable God Mode", "script ClearInvincible( GetPlayerArray()[0] )" )
+		SetupDevCommand( "Enable God Mode", "script EnableDemigod( gp()[0] )" )
+		SetupDevCommand( "Disable God Mode", "script DisableDemigod( gp()[0] )" )
 		//SetupDevCommand( "Toggle Screen Alignment Tool", "script_client DEV_ToggleScreenAlignmentTool()" )
 
 		SetupDevCommand( "Toggle Third Person Mode", "ToggleThirdPerson" )
@@ -744,7 +744,7 @@ void function SetupRespawnPlayersDevMenu()
 	SetupDevCommand( "Respawn dead bots", "respawn deadbots" )
 	SetupDevCommand( "Respawn my teammates", "respawn allies" )
 	SetupDevCommand( "Respawn my enemies", "respawn enemies" )
-	//foreach ( player in GetPlayerArray() )
+	//foreach ( player in gp() )
 	//{
 	//	SetupDevCommand( "Respawn player: " + player.GetPlayerName(), "respawn " + player.GetEntIndex() )
 	//}
@@ -784,7 +784,7 @@ void function SetupTDMPrimaryWeapsons()
 	//SetupDevCommand( "Kraber", "tgive p mp_weapon_sniper" )
 	
 
-	//foreach ( player in GetPlayerArray() )
+	//foreach ( player in gp() )
 	//{
 	//	SetupDevCommand( "Respawn player: " + player.GetPlayerName(), "respawn " + player.GetEntIndex() )
 	//}
@@ -825,7 +825,7 @@ void function SetupTDMSecondaryWeapsons()
 	//SetupDevCommand( "Kraber", "tgive s mp_weapon_sniper" )
 	
 
-	//foreach ( player in GetPlayerArray() )
+	//foreach ( player in gp() )
 	//{
 	//	SetupDevCommand( "Respawn player: " + player.GetPlayerName(), "respawn " + player.GetEntIndex() )
 	//}
@@ -887,8 +887,8 @@ void function SetDevMenu_Prototypes( var _ )
 
 void function SetupPrototypesDevMenu()
 {
-	SetupDevCommand( "Toggle Akimbo With Current Weapon", "script DEV_ToggleAkimboWeapon(GetPlayerArray()[0])" )
-	SetupDevCommand( "Toggle Akimbo With Holstered Weapon", "script DEV_ToggleAkimboWeaponAlt(GetPlayerArray()[0])" )
+	SetupDevCommand( "Toggle Akimbo With Current Weapon", "script DEV_ToggleAkimboWeapon(gp()[0])" )
+	SetupDevCommand( "Toggle Akimbo With Holstered Weapon", "script DEV_ToggleAkimboWeaponAlt(gp()[0])" )
 	// SetupDevCommand( "Change to Shadow Squad", "script Dev_ShadowFormEnable( GP() )" )
 }
 
@@ -1015,7 +1015,7 @@ void function RunDevCommand( DevCommand cmd, bool isARepeat )
 		if ( IsLobby() )
 		{
 			CloseAllMenus()
-			AdvanceMenu( GetMenu( "R5RLobbyMenu" ) )
+			AdvanceMenu( GetMenu( GetCurrentLobbyMenu() ) )
 		}
 		else
 		{
@@ -1119,7 +1119,7 @@ void function BindCommandToGamepad_Activate( var button )
 
 		string prompt = "Bound to gamepad BACK: " + fullName
 		printt( prompt )
-		//string cmdText = "script Dev_PrintMessage( GetPlayerArray()[0], \"" + prompt + "\" )"
+		//string cmdText = "script Dev_PrintMessage( gp()[0], \"" + prompt + "\" )"
 		//ClientCommand( cmdText )
 		EmitUISound( "wpn_pickup_titanweapon_1p" )
 	}

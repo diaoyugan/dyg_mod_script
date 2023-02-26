@@ -99,7 +99,6 @@ global const FREELANCE                  = "freelance"
 global const CUSTOM_TDM                 = "custom_tdm"
 global const CUSTOM_CTF                 = "custom_ctf"
 global const CUSTOM_AIMTRAINER			= "custom_aimtrainer"
-global const MAP_EDITOR					= "map_editor"
 
 global const FREELANCE_ENABLED          = false
 
@@ -571,7 +570,7 @@ global const KILL_REPLAY_BEFORE_KILL_TIME_TITAN 		= 6.8
 global const KILL_REPLAY_BEFORE_KILL_TIME_DROPPOD 		= 2.0
 global const KILL_REPLAY_AFTER_KILL_TIME 				= 2.0
 
-global const DEATHCAM_TIME_SHORT 						= 3.0
+global const DEATHCAM_TIME_SHORT 						= 1.5
 global const KILL_REPLAY_BEFORE_KILL_TIME_SHORT 		= 3.5
 global const KILL_REPLAY_AFTER_KILL_TIME_SHORT 			= 1.0
 global const RESPAWN_BUTTON_BUFFER 						= 0.0 // the amount of time before you're allowed to respawn, after DEATHCAM_TIME
@@ -846,7 +845,7 @@ global const TITAN_DAMAGE_STAGE_3 			= 0.25
 global const TITAN_DAMAGE_STAGE_DOOMED 		= 0.0
 global const int DOOMED_MIN_HEALTH 			= 1
 
-global const float AREA_SONAR_SCAN_RADIUS 			= 32000
+global const float AREA_SONAR_SCAN_RADIUS 			= 1250.0
 global const float AREA_SONAR_SCAN_PULSE_DURATION 	= 6.0
 
 global const float SONAR_GRENADE_RADIUS 			= 1250.0
@@ -1286,8 +1285,7 @@ global enum ePresentationType
 	BATTLE_PASS,
 	BATTLE_PASS_3,
 	COLLECTION_EVENT,
-	MODEL
-	
+	MODS,
 	COUNT
 }
 

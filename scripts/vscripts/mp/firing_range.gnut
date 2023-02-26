@@ -32,6 +32,8 @@ global const asset FIRINGRANGE_QUARRY_BLOCK_ASSET = $"mdl/rocks/thunderdome_quar
 #if SERVER
 // To be used outside if needed
 global int firingrange_infinite_ammo = 0
+
+bool toggledFriendlyFire = false
 #endif
 
 #if CLIENT
@@ -89,6 +91,8 @@ void function FiringRangeGameMode_Init()
 		AddCallback_OnPlayerKilled( OnPlayerKilled )
 		AddCallback_OnWeaponAttack( OnWeaponAttack )
 		AddSpawnCallback( "prop_survival", OnPropSurvivalSpawned )
+		AddCallback_ItemFlavorLoadoutSlotDidChange_AnyPlayer( Loadout_CharacterClass(), OnTeammateLoadoutSelectionChanged, false )
+		AddClientCommandCallback( "firingrange_toggle_friendlyfire", ClientCommand_ToggleFriendlyFire )
 
 		firingrange_infinite_ammo = GetCurrentPlaylistVarBool( "survival_infinite_ammo", false ) ? 1 : 2
 	#endif
@@ -124,6 +128,7 @@ void function SCB_BroadcastFriendlyFireChange( entity playerThatChanged )
 	vector titleColor = (isEnabled ? ENEMY_COLOR : FRIENDLY_COLOR)
 	AnnouncementMessage( localPlayer, mainText, subText, titleColor )
 }
+
 #endif //
 
 void function OnEntitiesDidLoad()
@@ -157,6 +162,10 @@ void function OnEntitiesDidLoad()
 	SpawnItems()
 	SpawnAmmo()
 
+	SpawnDummy(<31541,-7964,-29165>, <0,179,0>)
+	SpawnDummy(<31541,-6705,-29165>, <0,179,0>)
+	SpawnDummy(<31541,-5885,-29165>, <0,179,0>)
+
 	// Doors
 	SpawnDoors_Init()
 
@@ -173,10 +182,51 @@ void function OnEntitiesDidLoad()
 	#endif
 }
 
-
-
-
 #if SERVER
+bool function ClientCommand_ToggleFriendlyFire( entity player, array<string> args )
+{
+	toggledFriendlyFire = !toggledFriendlyFire
+	SetTeamIsRabid( player.GetTeam(), toggledFriendlyFire )
+	foreach( targetPlayer in GetPlayerArray() )
+		Remote_CallFunction_NonReplay( targetPlayer, "SCB_BroadcastFriendlyFireChange", player )
+
+	return true
+}
+
+void function SpawnDummy(vector origin, vector angles)
+
+{
+    entity dummy = CreateEntity( "npc_dummie" )
+    SetSpawnOption_AISettings( dummy, "npc_training_dummy" )
+    dummy.SetOrigin( origin )
+    dummy.SetAngles( angles )
+	DispatchSpawn( dummy )
+	dummy.SetShieldHealthMax( 125 )
+	dummy.SetShieldHealth( 125 )
+	dummy.SetMaxHealth( 100 )
+	dummy.SetHealth( 100 )
+	dummy.SetTakeDamageType( DAMAGE_YES )
+	dummy.SetDamageNotifications( true )
+	dummy.SetDeathNotifications( true )
+	dummy.SetValidHealthBarTarget( true )
+	SetObjectCanBeMeleed( dummy, true )
+	dummy.SetSkin(RandomInt(6))
+	dummy.DisableHibernation()
+    SetTeam(dummy, 99)
+
+	thread OnDummyKilled(dummy)
+}
+
+void function OnDummyKilled(entity dummy)
+{
+	//printt("Flowstate DEBUG - Dummy killed, spawning it.")
+	vector pos = dummy.GetOrigin()
+	vector angles = dummy.GetAngles()
+	dummy.WaitSignal( "OnDeath" )
+	wait 1
+	StartParticleEffectInWorld( GetParticleSystemIndex( FIRINGRANGE_ITEM_RESPAWN_PARTICLE ), pos, angles )
+	thread SpawnDummy( pos, angles)
+}
 
 // ==================================================
 //					PLAYER EQUIP
@@ -230,6 +280,13 @@ void function OnPlayerRespawned(entity player)
 	player.SetShieldHealth( player.GetShieldHealthMax() )
 }
 
+void function OnTeammateLoadoutSelectionChanged( EHI playerEHI, ItemFlavor unused )
+{
+	entity player = FromEHI( playerEHI )
+	ClientCommand( player, "Sur_UpdateCharacterLock 0" )
+	if( IsAlive( player ) && Bleedout_IsBleedingOut( player ) )
+		player.Die( null, null, { damageSourceId = eDamageSourceId.damagedef_despawn } )
+}
 
 // ==================================================
 //					ITEM SPAWNING

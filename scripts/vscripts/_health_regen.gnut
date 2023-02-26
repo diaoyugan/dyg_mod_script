@@ -202,9 +202,15 @@ float function PilotShieldModifyDamage( entity player, var damageInfo)
     if ( shieldHealth && newShieldHealth <= 0 )
     {
 		DamageInfo_AddCustomDamageType( damageInfo, DF_SHIELD_BREAK )
-		
-		if( IsValid( attacker ) )
-			thread EmitSoundOnEntityOnlyToPlayer( attacker, attacker, "humanshield_break_1p_vs_3p" )
+
+		if( IsValid( attacker ) && IsValid( player ) )
+		{
+			if( attacker != player && attacker.IsPlayer() )
+				EmitSoundOnEntityOnlyToPlayer( attacker, attacker, "humanshield_break_1p_vs_3p" )
+
+			if( player.IsPlayer() )
+				EmitSoundOnEntityOnlyToPlayer( player, player, "humanshield_break_3p_vs_1p" )
+		}
     }
 
 	if(permanentDamage > 0)

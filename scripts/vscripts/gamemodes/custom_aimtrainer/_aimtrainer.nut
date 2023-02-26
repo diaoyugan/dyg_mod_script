@@ -23,6 +23,9 @@ global function  _ChallengesByColombia_Init
 global function StartFRChallenges
 global function CreateMovementMapDummie
 global function CreateMovementMapDummieFromMapLoad
+global function CC_MenuGiveAimTrainerWeapon
+global function CC_AimTrainer_SelectWeaponSlot
+global function CC_AimTrainer_CloseWeaponSelector
 
 vector floorLocation
 vector floorCenterForPlayer
@@ -44,6 +47,9 @@ table<int, int> ChallengesBestScores
 
 void function _ChallengesByColombia_Init()
 {
+	//Increase client command limit to 60
+	SetConVarInt("sv_quota_stringCmdsPerSecond", 60)
+	
 	//Todo: create only one cc for this
 	//first challenges select menu column
 	AddClientCommandCallback("CC_StartChallenge1", CC_StartChallenge1)
@@ -81,6 +87,8 @@ void function _ChallengesByColombia_Init()
 	AddClientCommandCallback("CC_AimTrainer_USER_WANNA_BE_A_DUMMY", CC_AimTrainer_USER_WANNA_BE_A_DUMMY)
 	AddClientCommandCallback("CC_MenuGiveAimTrainerWeapon", CC_MenuGiveAimTrainerWeapon) 
 	AddClientCommandCallback("CC_ExitChallenge", CC_ExitChallenge)
+	AddClientCommandCallback("CC_AimTrainer_SelectWeaponSlot", CC_AimTrainer_SelectWeaponSlot)
+	AddClientCommandCallback("CC_AimTrainer_WeaponSelectorClose", CC_AimTrainer_CloseWeaponSelector)
 	
 	//results menu skip and restart button callback
 	AddClientCommandCallback("ChallengesSkipButton", CC_ChallengesSkipButton)
@@ -156,8 +164,6 @@ void function StartFRChallenges(entity player)
 	player.SetAngles(AimTrainer_startAngs)
 
 	player.p.isChallengeActivated = false
-	if( IsAlive( player ) )
-		player.Die( null, null, { damageSourceId = eDamageSourceId.damagedef_suicide } )
 }
 
 void function ResetChallengeStats(entity player)
@@ -267,6 +273,11 @@ void function StrafeMovement(entity ai, entity player)
 	while(IsValid(ai))
 	{
 		ai.SetAngles(VectorToAngles( player.GetOrigin() - ai.GetOrigin()))
+		if(AimTrainer_STRAFING_SPEED == 0)
+		{
+			WaitFrame()
+			continue
+		}
 			
 		int random = RandomIntRangeInclusive(1,10)
 		if (random == 9 || random == 10){
@@ -383,6 +394,11 @@ void function TargetSwitcthingWatcher(entity ai, entity player)
 	while(IsValid(ai))
     {
 		ai.SetAngles(VectorToAngles( player.GetOrigin() - ai.GetOrigin()))
+		if(AimTrainer_STRAFING_SPEED == 0)
+		{
+			WaitFrame()
+			continue
+		}
 		
         int random = RandomIntRangeInclusive(1,6)
         if(random == 1 || random == 2 || random == 3){
@@ -2041,7 +2057,7 @@ void function DummyRunningTargetsMovement(entity ai, entity player)
 			ChallengesEntities.dummies.removebyvalue(ai)
 		}
 	)
-
+	
 	ai.Anim_ScriptedPlayActivityByName( "ACT_SPRINT_FORWARD", true, 0.1 )
 	ai.Anim_SetPlaybackRate(AimTrainer_STRAFING_SPEED)
 	wait 0.5
@@ -2145,9 +2161,6 @@ void function ChallengesStartAgain(entity player)
 				ResetChallengeStats(player)
 				
 				Remote_CallFunction_NonReplay(player, "ServerCallback_ResetLiveStatsUI")
-
-				if( IsAlive( player ) )
-					player.Die( null, null, { damageSourceId = eDamageSourceId.damagedef_suicide } )
 				
 				if(!player.p.isRestartingLevel)
 				{
@@ -2406,7 +2419,10 @@ void function Arcstar_OnStick( entity ent, var damageInfo )
 void function Arcstar_OnStick2( entity ent, var damageInfo )
 {
 	entity player = DamageInfo_GetAttacker( damageInfo )
-	if(!IsValid(player)) return
+
+	if( !IsValid( player ) || ent == player )
+		return
+	
 	printt("Stick! +1 point.")
 	EmitSoundOnEntity(player, "UI_PostGame_TitanPointIncrease")
 	ChallengesEntities.dummies.removebyvalue(ent)
@@ -2419,20 +2435,15 @@ void function OnPlayerDeathCallback(entity player, var damageInfo)
 	thread OnPlayerDeathCallbackThread(player)
 }
 
-void function OnPlayerDeathCallbackThread(entity player)
+void function OnPlayerDeathCallbackThread( entity player )
 {
 	if( !player.p.isChallengeActivated )
 		return
 
 	wait 1
-
-	Signal(player, "ChallengeTimeOver")
-	vector lastPos = player.GetOrigin()
-	vector lastAng = player.GetAngles()
-	player.SetOrigin(lastPos)
-	player.SetAngles(lastAng)
 	
-    SetupPlayer( player )
+	Signal(player, "ChallengeTimeOver")
+	SetupPlayer( player )
 }
 
 int function ReturnShieldAmountForDesiredLevel()
@@ -2517,6 +2528,9 @@ void function ClippingAIWorkaround(entity dummy)
 //CLIENT COMMANDS
 void function PreChallengeStart(entity player, int challenge)
 {
+	if( IsAlive( player ) )
+		player.Die( null, null, { damageSourceId = eDamageSourceId.damagedef_despawn } )
+	
 	SetupPlayer( player )
 	player.FreezeControlsOnServer()
 
@@ -2760,98 +2774,143 @@ bool function CC_AimTrainer_DUMMIES_COLOR( entity player, array<string> args )
 	return false
 }
 
-bool function CC_MenuGiveAimTrainerWeapon( entity player, array<string> args )
+bool function CC_AimTrainer_SelectWeaponSlot(entity player, array<string> args )
+{
+	if(!IsValid(player) || args.len() > 1) return false
+	
+	string slot = args[0]
+	int actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_0
+	
+	if(slot == "p")
+		actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_0
+	else if(slot == "s")
+		actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_1
+	
+	player.FreezeControlsOnServer()
+	player.SetActiveWeaponBySlot( eActiveInventorySlot.mainHand, actualslot )
+	return true
+}
+
+bool function CC_AimTrainer_CloseWeaponSelector(entity player, array<string> args )
 {
 	if(!IsValid(player)) return false
+
+	player.UnfreezeControlsOnServer()
+	return true
+}
+
+bool function CC_MenuGiveAimTrainerWeapon( entity player, array<string> args )
+{
+	if(!IsValid(player) || args.len() < 2) return false
 	
 	string weapon = args[0]
-    entity primary = player.GetNormalWeapon( WEAPON_INVENTORY_SLOT_PRIMARY_0 )
-    
-	if (IsValid(primary))
-		player.TakeWeaponByEntNow( primary )
 	
+	if(GameRules_GetGameMode() != "custom_aimtrainer" && GetWhiteListedWeapons().len() && GetWhiteListedWeapons().find(weapon) != -1)
+	{
+		Message(player, "WEAPON WHITELISTED")
+		return false
+	}
+
+	if(GameRules_GetGameMode() != "custom_aimtrainer" && GetWhiteListedAbilities().len() && GetWhiteListedAbilities().find(weapon) != -1 )
+	{
+		Message(player, "ABILITY WHITELISTED")
+		return false
+	}
+
+    string slot = args[1]
+	int actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_0
+	
+	if(slot == "p")
+		actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_0
+	else if(slot == "s")
+		actualslot = WEAPON_INVENTORY_SLOT_PRIMARY_1
+	
+	entity actualweapon = player.GetNormalWeapon( actualslot )
+	if ( IsValid(actualweapon) )
+		player.TakeWeaponByEntNow( actualweapon )
+
 	entity weaponent
 	bool shouldPutLaser = false
 	array<string> finalargs
-	if (args.len() > 1) //from attachments buy box
+	if (args.len() > 2) //from attachments buy box
 		{
-			printt("DEBUG: " + args[1], args[2], args[3], args[4], args[5], args[6])
+			printt("DEBUG: " + args[2], args[3], args[4], args[5], args[6], args[7])
 
-			switch(args[5])
+			switch(args[6])
 			{
 				case "smg":
 			
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[2] != "none") 
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[3] != "none") 
 					{
-						finalargs.append(args[2])						
-						if(args[2] == "barrel_stabilizer_l1" || args[2] == "barrel_stabilizer_l2" || args[2] == "barrel_stabilizer_l3" )
+						finalargs.append(args[3])						
+						if(args[3] == "barrel_stabilizer_l1" || args[3] == "barrel_stabilizer_l2" || args[3] == "barrel_stabilizer_l3" )
 							shouldPutLaser = true
 					}
-					if(args[3] != "none") finalargs.append(args[3])
-					if(args[6] != "none") finalargs.append(args[6])	
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[7] != "none") finalargs.append(args[7])	
 					
 					break
 				case "pistol":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[2] != "none") 
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[3] != "none") 
 					{
-						finalargs.append(args[2])						
+						finalargs.append(args[3])						
 						if(weapon == "mp_weapon_autopistol")
 							shouldPutLaser = true
 					}
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[7] != "none") finalargs.append(args[7])
 					
 					break
 				case "pistol2":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[7] != "none") finalargs.append(args[7])
 					break
 				case "shotgun":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[4] != "none") finalargs.append(args[4])
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[5] != "none") finalargs.append(args[5])
 					break
 				case "lmg2":
 				case "ar":
-					if(args[1] != "none") finalargs.append(args[1])
 					if(args[2] != "none") finalargs.append(args[2])
 					if(args[3] != "none") finalargs.append(args[3])
-					if(args[4] != "." && weapon == "mp_weapon_esaw") finalargs.append(args[4])
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[5] != "." && weapon == "mp_weapon_esaw") finalargs.append(args[5])
+					if(args[7] != "none") finalargs.append(args[7])
 					break
 				case "ar2":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[3] != "none") finalargs.append(args[3])
-					if(args[4] != "." && weapon == "mp_weapon_energy_ar") finalargs.append(args[4])
-					if(args[6] != "none") finalargs.append(args[6])				
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[5] != "." && weapon == "mp_weapon_energy_ar") finalargs.append(args[5])
+					if(args[7] != "none") finalargs.append(args[7])				
 					break
 				case "marksman":
-					if(args[1] != "none") finalargs.append(args[1])
 					if(args[2] != "none") finalargs.append(args[2])
 					if(args[3] != "none") finalargs.append(args[3])
-					if(args[4] != "." ) finalargs.append(args[4])
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[5] != "." ) finalargs.append(args[5])
+					if(args[7] != "none") finalargs.append(args[7])
 					break
 				case "marksman2":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[3] != "none") finalargs.append(args[3])
-					if(args[4] != "." ) finalargs.append(args[4])
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[5] != "." ) finalargs.append(args[5])
+					if(args[7] != "none") finalargs.append(args[7])
 					break
 				case "marksman3":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[3] != "none") finalargs.append(args[3])
-					if(args[6] != "none") finalargs.append(args[6])	
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[7] != "none") finalargs.append(args[7])	
 					break
 				case "sniper":
-					if(args[1] != "none") finalargs.append(args[1])
 					if(args[2] != "none") finalargs.append(args[2])
 					if(args[3] != "none") finalargs.append(args[3])
-					if(args[6] != "none") finalargs.append(args[6])
+					if(args[4] != "none") finalargs.append(args[4])
+					if(args[7] != "none") finalargs.append(args[7])
 					break
 				case "sniper2":
-					if(args[1] != "none") finalargs.append(args[1])
-					if(args[3] != "none") finalargs.append(args[3])
+					if(args[2] != "none") finalargs.append(args[2])
+					if(args[4] != "none") finalargs.append(args[4])
 					break
 			}
 		}
@@ -2863,31 +2922,111 @@ bool function CC_MenuGiveAimTrainerWeapon( entity player, array<string> args )
 	else
 		Remote_CallFunction_NonReplay(player, "ServerCallback_ToggleDotForHitscanWeapons", false)
 	
-	weaponent = player.GiveWeapon( weapon, WEAPON_INVENTORY_SLOT_PRIMARY_0, finalargs)
-
+	weaponent = player.GiveWeapon( weapon, actualslot, finalargs)
+	
+	if(!IsValid(actualweapon)) player.SetActiveWeaponBySlot( eActiveInventorySlot.mainHand, actualslot )
+		
 	if( shouldPutLaser )
 		Remote_CallFunction_NonReplay(player, "ServerCallback_SetLaserSightsOnSMGWeapon", weaponent)
 	else
 		Remote_CallFunction_NonReplay(player, "ServerCallback_StopLaserSightsOnSMGWeapon", weaponent)
 
-	if(!IsValid(weaponent)) return false
+	if(!IsValid(weaponent)) return true
 	
-	thread PlayAnimsOnGiveWeapon(weaponent, player)
-	
-	if(!GetCurrentPlaylistVarBool( "aimtrainer_enableSkins", false )) return false
+	if( IsAlive( player ) ) // This is for TDM
+	{
+		string weapon1
+		string weapon2
+		string optics1
+		string optics2
+		array<string> mods1 
+		array<string> mods2 
+		string weaponname1
+		string weaponname2
 
-	if(weaponent.GetWeaponClassName() == "mp_weapon_car")
-		weaponent.SetSkin( weaponent.GetSkinIndexByName( "charm_preview_black" ) )
-	else if(weaponent.GetWeaponClassName() == "mp_weapon_wingman")
-	{
-		weaponent.SetLegendaryModelIndex(2)
-		weaponent.SetSkin(RandomInt(weaponent.GetSkinCount()))
+		weapon1 = SURVIVAL_GetWeaponBySlot( player, WEAPON_INVENTORY_SLOT_PRIMARY_0 ) // This function returns weapon class name if there's weapon, otherwise returns empty string
+		weapon2 = SURVIVAL_GetWeaponBySlot( player, WEAPON_INVENTORY_SLOT_PRIMARY_1 )
+
+		if( weapon1 != "" ) // Primary slot
+		{
+			mods1 = GetWeaponMods( player.GetNormalWeapon( WEAPON_INVENTORY_SLOT_PRIMARY_0 ) )
+			foreach (mod in mods1)
+				optics1 = mod + " " + optics1
+			
+			weaponname1 = "tgive p " + weapon1 + " " + optics1 + "; "
+		}
+
+		if( weapon2 != "" ) // Secondary Slot
+		{
+			mods2 = GetWeaponMods( player.GetNormalWeapon( WEAPON_INVENTORY_SLOT_PRIMARY_1 ) )
+			foreach (mod in mods2)
+				optics2 = mod + " " + optics2
+		
+			weaponname2 = "tgive s " + weapon2 + " " + optics2
+		}
+
+		weaponlist[ player.GetPlayerName() ] <- weaponname1 + weaponname2
 	}
-	else if(weaponent.GetWeaponClassName() == "mp_weapon_r97")
+	
+	if(GameRules_GetGameMode() == "custom_aimtrainer")
+		thread PlayAnimsOnGiveWeapon(weaponent, player)
+
+	int weaponSkin = -1
+	int weaponModelIndex = -1
+	switch( weaponent.GetWeaponClassName() )
 	{
-		weaponent.SetLegendaryModelIndex(2)
-		weaponent.SetSkin(RandomInt(weaponent.GetSkinCount()))
+		case "mp_weapon_car":
+			weaponSkin = weaponent.GetSkinIndexByName( "charm_preview_black" )
+			break
+		case "mp_weapon_wingman":
+		case "mp_weapon_r97":
+			weaponModelIndex = 2
+			weaponSkin = RandomInt( weaponent.GetSkinCount() )
+			break
 	}
+	
+	if(slot == "p")
+	{
+		player.p.weapon = weapon
+		player.p.mods = finalargs
+		if( weaponModelIndex > -1 )
+		{
+			weaponent.SetLegendaryModelIndex( weaponModelIndex )
+			player.p.weaponModelIndex = weaponModelIndex
+		} else {
+			player.p.weaponModelIndex = -1
+		}
+
+		if( weaponSkin > -1 )
+		{
+			weaponent.SetSkin( weaponSkin )
+			player.p.weaponSkin = weaponSkin
+		} else {
+			player.p.weaponSkin = -1
+		}
+	}
+	else if(slot == "s")
+	{
+		player.p.weapon2 = weapon
+		player.p.mods2 = finalargs
+		if( weaponModelIndex > -1 )
+		{
+			weaponent.SetLegendaryModelIndex( weaponModelIndex )
+			player.p.weaponModelIndex2 = weaponModelIndex
+		} else {
+			player.p.weaponModelIndex2 = -1
+		}
+
+		if( weaponSkin > -1 )
+		{
+			weaponent.SetSkin( weaponSkin )
+			player.p.weaponSkin2 = weaponSkin
+		} else {
+			player.p.weaponSkin2 = -1
+		}
+	}
+
+
 	// else
 	// {
 		// if(CoinFlip())
@@ -2896,10 +3035,7 @@ bool function CC_MenuGiveAimTrainerWeapon( entity player, array<string> args )
 	// }
 	// printt("Skin codename: " + weaponent.GetSkinNameByIndex(weaponent.GetSkin()))
 
-	player.p.weapon = weapon
-	player.p.mods = finalargs
-	
-	return false
+	return true
 }
 
 void function PlayAnimsOnGiveWeapon(entity weaponent, entity player)
@@ -2926,10 +3062,33 @@ void function SetupPlayer( entity player )
 	
 	player.GiveWeapon( "mp_weapon_bolo_sword_primary", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
     player.GiveOffhandWeapon( "melee_bolo_sword", OFFHAND_MELEE, [] )
-	player.GiveWeapon( player.p.weapon, WEAPON_INVENTORY_SLOT_PRIMARY_0, player.p.mods )
-	player.SetActiveWeaponBySlot( eActiveInventorySlot.mainHand, WEAPON_INVENTORY_SLOT_PRIMARY_0 )
+	entity weapon = player.GiveWeapon( player.p.weapon, WEAPON_INVENTORY_SLOT_PRIMARY_0, player.p.mods )
 
+	if( player.p.weaponModelIndex > -1 )
+		weapon.SetLegendaryModelIndex( player.p.weaponModelIndex )
+	
+	if( player.p.weaponSkin > -1 )
+		weapon.SetSkin( player.p.weaponSkin )
+	
+	if(player.p.weapon2 == "") 
+	{
+		player.SetActiveWeaponBySlot( eActiveInventorySlot.mainHand, WEAPON_INVENTORY_SLOT_PRIMARY_0 )
+		DeployAndEnableWeapons( player )
+		player.ClearFirstDeployForAllWeapons()
+		return
+	}
+	
+	entity weapon2 = player.GiveWeapon( player.p.weapon2, WEAPON_INVENTORY_SLOT_PRIMARY_1, player.p.mods2 )
+
+	if( player.p.weaponModelIndex2 > -1 )
+		weapon2.SetLegendaryModelIndex( player.p.weaponModelIndex2 )
+	
+	if( player.p.weaponSkin2 > -1 )
+		weapon2.SetSkin( player.p.weaponSkin2 )
+
+	player.SetActiveWeaponBySlot( eActiveInventorySlot.mainHand, WEAPON_INVENTORY_SLOT_PRIMARY_0 )
 	DeployAndEnableWeapons( player )
+	player.ClearFirstDeployForAllWeapons()
 }
 
 bool function CC_Weapon_Selector_Open( entity player, array<string> args )
@@ -2942,8 +3101,6 @@ bool function CC_Weapon_Selector_Open( entity player, array<string> args )
 }
 bool function CC_Weapon_Selector_Close( entity player, array<string> args )
 {
-	if( IsAlive( player ) )
-		player.Die( null, null, { damageSourceId = eDamageSourceId.damagedef_suicide } )
 	return false
 }
 
