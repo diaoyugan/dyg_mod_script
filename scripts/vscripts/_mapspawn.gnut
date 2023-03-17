@@ -249,7 +249,7 @@ void function CodeCallback_MapSpawn() // original script entry point
 	PrecacheModel( $"mdl/menu/coin.rmdl" )
 	PrecacheModel( $"mdl/currency/crafting/currency_crafting_epic.rmdl" )
 	//Weapons
-
+	PrecacheWeapon( $"mp_ability_crypto_drone_nuclear" )
 	PrecacheWeapon( $"mp_weapon_melee_survival" )
 	PrecacheWeapon( $"mp_weapon_mdlspawner" )
 	PrecacheWeapon( $"mp_weapon_alternator_smg" )
@@ -306,7 +306,9 @@ void function CodeCallback_MapSpawn() // original script entry point
 	PrecacheWeapon( $"npc_weapon_energy_shotgun" )
 	PrecacheWeapon( $"npc_weapon_hemlok" )
 	PrecacheWeapon( $"npc_weapon_lstar" )
-
+	PrecacheWeapon( $"mp_titancore_salvo_core" )
+	PrecacheWeapon( $"mp_ability_heal_pistol" )
+	
 	switch(GameRules_GetGameMode())
 	{
 		case "custom_tdm":

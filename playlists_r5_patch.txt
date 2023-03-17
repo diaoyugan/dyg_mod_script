@@ -551,8 +551,8 @@ playlists
 				waiting_for_players_spawning_enabled           1
 				waiting_for_players_countdown_seconds          0
 				waiting_for_players_timeout_seconds            1
-				character_select_time_max                      0.0
-				character_select_time_min                      0.0
+				character_select_time_max                      6
+				character_select_time_min                      6
 				survival_enable_gladiator_intros               0
 				jump_from_plane_enabled                        0
 

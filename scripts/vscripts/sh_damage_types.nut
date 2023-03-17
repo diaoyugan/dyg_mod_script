@@ -230,6 +230,7 @@ global enum eDamageSourceId
 	rodeo_battery_removal
 	phase_shift
 	gamemode_bomb_detonation
+	mp_ability_heal_pistol
 	nuclear_turret
 	proto_viewmodel_test
 	mp_titanweapon_heat_shield
@@ -528,7 +529,7 @@ void function DamageTypes_Init()
 		[ eDamageSourceId.gamemode_bomb_detonation ]				= "Bomb Detonation",
 		[ eDamageSourceId.bleedout ]								= "#DEATH_BLEEDOUT",
 		[ eDamageSourceId.mp_weapon_energy_shotgun ]				= "Energy Shotgun",
-
+		[ eDamageSourceId.mp_ability_heal_pistol ]					= "HEAL",
 		[ eDamageSourceId.damagedef_unknownBugIt ] 					= "#DEATH_GENERIC_KILLED",
 		[ eDamageSourceId.damagedef_unknown ] 						= "#DEATH_GENERIC_KILLED",
 		[ eDamageSourceId.weapon_cubemap ] 							= "#DEATH_GENERIC_KILLED",

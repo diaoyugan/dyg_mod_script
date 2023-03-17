@@ -63,15 +63,26 @@ void function SetupHeirloom( bool allplayers = false)
 	player.GiveOffhandWeapon( "melee_bolo_sword", OFFHAND_MELEE )
 }
 
-void function Setupsmartpistolult( bool allplayers = false)
+void function Setuphealpistolult( bool allplayers = false)
 {
 	entity player = gp()[0]
 	if ( !IsValid( player ) )
 		return
 		
 	player.TakeOffhandWeapon(OFFHAND_ULTIMATE)
-	player.GiveOffhandWeapon("mp_weapon_smart_pistol", OFFHAND_ULTIMATE)
+	player.GiveOffhandWeapon("mp_ability_heal_pistol", OFFHAND_ULTIMATE)
 }
+
+void function SetupSalvoCoreUlt( bool allplayers = false)
+{
+	entity player = gp()[0]
+	if ( !IsValid( player ) )
+		return
+		
+	player.TakeOffhandWeapon(OFFHAND_ULTIMATE)
+	player.GiveOffhandWeapon("mp_titancore_salvo_core", OFFHAND_ULTIMATE)
+}
+
 
 void function UnEquipMelee( bool allplayers = false)
 {

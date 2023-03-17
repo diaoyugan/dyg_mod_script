@@ -385,7 +385,8 @@ void function SetupDefaultDevCommandsMP()
 		SetupDevCommand( "Heirloom: BLOODHOUND axe", "script thread SetupHeirloomaxe()" )		
 		SetupDevCommand( "Heirloom: LIFELINE baton", "script thread SetupHeirloombaton()" )		
 		SetupDevCommand( "Melee: Unequip", "script thread UnEquipMelee()" )		
-		SetupDevCommand( "Ult: smart pistol", "script thread Setupsmartpistolult()" )		
+		SetupDevCommand( "Ult: heal pistol", "script thread Setuphealpistolult()" )
+		SetupDevCommand( "TitanCore: SalvoCore", "script thread SetupSalvoCoreUlt()" )
 		#endif
 		
 		//SetupDevCommand( "Toggle Offhand Low Recharge", "ToggleOffhandLowRecharge" )
