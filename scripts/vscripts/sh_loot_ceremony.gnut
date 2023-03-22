@@ -60,7 +60,7 @@ global function SetChallengeRewardPresentationModeActive
 global function GetNextLootBox
 #endif
 
-#if CLIENT || UI 
+#if CLIENT || UI
 global function TEMP_GetVoidwalkerBundle
 #endif
 
@@ -952,6 +952,7 @@ void function TickAnimationSequence( ItemFlavor packFlav, bool firstTime )
 
 	if ( firstTime )
 		wait 0.25 // allow for fade in
+		
 
 	RunUIScript( "PlayCustomUIMusic", LOOT_CEREMONY_MUSIC_P1 )
 
@@ -963,8 +964,10 @@ void function TickAnimationSequence( ItemFlavor packFlav, bool firstTime )
 	wait 0.5
 
 	// wait for grx rewards to come in
-	while( !fileLevel.grxRewardsReceived )
-		WaitFrame()
+	//while( !fileLevel.grxRewardsReceived )
+		//WaitFrame()
+
+	GetRandomRewards()
 
 	// allow skip anim button
 	Hud_SetEnabled( fileLevel.skipAnimButton, true )
@@ -982,12 +985,12 @@ void function TickAnimationSequence( ItemFlavor packFlav, bool firstTime )
 	thread WaitForTickAnimCompleteAndSignalDisplayLoot( fileLevel.lootTickModel, deployAnim )
 
 	// wait for either anim to reach its display event or user skips anim (or early exit out of loot ceremony)
-	bool animReachedDisplayEvent = false
+	bool animReachedDisplayEvent = true
 	array<string> signalsToWait  = ["TickAnimStartDisplayLoot", "TickAnimSkip", "LootCeremonyTickCancelAnim"]
 	string resultSignal          = GetWaitMultipleSignal_Entity( fileLevel.lootTickModel, signalsToWait, "LootCeremonyAnimShowLootOrSkip" )
 
-	if ( resultSignal == "TickAnimStartDisplayLoot" )
-		animReachedDisplayEvent = true
+	//if ( resultSignal == "TickAnimStartDisplayLoot" )
+		//animReachedDisplayEvent = true
 
 	// disable the invisible fullscreen skip animation button
 	Hud_SetEnabled( fileLevel.skipAnimButton, false )
@@ -1077,9 +1080,9 @@ void function LootCeremonyOnFullUpdate()
 	if ( !IsLootCeremonyActive() && !IsSpecialItemPresentationModeActive() )
 		return
 
-	//printt( "#################" )
-	//printf( "%s() ", FUNC_NAME() )
-	//printt( "#################" )
+	printt( "#################" )
+	printf( "%s() ", FUNC_NAME() )
+	printt( "#################" )
 
 	entity localClientPlayer = GetLocalClientPlayer()
 	if ( IsValid( localClientPlayer ) && IsValid( fileLevel.cameraEnt ) )
@@ -1378,6 +1381,76 @@ const float REWARDS_DELAY_TIER1 = 0.2
 
 
 #if CLIENT
+ItemFlavor function GetRandomItemFlavor()
+{
+	array<ItemFlavor> selected
+
+	int num = RandomIntRange( 0, 8 )
+
+	switch(num)
+	{
+		case 0:
+			selected = GetAllItemFlavorsOfType( eItemType.weapon_skin )
+			break;
+		case 1:
+			selected = GetAllItemFlavorsOfType( eItemType.character_skin )
+			break;
+		case 2:
+			selected = GetAllItemFlavorsOfType( eItemType.weapon_skin )
+			break;
+		case 3:
+			selected = GetAllItemFlavorsOfType( eItemType.character_skin )
+			break;
+		case 4:
+			selected = GetAllItemFlavorsOfType( eItemType.character_execution )
+			break;
+		case 5:
+			selected = GetAllItemFlavorsOfType( eItemType.weapon_charm )
+			break;
+		case 6:
+			selected = GetAllItemFlavorsOfType( eItemType.gladiator_card_intro_quip )
+			break;
+		case 7:
+			selected = GetAllItemFlavorsOfType( eItemType.gladiator_card_kill_quip )
+			break;
+		case 8:
+			selected = GetAllItemFlavorsOfType( eItemType.gladiator_card_stat_tracker )
+			break;
+	}
+
+	ItemFlavor randomitem = selected[RandomIntRange( 0, selected.len() )]
+
+	return randomitem
+}
+
+void function GetRandomRewards()
+{
+	ItemFlavor random1 = GetRandomItemFlavor()
+	ItemFlavor random2 = GetRandomItemFlavor()
+	ItemFlavor random3 = GetRandomItemFlavor()
+
+	ItemPresentationData wtfLeft
+	wtfLeft.item = random1
+	wtfLeft.rarity = ItemFlavor_GetQuality( random1, 0 )
+	wtfLeft.attachment = TICK_LOOT_ATTACHMENTS[0]
+	wtfLeft.quantity = 1
+	fileLevel.itemPresentationDatas.append( wtfLeft )
+
+	ItemPresentationData wtfMiddle
+	wtfMiddle.item = random2
+	wtfMiddle.rarity = ItemFlavor_GetQuality( random2, 0 )
+	wtfMiddle.attachment = TICK_LOOT_ATTACHMENTS[1]
+	wtfMiddle.quantity = 1
+	fileLevel.itemPresentationDatas.append( wtfMiddle )
+
+	ItemPresentationData wtfRight
+	wtfRight.item = random3
+	wtfRight.rarity = ItemFlavor_GetQuality( random3, 0 )
+	wtfRight.attachment = TICK_LOOT_ATTACHMENTS[2]
+	wtfRight.quantity = 1
+	fileLevel.itemPresentationDatas.append( wtfRight )
+}
+
 void function LootCeremonySequenceShowRewards()
 {
 	EndSignal( fileLevel.signalDummy, "LootCeremonyExit" )
@@ -1475,6 +1548,9 @@ void function LootCeremonySequenceShowRewards()
 		else
 			fileLevel.dummyInspectButtons[i].shouldShow = false
 	}
+
+	fileLevel.itemPresentationDatas.clear()
+
 	EnableFakeInspectButtons()
 }
 #endif
@@ -1973,7 +2049,9 @@ void function ShowRewards_WeaponCharm( ItemFlavor item, vector origin, vector an
 	WeaponCosmetics_Apply( weaponModel, null, item )
 
 	entity charmEnt = GetCharmForWeaponEntity( weaponModel )
-	charmEnt.SetModelScale( WEAPON_CHARM_BASE_SCALE * WEAPON_CHARM_EXTRA_SCALE )
+
+	if(IsValid( charmEnt ))
+		charmEnt.SetModelScale( WEAPON_CHARM_BASE_SCALE * WEAPON_CHARM_EXTRA_SCALE )
 
 	ModelIntroHighlightEffect( weaponModel, rarity, true )
 	LootCeremonyUpdateSpotLights( attachment, true, eItemType.weapon_skin )
@@ -2951,7 +3029,7 @@ void function UIToClient_RewardEquipToWheelOnClickWithIndex( int index )
 #endif
 
 
-#if CLIENT || UI 
+#if CLIENT || UI
 array<LoadoutEntry> function EquipButton_GetItemLoadoutEntries( ItemFlavor item, bool statTrackerFindExistingEntry = false )
 {
 	int itemType = ItemFlavor_GetType( item )
@@ -3036,7 +3114,7 @@ array<LoadoutEntry> function EquipButton_GetItemLoadoutEntries( ItemFlavor item,
 #endif
 
 
-#if CLIENT || UI 
+#if CLIENT || UI
 LoadoutEntry function PopulateInspectMenuDetails_GetStatTrackerLoadoutEntry( ItemFlavor item, bool findExistingEntry )
 {
 	ItemFlavor character = GladiatorCardStatTracker_GetCharacterFlavor( item )
@@ -4541,15 +4619,15 @@ void function LootCeremony_UpdateOpenAdditionalButton()
 
 	if ( HasLootBeenPresented() && !IsInspectModeActive() && !IsSpecialItemPresentationModeActive() )
 	{
-		if ( GRX_IsInventoryReady() )
-		{
+		//if ( GRX_IsInventoryReady() )
+		//{
 			//
 			showButton = true
 			array<ItemFlavor> specificPackFlavs = []
-			if ( fileLevel.forceParticularPackFlav != null )
-				specificPackFlavs.append( expect ItemFlavor( fileLevel.forceParticularPackFlav ) )
+			//if ( fileLevel.forceParticularPackFlav != null )
+				//specificPackFlavs.append( expect ItemFlavor( fileLevel.forceParticularPackFlav ) )
 			UpdateLootBoxButton( fileForever.lootBoxOpenButton, specificPackFlavs )
-		}
+		//}
 	}
 
 	Hud_SetVisible( fileForever.lootBoxOpenButton, showButton )
@@ -4585,8 +4663,8 @@ void function ClientToUI_SetLootHasBeenPresented()
 	fileLevel.lootHasBeenPresented = true
 	fileLevel.considerFocusOpenButton = true
 	UpdateFooterOptions()
-	Hud_SetVisible( fileForever.storeButton, true )
-	Hud_SetEnabled( fileForever.storeButton, true )
+	Hud_SetVisible( fileForever.storeButton, false )
+	Hud_SetEnabled( fileForever.storeButton, false )
 }
 #endif
 
@@ -5038,8 +5116,10 @@ void function LootBoxOpenSequenceUI( bool firstTime )
 	Hud_SetVisible( fileForever.storeButton, false )
 	Hud_SetEnabled( fileForever.storeButton, false )
 
+	LootCeremony_UpdateOpenAdditionalButton()
+
 	// Get the actual rewards
-	ItemFlavor ornull pack
+	/*ItemFlavor ornull pack
 	if ( fileLevel.forceParticularPackFlav )
 	{
 		pack = fileLevel.forceParticularPackFlav
@@ -5047,7 +5127,10 @@ void function LootBoxOpenSequenceUI( bool firstTime )
 	else
 	{
 		pack = GetNextLootBox()
-	}
+	}*/
+
+	ItemFlavor ornull pack
+	pack = GetItemFlavorByHumanReadableRef( "pack_cosmetic_rare" )
 	Assert( pack != null )
 	expect ItemFlavor( pack )
 	int quality = ItemFlavor_GetQuality( pack )
@@ -5069,13 +5152,8 @@ void function LootBoxOpenSequenceUI( bool firstTime )
 		printt( "GRX_OpenPack", opID, ItemFlavor_GetGRXIndex( pack ) )
 		GRX_OpenPack( opID, ItemFlavor_GetGRXIndex( pack ) )
 	})
-	operation.onDoneCallback = (void function( int status ) : ( operation ) {
-		if ( status == eScriptGRXOperationStatus.DONE_SUCCESS )
-			RunClientScript( "UIToClient_OnGRXPackOpeningResultsAvailable" )
-		else
-			CloseActiveMenu()
-	})
-	QueueGRXOperation( GetUIPlayer(), operation )
+	operation.onDoneCallback = null
+	QueueGRXOperation( GetUIPlayer(), operation, true )
 }
 #endif
 
@@ -5285,8 +5363,8 @@ ItemFlavor ornull function GetNextLootBox()
 #endif
 
 
-#if CLIENT || UI 
-//Voidwalker Event Bundle
+#if CLIENT || UI
+// Voidwalker Event Bundle
 ItemFlavor function TEMP_GetVoidwalkerBundle()
 {
 	return GetItemFlavorByAsset( $"settings/itemflav/pack/cosmetic_event_season02_event02_wraith.rpak" )

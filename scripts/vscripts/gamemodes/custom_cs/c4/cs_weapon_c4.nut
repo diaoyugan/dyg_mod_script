@@ -1,0 +1,3 @@
+global function OnWeaponPrimaryAttack_c4
+
+var function OnWeaponPrimaryAttack_c4(entity weapon, WeaponPrimaryAttackParams attackParams)
