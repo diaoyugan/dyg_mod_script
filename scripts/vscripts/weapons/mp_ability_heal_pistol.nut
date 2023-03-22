@@ -72,7 +72,7 @@ void function GiveChargeBack( entity weapon )
 	weapon.SetWeaponPrimaryClipCount( currentcharge + givechargebackcount )
 	return
     }
-    else if (((currentcharge + givechargebackcount) > chargemax))
+    else if (((currentcharge + givechargebackcount) >= chargemax))
     {
     weapon.SetWeaponPrimaryClipCount( weapon.GetWeaponPrimaryClipCountMax() )
     return
