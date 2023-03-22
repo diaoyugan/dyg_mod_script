@@ -63,27 +63,6 @@ void function SetupHeirloom( bool allplayers = false)
 	player.GiveOffhandWeapon( "melee_bolo_sword", OFFHAND_MELEE )
 }
 
-void function Setuphealpistolult( bool allplayers = false)
-{
-	entity player = gp()[0]
-	if ( !IsValid( player ) )
-		return
-		
-	player.TakeOffhandWeapon(OFFHAND_ULTIMATE)
-	player.GiveOffhandWeapon("mp_ability_heal_pistol", OFFHAND_ULTIMATE)
-}
-
-void function SetupSalvoCoreUlt( bool allplayers = false)
-{
-	entity player = gp()[0]
-	if ( !IsValid( player ) )
-		return
-		
-	player.TakeOffhandWeapon(OFFHAND_ULTIMATE)
-	player.GiveOffhandWeapon("mp_titancore_salvo_core", OFFHAND_ULTIMATE)
-}
-
-
 void function UnEquipMelee( bool allplayers = false)
 {
 	entity player = gp()[0]
@@ -92,44 +71,14 @@ void function UnEquipMelee( bool allplayers = false)
 
 	player.TakeOffhandWeapon(OFFHAND_MELEE)
 	player.TakeNormalWeaponByIndexNow( WEAPON_INVENTORY_SLOT_PRIMARY_2 )
-	player.GiveWeapon( "mp_weapon_melee_survival", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
-	player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [] )
-}
 
-void function SetupHeirloomkunai( bool allplayers = false)
-{
-	entity player = gp()[0]
-	if ( !IsValid( player ) )
-		return
-
-	player.TakeOffhandWeapon(OFFHAND_MELEE)
-	player.TakeNormalWeaponByIndexNow( WEAPON_INVENTORY_SLOT_PRIMARY_2 )
-	player.GiveWeapon( "mp_weapon_wraith_kunai_primary", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
-	player.GiveOffhandWeapon( "melee_wraith_kunai", OFFHAND_MELEE, [] )
-}
-
-void function SetupHeirloomaxe( bool allplayers = false)
-{
-	entity player = gp()[0]
-	if ( !IsValid( player ) )
-		return
-
-	player.TakeOffhandWeapon(OFFHAND_MELEE)
-	player.TakeNormalWeaponByIndexNow( WEAPON_INVENTORY_SLOT_PRIMARY_2 )
-	player.GiveWeapon( "mp_weapon_bloodhound_axe_primary", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
-	player.GiveOffhandWeapon( "melee_bloodhound_axe", OFFHAND_MELEE, [] )
-}
-
-void function SetupHeirloombaton( bool allplayers = false)
-{
-	entity player = gp()[0]
-	if ( !IsValid( player ) )
-		return
-
-	player.TakeOffhandWeapon(OFFHAND_MELEE)
-	player.TakeNormalWeaponByIndexNow( WEAPON_INVENTORY_SLOT_PRIMARY_2 )
-	player.GiveWeapon( "mp_weapon_lifeline_baton_primary", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
-	player.GiveOffhandWeapon( "melee_lifeline_baton", OFFHAND_MELEE, [] )
+	ItemFlavor character = LoadoutSlot_GetItemFlavor( ToEHI( player ), Loadout_CharacterClass() )
+	ItemFlavor meleeSkin = LoadoutSlot_GetItemFlavor( ToEHI( player ), Loadout_MeleeSkin( character ) )
+	string meleePrimary = MeleeSkin_GetMainWeaponClassname( meleeSkin )
+	string meleeOffhand = MeleeSkin_GetOffhandWeaponClassname( meleeSkin )
+	
+	player.GiveWeapon( meleePrimary, WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
+	player.GiveOffhandWeapon( meleeOffhand, OFFHAND_MELEE, [] )
 }
 #endif
 
@@ -986,4 +935,3 @@ void function DEV_DumpItems()
 	}
 }
 #endif
-

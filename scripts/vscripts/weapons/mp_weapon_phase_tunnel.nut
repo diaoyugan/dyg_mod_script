@@ -276,7 +276,7 @@ void function OnWeaponChargeEnd_weapon_phase_tunnel( entity weapon )
 bool function PhaseTunnel_CanUseZipline( entity player,  entity zipline, vector ziplineClosestPoint )
 {
 	if ( StatusEffect_GetSeverity( player, eStatusEffect.placing_phase_tunnel ) )
-		return true
+		return false
 
 	return true
 }

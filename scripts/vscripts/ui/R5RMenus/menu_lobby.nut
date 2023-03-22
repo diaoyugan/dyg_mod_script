@@ -47,8 +47,6 @@ global table<string, asset> MapAssets = {
 //Map to readable name
 global table<string, string> MapNames = {
 	[ "mp_rr_canyonlands_staging" ] = "Firing Range",
-	[ "mp_rr_aqueduct" ] = "Overflow",
-	[ "mp_rr_aqueduct_night" ] = "Overflow After Dark",
 	[ "mp_rr_ashs_redemption" ] = "Ash's Redemption",
 	[ "mp_rr_canyonlands_64k_x_64k" ] = "Kings Canyon S1",
 	[ "mp_rr_canyonlands_mu1" ] = "Kings Canyon S2",
@@ -56,10 +54,30 @@ global table<string, string> MapNames = {
 	[ "mp_rr_desertlands_64k_x_64k" ] = "Worlds Edge",
 	[ "mp_rr_desertlands_64k_x_64k_nx" ] = "Worlds Edge After Dark",
 	[ "mp_rr_desertlands_64k_x_64k_tt" ] = "Worlds Edge Mirage Voyage",
-	[ "mp_rr_arena_composite" ] = "Drop Off",
-	[ "mp_rr_arena_skygarden" ] = "Encore",
-	[ "mp_rr_party_crasher" ] = "Party Crasher",
+	[ "mp_rr_aqueduct" ] = "Arena: Overflow",
+	[ "mp_rr_aqueduct_night" ] = "Arena: Overflow AD",
+	[ "mp_rr_arena_composite" ] = "Arena: Drop Off",
+	[ "mp_rr_arena_skygarden" ] = "Arena: Encore",
+	[ "mp_rr_party_crasher" ] = "Arena: Party Crasher",
 	[ "mp_lobby" ] = "Lobby"
+}
+
+//Playlist to readable name
+global table<string, string> playlisttoname = {
+	[ "custom_aimtrainer" ] = "Flowstate Aim Trainer",
+	[ "firingrange" ] = "Firing Range (Beta)",
+	[ "survival" ] = "Battle Royale (Beta)",
+	[ "FallLTM" ] = "ShadowFall",
+	[ "duos" ] = "Duos (Beta)",
+	[ "custom_tdm" ] = "Flowstate TDM/FFA",
+	[ "custom_ctf" ] = "Capture The Flag",
+	[ "survival_dev" ] = "Survival Dev",
+	[ "custom_tdm_fiesta" ] = "Flowstate Fiesta",
+	[ "custom_tdm_gungame" ] = "Flowstate Gungame (Beta)",
+	[ "custom_prophunt" ] = "Flowstate Prophunt (Beta)",
+	[ "custom_surf" ] = "Flowstate SURF",
+	[ "map_editor" ] = "Map Editor",
+	[ "dev_default" ] = "Dev Default"
 }
 
 //Vis to readable name
@@ -188,10 +206,15 @@ void function ShowSelectedPanel(var panel, var button)
 
 string function GetUIPlaylistName(string playlist)
 {
-	if(!IsLobby() || !IsConnected())
-		return ""
+	//Set default playlist string
+	string playlistname = playlist
 
-	return GetPlaylistVarString( playlist, "name", playlist )
+	//If playlist in the table set it to the readable name
+	if(playlist in playlisttoname)
+		playlistname = playlisttoname[playlist]
+
+	//return the playlist name
+	return playlistname
 }
 
 string function GetUIMapName(string map)

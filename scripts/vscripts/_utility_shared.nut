@@ -126,7 +126,7 @@ void function InitWeaponScripts()
 	//		PrecacheProjectileEntity( "grenade_frag" )
 	//		PrecacheProjectileEntity( "crossbow_bolt" )
 	//	#endif
-
+	
 	MpWeaponDoubletake_Init()
 	//MpWeaponGrenadeGravity_Init()
 	MpSpaceElevatorAbility_Init()
@@ -151,16 +151,15 @@ void function InitWeaponScripts()
 	MpWeaponLifelineBatonPrimary_Init()
 	MpWeaponDeployableCover_Init()
 	MeleeShadowsquadHands_Init()
-	SalvoCore_Init()
+	
 	#if DEVELOPER
 		MpWeaponShadowsquadHandsPrimary_Init()
 		MDLSpawner_Init()
 	#endif
-	MpAbilityHealPistol_Init()
+
 	MpAbilityGibraltarShield_Init()
 	MpWeaponBubbleBunker_Init()
-	MpMeleeHeal_Init()
-	MpArmorPiercingHopup_Init()
+
 	MpWeaponGrenadeDefensiveBombardment_Init()
 	MpAbilityHuntModeWeapon_Init()
 	MpAbilityAreaSonarScan_Init()
@@ -179,6 +178,8 @@ void function InitWeaponScripts()
 	MpWeaponTrophy_Init()
 
 	MpWeaponBasicBolt_Init()
+	if(GameRules_GetGameMode() == "map_editor")
+		MpWeaponEditor_Init()
 
 	#if SERVER
 		//BallLightning_Init()
@@ -5378,7 +5379,7 @@ bool function IsFallLTM()
 
 bool function IsLobbyFallLTM()
 {
-	return GetCurrentPlaylistVarInt( "menu_fall_ltm", 0 ) == 1
+	return false //GetCurrentPlaylistVarInt( "menu_fall_ltm", 0 ) == 1
 }
 
 

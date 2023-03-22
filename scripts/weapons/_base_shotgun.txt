@@ -86,7 +86,7 @@ WeaponData
 	"bolt_zero_distance" 							"984.3" // 25m
 
     //"bolt_hitsize"									"1.0"
-    "bolt_hitsize"									"0.25"
+    "bolt_hitsize"									"0.4"
     "bolt_hitsize_grow1_time"						"0.025"
     "bolt_hitsize_grow1_size"						"0.6"
     "bolt_hitsize_grow2_time"						"0.1"
@@ -274,85 +274,6 @@ WeaponData
 
             "viewdrift_hipfire_air_scale_pitch"	            "0.0"
             "viewdrift_hipfire_air_scale_yaw"               "0.0"
-        }
-inversion
-        {
-
-
-  	"viewkick_pitch_base" 							"*-1"
-	"viewkick_pitch_random"   						"*-1"
-	"viewkick_pitch_softScale"						"*-1"
-    "viewkick_pitch_hardScale"						"*-1"
-
-	"viewkick_yaw_base"   							"*-1"
-	"viewkick_yaw_random" 							"*-1"
-	"viewkick_yaw_random_innerexclude"				"*-1"
-    "viewkick_yaw_softScale"						"*-1"
-    "viewkick_yaw_hardScale"						"*-1"
-
-	"viewkick_roll_base"  							"*-1"
-    "viewkick_roll_randomMin" 						"*-1"
-    "viewkick_roll_randomMax" 						"*-1"
-    "viewkick_roll_softScale" 						"*-1"
-	"viewkick_roll_hardScale" 						"*-1"
-
-	"viewkick_hipfire_weaponFraction" 				"*-1"
-	"viewkick_hipfire_weaponFraction_vmScale" 		"*-1"
-	"viewkick_ads_weaponFraction" 					"*-1"
-	"viewkick_ads_weaponFraction_vmScale" 			"*-1"
-
-	"viewkick_perm_pitch_base" 						"*-1"
-	"viewkick_perm_pitch_random"   					"*-1"
-	"viewkick_perm_yaw_base"   						"*-1"
-	"viewkick_perm_yaw_random" 						"*-1"
-
-	"viewkick_scale_firstshot_hipfire"				"*-1"
-	"viewkick_scale_firstshot_ads"					"*-1"
-	"viewkick_scale_min_hipfire"  					"*-1"
-	"viewkick_scale_max_hipfire"  					"*-1"
-	"viewkick_scale_min_ads"  						"*-1"
-	"viewkick_scale_max_ads"  						"*-1"
-	"viewkick_scale_valuePerShot" 					"*-1"
-	"viewkick_scale_pitch_valueLerpStart"   		"*-1"
-	"viewkick_scale_pitch_valueLerpEnd" 			"*-1"
-	"viewkick_scale_yaw_valueLerpStart"   			"*-1"
-	"viewkick_scale_yaw_valueLerpEnd" 				"*-1"
-	"viewkick_scale_valueDecayDelay"  				"*-1"
-    "viewkick_scale_valueDecayRate"   				"*-1"
-
-
-    "spread_stand_hip"								"*-1"
-    "spread_stand_hip_run"							"*-1"
-    "spread_stand_hip_sprint"                       "*-1"
-    "spread_crouch_hip"   							"*-1"
-    "spread_air_hip"  								"*-1"
-
-    "spread_moving_increase_rate" 					"*-1"
-    "spread_moving_decay_rate" 						"*-1"
-
-    "spread_kick_on_fire_stand_hip"   				"*-1"
-    "spread_kick_on_fire_crouch_hip"  				"*-1"
-    "spread_kick_on_fire_air_hip" 					"*-1"
-
-    "spread_max_kick_stand_hip"   					"*-1"
-    "spread_max_kick_crouch_hip"  					"*-1"
-    "spread_max_kick_air_hip" 						"*-1"
-
-    "spread_decay_delay"  							"*-1"
-    "spread_decay_rate"   							"*-1"
-
-    "spread_stand_ads"								"*-1"
-    "spread_crouch_ads"   							"*-1"
-    "spread_air_ads"  								"*-1"
-
-    "spread_kick_on_fire_stand_ads"   				"*-1"
-    "spread_kick_on_fire_crouch_ads"  				"*-1"
-    "spread_kick_on_fire_air_ads" 					"*-1"
-
-    "spread_max_kick_stand_ads"   					"*-1"
-    "spread_max_kick_crouch_ads"  					"*-1"
-    "spread_max_kick_air_ads" 						"*-1"
-
         }
     }
 }

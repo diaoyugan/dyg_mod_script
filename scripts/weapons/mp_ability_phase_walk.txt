@@ -16,10 +16,9 @@ WeaponData
 	"weaponType"									"tactical"
 	"fire_mode"   									"offhand"
 	"offhand_default_inventory_slot"				"1"
-	"offhand_keep_primary_in_hand"					"1"
+	"offhand_keep_primary_in_hand"					"0"
 	"offhand_holster_primary"						"1"
     "hide_holstered_sidearm_when_active"			"1"
-	"offhand_active_slot"                           "altHand"
     "zoom_effects"                                  "0"
 
 	"OnWeaponPrimaryAttack"							"OnWeaponPrimaryAttack_ability_phase_walk"
@@ -57,22 +56,22 @@ WeaponData
 	"explosion_inner_radius"  						"50"
 	"explosionradius" 								"120"
 	"impulse_force"   								"1"
-	"locks_weapon_change"							"0"
+	"locks_weapon_change"							"1"
 
 	// Ammo
 	"cooldown_type"                                 "ammo_instant"
-	"ammo_display"									"bar"
+	"ammo_display"									"count"
 
-	"ammo_drains_to_empty_on_fire"					"1"
+	"ammo_drains_to_empty_on_fire"					"0"
 	"ammo_no_remove_from_clip"						"0"
 
-    "ammo_clip_size"   								"200"
-	"ammo_default_total"							"200"
-	"ammo_min_to_fire"								"100"
-	"ammo_per_shot"									"100"
-	"ammo_stockpile_max"							"200"
+    "ammo_clip_size"   								"250"
+	"ammo_default_total"							"250"
+	"ammo_min_to_fire"								"250"
+	"ammo_per_shot"									"250"
+	"ammo_stockpile_max"							"250"
 
-	"charge_time"									"4"
+	"charge_time"									"4.0"
 
     "charge_cooldown_time"							"1.0"
     "charge_cooldown_delay"   						"0.5"
@@ -118,10 +117,10 @@ WeaponData
 	"zoom_time_out"   								"0.01"
 	"zoom_fov"										"50"
 	"reload_time" 									"0"
-	"holster_time"									"0.15"
-	"deploy_time" 								"0.4"  //want to be driven by animation
-	"lower_time"  									"0.0"
-	"raise_time"  									"0.0"
+    	"holster_time"									"0.15"
+	"deploy_time" 								"1.25"  //want to be driven by animation
+	"lower_time"  									"0.5"
+	"raise_time"  									"0.5"
 	"vortex_refire_behavior"  						"rocket"
 	"allow_empty_fire"								"0"
 	"reload_enabled"  								"0"

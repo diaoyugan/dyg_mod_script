@@ -11,18 +11,12 @@ global function OnWeaponStartZoomIn_weapon_smart_pistol
 global function OnWeaponStartZoomOut_weapon_smart_pistol
 
 const float SMART_PISTOL_TRACKER_TIME = 10.0
-// global const string SMART_PISTOL_WEAPON_NAME = "mp_weapon_smart_pistol"
 
 function MpWeaponSmartPistol_Init()
 {
-
 	PrecacheParticleSystem( $"P_smartpistol_lockon_FP" )
 	PrecacheParticleSystem( $"P_smartpistol_lockon" )
-	// #if CLIENT
-	// RegisterConCommandTriggeredCallback( "+scriptCommand3", ForceCooldownPressed )
-	// #endif
 }
-
 
 void function OnWeaponActivate_weapon_smart_pistol( entity weapon )
 {
@@ -113,20 +107,3 @@ void function OnWeaponStartZoomOut_weapon_smart_pistol( entity weapon )
 	}
 
 }
-
-// #if CLIENT
-// void function ForceCooldownPressed( entity player )
-// {
-// 	if ( player != GetLocalViewPlayer() )
-// 		return
-
-// 	entity activeWeapon = player.GetActiveWeapon( eActiveInventorySlot.mainHand )
-// 	if ( !IsValid( activeWeapon ) )
-// 		return
-
-// 	entity ultWeapon = player.GetOffhandWeapon( OFFHAND_ULTIMATE )
-// 	entity placementWeapon = player.GetOffhandWeapon( OFFHAND_RIGHT )
-// 	if( activeWeapon == ultWeapon && ultWeapon.GetWeaponClassName() == SMART_PISTOL_WEAPON_NAME )
-
-// }
-// #endif 

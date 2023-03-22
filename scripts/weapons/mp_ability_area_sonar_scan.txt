@@ -136,10 +136,7 @@ WeaponData
 	    {
                                         
             regen_ammo_refill_rate                 30
-                      "ammo_stockpile_max"							"10"
-        "ammo_clip_size"   								"10"
-        "ammo_per_shot"									"5"
-        "ammo_min_to_fire"								"5"
+              
             "fire_rate"                            1.25
             "holster_time"                         0.5
             "deploy_time"                          0.4

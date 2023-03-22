@@ -693,7 +693,7 @@ void function DrawAttentionToTestMap( var elem )
 
 void function ClientHudInit( entity player )
 {
-	Assert( player == GetLocalClientPlayer() )
+	// Assert( player == GetLocalClientPlayer() )
 
 	// #if DEVELOPER
 		// HudElement( "Dev_Info1" ).Hide()

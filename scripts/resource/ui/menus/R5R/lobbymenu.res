@@ -128,7 +128,7 @@
 			ruiArgs
 			{
 				isSelected 0
-				buttonText "Create"
+				buttonText "Create Server"
 			}
 
 			"pin_to_sibling"			"HomeBtn"
@@ -148,7 +148,7 @@
 			ruiArgs
 			{
 				isSelected 0
-				buttonText "Browse"
+				buttonText "Server Browser"
 			}
 
 			"pin_to_sibling"			"CreateServerBtn"

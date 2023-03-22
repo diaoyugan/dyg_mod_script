@@ -128,7 +128,9 @@ void function _CustomTDM_Init()
 	
 	SurvivalFreefall_Init() //Enables freefall/skydive
 	PrecacheCustomMapsProps()
-    PrecacheZeesMapProps()
+	PrecacheZeesMapProps()
+	PrecacheMovementMapProps()
+	PrecacheDEAFPSMapProps()
 
     __InitAdmins()
 
@@ -426,7 +428,10 @@ void function _OnPlayerConnected(entity player)
 	    Message(player, "FLOWSTATE: FIESTA", "Type 'commands' in console to see the available console commands. ", 10)
 	else if (FlowState_Gungame())
 	    Message(player, "FLOWSTATE: GUNGAME", "Type 'commands' in console to see the available console commands. ", 10)
-	else
+	else if (FlowState_EnableMovementGym()){
+	    Message(player, "Movement Gym", "Type 'commands' in console to see the available console commands. ", 10)
+	    player.SetPlayerNetBool( "pingEnabled", false )
+	} else
 	    Message(player, "FLOWSTATE: DM", "Type 'commands' in console to see the available console commands. ", 10)
 
 	if(IsValid(player))
@@ -542,6 +547,7 @@ bool function is1v1EnabledAndAllowed()
 	{
 		case "mp_rr_arena_composite":
 		case "mp_rr_aqueduct":
+		case "mp_rr_canyonlands_64k_x_64k":
 		return true
 		default:
 		return false
@@ -2061,7 +2067,37 @@ void function SimpleChampionUI()
         DestroyPlayerProps()
         wait 1
 		thread nuketown()
-    }
+	} else if (file.selectedLocation.name == "Killyard")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread Killyard()
+	} else if (file.selectedLocation.name == "Dustment by DEAFPS")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread Dustment()
+	} else if (file.selectedLocation.name == "Shoothouse by DEAFPS")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread Shoothouse()
+	} else if (file.selectedLocation.name == "Rust By DEAFPS")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread Rust()
+	} else if (file.selectedLocation.name == "Noshahr Canals by DEAFPS")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread NCanals()
+	} else if (file.selectedLocation.name == "Movement Gym v0.5")
+    {
+        DestroyPlayerProps()
+        wait 1
+		thread MovementGym()
+	}
 
     foreach( player in GetPlayerArray() )
     {
@@ -2312,7 +2348,11 @@ void function SimpleChampionUI()
 		if( !IsValid( player ) ) continue
 		
 		AddCinematicFlag( player, CE_FLAG_HIDE_MAIN_HUD | CE_FLAG_EXECUTION )
-		Message( player,"Round Scoreboard", "\n         Name:    K  |   D   |   KD   |   Damage dealt \n \n" + ScoreboardFinal() + "\n \n"+ "Your data:\n" + player.GetPlayerName() + ":   " + player.GetPlayerGameStat( PGS_KILLS ) + " | " + player.GetPlayerGameStat( PGS_DEATHS ) + " | " + getkd(player.GetPlayerGameStat( PGS_KILLS ),player.GetPlayerGameStat( PGS_DEATHS )) + " | " + player.p.playerDamageDealt  + "\n\n               Custom_tdm by sal#3261.\n\n                    Flowstate DM " + file.scriptversion + " \n by @CafeFPS & 暇人のEndergreen#7138", 7, "UI_Menu_RoundSummary_Results" )
+		if(file.selectedLocation.name == "Movement Gym v0.5"){
+			Message( player,"Movement Gym", "\n\n               Made by twitter.com/DEAFPS_ \n\n               With help from AyeZee#6969 & Julefox#0050 \n\n               Parkour Course by Treeree and JayTheYggdrasil modified by DEAFPS \n\n               Custom_tdm by sal#3261.\n\n                    Flowstate DM " + file.scriptversion + " \n by @CafeFPS & 暇人のEndergreen#7138", 7, "UI_Menu_RoundSummary_Results" )
+		} else {
+			Message( player,"Round Scoreboard", "\n         Name:    K  |   D   |   KD   |   Damage dealt \n \n" + ScoreboardFinal() + "\n \n"+ "Your data:\n" + player.GetPlayerName() + ":   " + player.GetPlayerGameStat( PGS_KILLS ) + " | " + player.GetPlayerGameStat( PGS_DEATHS ) + " | " + getkd(player.GetPlayerGameStat( PGS_KILLS ),player.GetPlayerGameStat( PGS_DEATHS )) + " | " + player.p.playerDamageDealt  + "\n\n               Custom_tdm by sal#3261.\n\n                    Flowstate DM " + file.scriptversion + " \n by @CafeFPS & 暇人のEndergreen#7138", 7, "UI_Menu_RoundSummary_Results" )
+		}
 	}
 
 	wait 7
@@ -2327,7 +2367,11 @@ void function SimpleChampionUI()
 
 		wait 6.0
 
+		if(FlowState_EnableMovementGymLogs() && FlowState_EnableMovementGym())
+			MovementGymSaveTimesToFile()
+		
 		GameRules_ChangeMap( GetMapName(), GameRules_GetGameMode() )
+	
 	}
 
 	foreach( player in GetPlayerArray() )
@@ -2373,7 +2417,31 @@ entity function CreateRingBoundary(LocationSettings location)
 
     ringRadius += GetCurrentPlaylistVarFloat("ring_radius_padding", 800)
 
-    if(file.selectedLocation.name == "Shipment By AyeZee" || file.selectedLocation.name == "Killhouse By AyeZee" || file.selectedLocation.name == "Nuketown By AyeZee")
+    if ( file.selectedLocation.name == "Shipment By AyeZee" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Killhouse By AyeZee" )
+        ringRadius += 20000
+
+    if ( file.selectedLocation.name == "Nuketown By AyeZee" )
+        ringRadius += 20000
+
+    if ( file.selectedLocation.name == "Killyard" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Dustment by DEAFPS" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Shoothouse by DEAFPS" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Rust By DEAFPS" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Noshahr Canals by DEAFPS" )
+        ringRadius += 20000
+	
+    if ( file.selectedLocation.name == "Movement Gym v0.5" )
         ringRadius = 99999
 
     if(is1v1EnabledAndAllowed())//we dont need rings in 1v1 mode

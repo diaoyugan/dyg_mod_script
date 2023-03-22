@@ -20,7 +20,7 @@ void function OnWeaponActivate_ability_phase_walk( entity weapon )
 	#if SERVER
 		entity player = weapon.GetWeaponOwner()
 		EmitSoundOnEntityExceptToPlayer( player, player, "pilot_phaseshift_armraise_3p" )
-
+		
 		if ( player.GetActiveWeapon( eActiveInventorySlot.mainHand ) != player.GetOffhandWeapon( OFFHAND_INVENTORY ) )
 			PlayBattleChatterLineToSpeakerAndTeam( player, "bc_tactical" )
 	#endif

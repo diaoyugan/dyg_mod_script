@@ -114,8 +114,8 @@ WeaponData
 
 	// Damage - When Used by Players
 	"damage_type"									"burn"
-	"damage_near_distance"							"10"
-	"damage_far_distance"							"10"
+	"damage_near_distance"							"1000"
+	"damage_far_distance"							"3000"
 	"damage_near_value"								"10"
 	"damage_far_value"								"10"
 	"damage_near_value_titanarmor"					"0"
