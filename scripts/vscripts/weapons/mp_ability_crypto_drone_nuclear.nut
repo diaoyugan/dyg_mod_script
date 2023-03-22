@@ -118,7 +118,7 @@ void function NuclearCoreExplosionChainReaction( vector origin, table e, entity 
 	int innerRadius
 	float time
 	bool IsNPC
-
+        entity owner = weapon.GetWeaponOwner()
 	float heavyArmorDamage = 2500
 	float normalDamage = 2500
 
@@ -191,8 +191,7 @@ void function NuclearCoreExplosionChainReaction( vector origin, table e, entity 
 			outerRadius = 750
 		}
 
-		entity explosionOwner = (weapon.GetWeaponOwner())
-
+		entity explosionOwner = owner
 		if ( outerRadius < innerRadius )
 			outerRadius = innerRadius
 
