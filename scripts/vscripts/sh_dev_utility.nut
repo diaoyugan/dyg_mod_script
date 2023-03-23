@@ -92,8 +92,12 @@ void function UnEquipMelee( bool allplayers = false)
 
 	player.TakeOffhandWeapon(OFFHAND_MELEE)
 	player.TakeNormalWeaponByIndexNow( WEAPON_INVENTORY_SLOT_PRIMARY_2 )
-	player.GiveWeapon( "mp_weapon_melee_survival", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
-	player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [] )
+	// player.GiveWeapon( "mp_weapon_melee_survival", WEAPON_INVENTORY_SLOT_PRIMARY_2, [] )
+	// player.GiveOffhandWeapon( "melee_pilot_emptyhanded", OFFHAND_MELEE, [] )
+	ItemFlavor character = LoadoutSlot_GetItemFlavor( ToEHI( player ), Loadout_CharacterClass() )
+	ItemFlavor meleeSkin = LoadoutSlot_GetItemFlavor( ToEHI( player ), Loadout_MeleeSkin( character ) )
+	string meleePrimary = MeleeSkin_GetMainWeaponClassname( meleeSkin )
+	string meleeOffhand = MeleeSkin_GetOffhandWeaponClassname( meleeSkin )
 }
 
 void function SetupHeirloomkunai( bool allplayers = false)
@@ -986,4 +990,3 @@ void function DEV_DumpItems()
 	}
 }
 #endif
-
