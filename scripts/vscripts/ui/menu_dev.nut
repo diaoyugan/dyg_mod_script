@@ -101,6 +101,9 @@ void function InitDevMenu( var newMenuArg )
 		AddMenuEventHandler( menu, eUIEvent.MENU_NAVIGATE_BACK, BackOnePage_Activate )
 		AddMenuFooterOption( menu, LEFT, BUTTON_Y, true, "%[Y_BUTTON|]% Repeat Last Dev Command:", "Repeat Last Dev Command:", RepeatLastCommand_Activate )
 		AddMenuFooterOption( menu, LEFT, BUTTON_BACK, true, "%[BACK|]% Bind Selection to Gamepad", "", BindCommandToGamepad_Activate )
+		#if !DEVELOPER
+		AddMenuFooterOption( menu, LEFT, BUTTON_SHOULDER_RIGHT, true, "Some commands are hidden because -dev is not specified.", "Some commands are hidden because -dev is not specified." )
+		#endif
 		file.footerHelpTxtLabel = GetElementsByClassname( menu, "FooterHelpTxt" )[0]
 
 		RegisterSignal( "DEV_InitCodeDevMenu" )
@@ -316,8 +319,10 @@ void function SetupDefaultDevCommandsMP()
 			//SetupDevCommand( "Survival Loot Zone Preprocess", "script_ui Dev_CommandLineAddParm( \"-survival_preprocess\", \"\" ); reload" )
 		}
 
+		#if DEVELOPER
 		SetupDevMenu( "Respawn Player(s)", SetDevMenu_RespawnPlayers )
 		SetupDevMenu( "Set Respawn Behaviour Override", SetDevMenu_RespawnOverride )
+		#endif
 
 		//SetupDevMenu( "Spawn NPC [IMC]", SetDevMenu_AISpawn, TEAM_IMC )
 		//SetupDevMenu( "Spawn NPC [Militia]", SetDevMenu_AISpawn, TEAM_MILITIA )
@@ -368,12 +373,21 @@ void function SetupDefaultDevCommandsMP()
 		//SetupDevCommand( "Max Activity (Conger Mode)", "script SetMaxActivityMode(4)" )
 		//SetupDevCommand( "Max Activity (Disabled)", "script SetMaxActivityMode(0)" )
 
+		#if DEVELOPER
 		SetupDevCommand( "Toggle Skybox View", "script thread ToggleSkyboxView()" )
+		#endif
 		SetupDevCommand( "Toggle HUD", "ToggleHUD" )
 
+		#if DEVELOPER
 		SetupDevCommand( "Melee: Equip Bolo Sword", "script thread SetupHeirloom()" )
 		SetupDevCommand( "Melee: Equip Shadow Hands", "script thread SetupShadowHands()" )
+		SetupDevCommand( "Heirloom: WRAITH kunai", "script thread SetupHeirloomkunai()" )		
+		SetupDevCommand( "Heirloom: BLOODHOUND axe", "script thread SetupHeirloomaxe()" )		
+		SetupDevCommand( "Heirloom: LIFELINE baton", "script thread SetupHeirloombaton()" )		
 		SetupDevCommand( "Melee: Unequip", "script thread UnEquipMelee()" )		
+		SetupDevCommand( "Ult: heal pistol", "script thread Setuphealpistolult()" )
+		SetupDevCommand( "TitanCore: SalvoCore", "script thread SetupSalvoCoreUlt()" )
+		#endif
 		
 		//SetupDevCommand( "Toggle Offhand Low Recharge", "ToggleOffhandLowRecharge" )
 		//SetupDevCommand( "Map Metrics Toggle", "script_client GetLocalClientPlayer().ClientCommand( \"toggle map_metrics 0 1 2 3\" )" )
@@ -1002,7 +1016,7 @@ void function RunDevCommand( DevCommand cmd, bool isARepeat )
 		if ( IsLobby() )
 		{
 			CloseAllMenus()
-			AdvanceMenu( GetMenu( "R5RLobbyMenu" ) )
+			AdvanceMenu( GetMenu( GetCurrentLobbyMenu() ) )
 		}
 		else
 		{
