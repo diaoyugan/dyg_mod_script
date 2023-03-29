@@ -286,7 +286,7 @@ Scripts:
 
 	weapons/mp_weapon_shadow_squad_hands_primary.nut
 	weapons/melee_shadowsquad_hands.nut
-	
+	weapons/mp_ability_upgrade.nut
 	
 	weapons/mp_weapon_shotgun.nut
 	weapons/mp_weapon_sniper.nut

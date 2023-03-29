@@ -308,6 +308,7 @@ void function CodeCallback_MapSpawn() // original script entry point
 	PrecacheWeapon( $"npc_weapon_lstar" )
 	PrecacheWeapon( $"mp_titancore_salvo_core" )
 	PrecacheWeapon( $"mp_ability_heal_pistol" )
+	PrecacheWeapon( $"mp_ability_upgrade" )
 
 	switch(GameRules_GetGameMode())
 	{
