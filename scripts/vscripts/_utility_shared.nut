@@ -151,7 +151,7 @@ void function InitWeaponScripts()
 	MpWeaponLifelineBatonPrimary_Init()
 	MpWeaponDeployableCover_Init()
 	MeleeShadowsquadHands_Init()
-	
+	MpWeapontickpistol_Init()
 	#if DEVELOPER
 		MpWeaponShadowsquadHandsPrimary_Init()
 		MDLSpawner_Init()

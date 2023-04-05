@@ -103,7 +103,7 @@ playlists
 				///////////////////////////////////////////////////////////////////////////////////
 				//// Custom Weapons
 				///////////////////////////////////////////////////////////////////////////////////
-				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity  mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas"
+				custom_weapon_list "mp_weapon_volt_smg mp_weapon_car mp_weapon_sentinel mp_weapon_smart_wingman mp_weapon_grenade_gravity  mp_weapon_lmgF mp_weapon_mastiffF mp_weapon_autopistol_gas mp_weapon_tick_pistol"
 				
 				mp_weapon_volt_smg_class "smg"
 				mp_weapon_sentinel_class  "sniper"
@@ -115,6 +115,13 @@ playlists
 				mp_weapon_smart_wingman_med_chance "1.0"
 				mp_weapon_smart_wingman_high_chance "1.0"
 				mp_weapon_smart_wingman_tier "1"
+
+				mp_weapon_tick_pistol_class "pistol"
+				mp_weapon_tick_pistol_attachments "mag sight"
+				mp_weapon_tick_pistol_low_chance "1.0"
+				mp_weapon_tick_pistol_med_chance "1.0"
+				mp_weapon_tick_pistol_high_chance "1.0"
+				mp_weapon_tick_pistol_tier "1"
 			
 				mp_weapon_grenade_gravity_class "pistol"
 				mp_weapon_grenade_gravity_attachments " "
