@@ -7,6 +7,7 @@ struct
 	var panel
 
 	var lootBoxOpenButton
+	var LoadOutButton
 } file
 
 void function InitR5RHomePanel( var panel )
@@ -18,6 +19,11 @@ void function InitR5RHomePanel( var panel )
 	HudElem_SetRuiArg( file.lootBoxOpenButton, "buttonText", "APEX组合包模拟器" )
 	HudElem_SetRuiArg( file.lootBoxOpenButton, "descText", "开包模拟器" )
 	AddButtonEventHandler( file.lootBoxOpenButton, UIE_CLICK, OpenLootBox )
+
+	file.LoadOutButton = Hud_GetChild( file.panel, "OpenLoadOutButton" )
+	HudElem_SetRuiArg( file.LoadOutButton, "buttonText", "自定义" )
+	HudElem_SetRuiArg( file.LoadOutButton, "descText", " " )
+	AddButtonEventHandler( file.LoadOutButton, UIE_CLICK, OpenLoadOut )
 
 	//Set info box image
 	RuiSetImage( Hud_GetRui( Hud_GetChild( file.panel, "R5RPicBox" ) ), "basicImage", $"rui/menu/home/bg" )
@@ -44,4 +50,10 @@ void function SetUIVersion()
 void function OpenLootBox(var button)
 {
 	AdvanceMenu( GetMenu( "LootBoxOpen" ) )
+}
+
+void function OpenLoadOut(var button)
+{
+//	GetPanel( "SkydiveTrailPanel" )
+	AdvanceMenu( GetMenu( "MiscCustomizeMenu" ) )
 }

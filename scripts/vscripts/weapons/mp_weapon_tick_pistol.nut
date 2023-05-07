@@ -102,6 +102,7 @@ void function ProjectileExplode( entity projectile )
 			thread FragDroneDeplyAnimation( drone, 0.0, 0.1 )
 			thread WaitForEnemyNotification( drone )
 			thread FragDroneLifetime( drone )
+			thread FragDroneExplode( drone )
 	#endif
 }
 
@@ -114,6 +115,33 @@ void function FragDroneLifetime( entity drone )
 	EmitSoundOnEntity( drone, "weapon_sentryfragdrone_emit_loop" )
 	wait 55.0
 	drone.Signal( "SuicideSpectreExploding" )
+}
+
+void function FragDroneExplode( entity drone )
+{
+	drone.EndSignal( "OnDestroy" )
+	drone.EndSignal( "OnDeath" )
+
+	while(true)
+	{
+		entity currentTarget = drone.GetEnemy()
+		entity owner = drone.GetFollowTarget()
+
+		if ( currentTarget != null )
+		{
+		float dist = Distance( currentTarget.GetOrigin(), drone.GetOrigin() )
+		
+		#if DEVELOPER
+		printt(currentTarget)
+		printt(dist)
+		#endif
+
+		float maxDist = 100
+		if ( dist < maxDist )
+			drone.Signal( "SuicideSpectreExploding" )
+		}
+		wait 0.25
+	}
 }
 
 void function DelayedExplode( entity projectile, float delay )

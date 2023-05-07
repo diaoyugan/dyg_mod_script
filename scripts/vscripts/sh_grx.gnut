@@ -770,65 +770,66 @@ bool function GRX_IsItemOwnedByPlayer_AllowOutOfDateData( ItemFlavor flav, entit
 }
 bool function IsItemOwnedByPlayerInternal( ItemFlavor flav, entity player = null )
 {
-	int grxMode = ItemFlavor_GetGRXMode( flav )
+	// int grxMode = ItemFlavor_GetGRXMode( flav )
 
-	if ( grxMode == GRX_ITEMFLAVORMODE_NONE )
-		return true
+	// if ( grxMode == GRX_ITEMFLAVORMODE_NONE )
+	// 	return true
 
-	if ( ItemFlavor_GetType( flav ) == eItemType.character )
-		return true
+	// if ( ItemFlavor_GetType( flav ) == eItemType.character )
+	// 	return true
 
-	return false
+	// return false
 
-	if ( !GRX_IsGRXEnabled() )
-		return true
+	// if ( !GRX_IsGRXEnabled() )
+	// 	return true
 
-	#if SERVER
-		Assert( player != null && IsValid( player ) )
-	#elseif CLIENT
-		if ( player == null )
-			player = GetLocalClientPlayer()
-	#elseif UI
-		if ( player == null )
-			player = GetUIPlayer()
-	#endif
+	// #if SERVER
+	// 	Assert( player != null && IsValid( player ) )
+	// #elseif CLIENT
+	// 	if ( player == null )
+	// 		player = GetLocalClientPlayer()
+	// #elseif UI
+	// 	if ( player == null )
+	// 		player = GetUIPlayer()
+	// #endif
 
-	if ( ItemFlavor_HasUnlockFunc( flav ) )
-	{
-		Assert( grxMode == GRX_ITEMFLAVORMODE_NONE, "These entitlement unlocks shouldn't also be used in GRX mode." )
-		return ItemFlavor_PassesUnlockFunc( flav, player )
-	}
+	// if ( ItemFlavor_HasUnlockFunc( flav ) )
+	// {
+	// 	Assert( grxMode == GRX_ITEMFLAVORMODE_NONE, "These entitlement unlocks shouldn't also be used in GRX mode." )
+	// 	return ItemFlavor_PassesUnlockFunc( flav, player )
+	// }
 
-	if ( ItemFlavor_GetPlaylistOpinion( flav ) == eItemFlavorPlaylistOpinion.FORCE_UNLOCK_FOR_SPECIAL_EVENT )
-		return true
+	// if ( ItemFlavor_GetPlaylistOpinion( flav ) == eItemFlavorPlaylistOpinion.FORCE_UNLOCK_FOR_SPECIAL_EVENT )
+	// 	return true
 
-	Assert( grxMode == GRX_ITEMFLAVORMODE_REGULAR, "Tried to call GRX_IsItemOwnedByPlayer on a non-regular GRX item" )
+	// Assert( grxMode == GRX_ITEMFLAVORMODE_REGULAR, "Tried to call GRX_IsItemOwnedByPlayer on a non-regular GRX item" )
 
-	bool has
-	if ( !GRX_HasInventoryEverBeenReady( player ) )
-	{
-		has = true
-	}
-	else
-	{
-		#if SERVER
-			has = GRX_HasItem( player, flav._____INTERNAL_grxIndex )
-		#elseif CLIENT || UI
-			#if CLIENT
-				Assert( player == GetLocalClientPlayer() )
-			#elseif UI
-				Assert( player == GetUIPlayer() )
-			#endif
-			has = GRX_HasItem( flav._____INTERNAL_grxIndex )
-		#endif
-	}
+	// bool has
+	// if ( !GRX_HasInventoryEverBeenReady( player ) )
+	// {
+	// 	has = true
+	// }
+	// else
+	// {
+	// 	#if SERVER
+	// 		has = GRX_HasItem( player, flav._____INTERNAL_grxIndex )
+	// 	#elseif CLIENT || UI
+	// 		#if CLIENT
+	// 			Assert( player == GetLocalClientPlayer() )
+	// 		#elseif UI
+	// 			Assert( player == GetUIPlayer() )
+	// 		#endif
+	// 		has = GRX_HasItem( flav._____INTERNAL_grxIndex )
+	// 	#endif
+	// }
 
-	#if DEVELOPER
-		if ( EverythingUnlockedConVarEnabled() || GetCurrentPlaylistVarBool( "dev_force_everything_unlocked", false ) )
+//	#if DEVELOPER
+		// if ( EverythingUnlockedConVarEnabled() || GetCurrentPlaylistVarBool( "dev_force_everything_unlocked", false ) )
+		// if ( GetCurrentPlaylistVarBool( "dev_force_everything_unlocked", false ) )
 			return true
-	#endif
+//	#endif
 
-	return has
+	// return has
 }
 #endif
 

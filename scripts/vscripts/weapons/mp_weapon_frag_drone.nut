@@ -149,7 +149,7 @@ void function WaitForEnemyNotification( entity drone )
 			drone.ClearEnemy()
 			drone.EnableBehavior( "Follow" )
 		}
-
+		
 		wait 0.25
 	}
 

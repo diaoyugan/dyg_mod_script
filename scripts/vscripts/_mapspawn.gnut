@@ -306,6 +306,7 @@ void function CodeCallback_MapSpawn() // original script entry point
 	PrecacheWeapon( $"npc_weapon_energy_shotgun" )
 	PrecacheWeapon( $"npc_weapon_hemlok" )
 	PrecacheWeapon( $"npc_weapon_lstar" )
+	PrecacheWeapon( $"mp_titanweapon_flightcore_rockets" )
 	PrecacheWeapon( $"mp_titancore_salvo_core" )
 	PrecacheWeapon( $"mp_ability_heal_pistol" )
 	PrecacheWeapon( $"mp_ability_upgrade" )
